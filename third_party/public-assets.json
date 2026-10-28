@@ -1,0 +1,26 @@
+[
+  {
+    "path": "launcher/app/src/main/res/font/outfit.ttf",
+    "sha256": "fc7287273e66929776e2ba54f144fe699080bec29f61bf649d70d871468aeade",
+    "license": "OFL-1.1",
+    "evidence": "third_party/font-provenance.json"
+  },
+  {
+    "path": "launcher/app/src/main/assets/wallpapers/turquoise-horizon.png",
+    "sha256": "5dd90e910a3e831d16cd11807db53608248a21c65d3bf1ba30c0fd77f65b9e90",
+    "license": "MIT",
+    "evidence": "third_party/wallpaper-provenance.json"
+  },
+  {
+    "path": "launcher/app/src/main/assets/wallpapers/silver-peaks.png",
+    "sha256": "ab013ee2cfb6541cfe3778910a660db2b387601b0a53e4a53d7ea68e1d68dc6c",
+    "license": "MIT",
+    "evidence": "third_party/wallpaper-provenance.json"
+  },
+  {
+    "path": "launcher/app/src/main/assets/wallpapers/golden-dunes.png",
+    "sha256": "848a1cb9df28c4522deaf8c3d10a37638a3b4a4422e46ababae3f18deb4f2943",
+    "license": "MIT",
+    "evidence": "third_party/wallpaper-provenance.json"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "component": "com.android.tools:desugar_jdk_libs:2.1.5",
+  "sourceRevision": "73170c345e6a762fc6a1f0301bb15218850023ef",
+  "releaseEvidence": "Prepare for jdk-11 based desugared library version 2.1.5",
+  "sourceUrl": "https://codeload.github.com/google/desugar_jdk_libs/zip/73170c345e6a762fc6a1f0301bb15218850023ef",
+  "sourceArchiveSha256": "cf0b48cb046b6517ed8e2a816c125116a907e13e48e341882ba6f4016a155d9f",
+  "sourceArchiveFilename": "desugar_jdk_libs-2.1.5-source.zip",
+  "licenseSha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+  "distributionRequirement": "Distribute this complete upstream source archive with signed binaries, plus Ufuq source/build instructions. No source archive is published by this preparation task.",
+  "publicTestFixtureKeyFiles": [
+    "jdk11/src/libcore/harmony-tests/src/test/java/org/apache/harmony/tests/javax/net/ssl/X509KeyManagerTest.java",
+    "jdk11/src/libcore/support/src/test/java/org/apache/harmony/security/tests/support/cert/TestUtils.java"
+  ],
+  "testFixtureNote": "The unchanged public upstream source includes two embedded Harmony TLS test fixture keys. They are public sample test data, not Ufuq signing material or personal credentials; the archive is not included in the APK or public Git tree."
+}

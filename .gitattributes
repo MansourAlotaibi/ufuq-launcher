@@ -1,0 +1,5 @@
+# Keep recorded publisher source bytes/hashes stable across checkout platforms.
+third_party/content-source/* -text
+third_party/content-source/tanzil*.txt whitespace=-blank-at-eol
+# Preserve official license downloads verbatim, including their final blank line.
+launcher/app/src/main/assets/licenses/*.txt -text whitespace=-blank-at-eof,-blank-at-eol

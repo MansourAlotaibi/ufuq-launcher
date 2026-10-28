@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'io.github.mansouralotaibi.ufuq'
+    compileSdk 34
+
+    defaultConfig {
+        // Public identity is fixed; firmware restrictions must never justify impersonating another app.
+        // The public-project development build must never update the protected MansourTV package.
+        applicationId 'io.github.mansouralotaibi.ufuq'
+        minSdk 19
+        targetSdk 34
+        versionCode 10000
+        versionName '1.0.0-rc1'
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        publicRelease {
+            if (System.getenv('UFUQ_KEYSTORE')) {
+                storeFile file(System.getenv('UFUQ_KEYSTORE'))
+                storePassword System.getenv('UFUQ_STORE_PASSWORD')
+                keyAlias System.getenv('UFUQ_KEY_ALIAS')
+                keyPassword System.getenv('UFUQ_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            vcsInfo { include = false }
+            // R8 strips and optimises the code (AndroidX included): smaller APK, faster start on a slow TV CPU.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Release remains unsigned unless a separate public key is supplied locally.
+            if (System.getenv("UFUQ_KEYSTORE")) signingConfig signingConfigs.publicRelease
+        }
+    }
+
+    packagingOptions {
+        resources {
+            // Kotlin metadata pulled in by AndroidX's dependencies. This launcher is plain Java and never reads it;
+            // leaving it out saves about 14 KB of every install.
+            excludes += ['kotlin/**', 'META-INF/*.version', 'META-INF/*.kotlin_module', 'DebugProbesKt.bin']
+        }
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.all {
+            systemProperty 'robolectric.dependency.repo.url', 'https://repo.maven.apache.org/maven2'
+        }
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    // Test only (never in the APK): plain JVM tests for the module card validators, src/test.
+    testImplementation 'junit:junit:4.13.2'
+    // Last Robolectric series that exercises both API 19 and API 34; test only.
+    testImplementation 'org.robolectric:robolectric:4.12.2'
+    testImplementation 'org.json:json:20240303'
+}
+
+// Refuse legacy command-line identity overrides rather than silently accepting them.
+if (providers.gradleProperty('launcherApplicationId').isPresent()) {
+    throw new GradleException('launcherApplicationId overrides are prohibited for public Ufuq builds')
+}

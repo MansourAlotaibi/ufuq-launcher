@@ -1,0 +1,8 @@
+{
+  "alias": "ufuq-public",
+  "algorithm": "RSA-3072 / SHA256withRSA",
+  "certificateSha256": "3b91e63bb81d85dd4cfb30c63227b46c08ddea300c9c1d8e347bebc942be7bd3",
+  "provisioned": "2026-10-29",
+  "origin": "New key generated for independent public Ufuq only. No personal signing identity accessed.",
+  "secretStorage": "Ignored owner-only local provisioning directory; separate encrypted/offline recovery backup remains an owner action."
+}

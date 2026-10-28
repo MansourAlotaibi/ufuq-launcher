@@ -1,0 +1,40 @@
+{
+  "tanzil": {
+    "downloadUrl": "https://tanzil.net/pub/download/index.php?quranType=uthmani&outType=txt-2&agree=true",
+    "downloadSha256": "bf4f57b968d03f4131c070b1e285da9be0e0a108a21c910e872801ca273312c8",
+    "version": "Uthmani 1.1",
+    "changes": "Four complete verse records selected; verse text unchanged."
+  },
+  "hadith": [
+    {
+      "key": "intentions",
+      "title": "صحيح البخاري/كتاب بدء الوحي",
+      "revision": 484874,
+      "sourceUrl": "https://ar.wikisource.org/w/index.php?oldid=484874",
+      "parseJsonSha256": "8784cc2889cfe1151a750713955826861c1c30917f478d648de1722c8a9b8478",
+      "textSha256": "a4b45d3335d4958a38a539c17ee978de8b0d050542aa87b00db40e1d28950675",
+      "text": "إنما الأعمال بالنيات وإنما لكل امرئ ما نوى فمن كانت هجرته إلى دنيا يصيبها أو إلى امرأة ينكحها فهجرته إلى ما هاجر إليه.",
+      "changes": "Arabic matn excerpt selected from the attributed chapter. Narrator chains and surrounding commentary omitted. Wording in the excerpt is unchanged. This transcription selection is distributed under CC BY-SA 4.0; the independent application code remains MIT. No endorsement is implied."
+    },
+    {
+      "key": "quran",
+      "title": "صحيح البخاري/كتاب فضائل سور القرآن",
+      "revision": 512181,
+      "sourceUrl": "https://ar.wikisource.org/w/index.php?oldid=512181",
+      "parseJsonSha256": "9bbc2d7b467342014828f50acecd0317fcce9d01f76356de3dd7811edb4a86de",
+      "textSha256": "48921eaf04569d99a11abc2da6a215a300c7dfcbc6d541c8e986830849b9cfc3",
+      "text": "(خيركم من تعلم القرآن وعلمه)",
+      "changes": "Arabic matn excerpt selected from the attributed chapter. Narrator chains and surrounding commentary omitted. Wording in the excerpt is unchanged. This transcription selection is distributed under CC BY-SA 4.0; the independent application code remains MIT. No endorsement is implied."
+    },
+    {
+      "key": "manners",
+      "title": "صحيح البخاري/كتاب الأدب",
+      "revision": 627517,
+      "sourceUrl": "https://ar.wikisource.org/w/index.php?oldid=627517",
+      "parseJsonSha256": "0bf9553ace2a07ee0d4edb9817efad03839a1aa2717f26016af668b92e5ae34a",
+      "textSha256": "329a0887516e458273fda4618231861f85d6d7041037147a2bb945aff1d06b07",
+      "text": "(من كان يؤمن بالله واليوم الآخر فلا يؤذ جاره، ومن كان يؤمن بالله واليوم الآخر فليكرم ضيفه، ومن كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت).",
+      "changes": "Arabic matn excerpt selected from the attributed chapter. Narrator chains and surrounding commentary omitted. Wording in the excerpt is unchanged. This transcription selection is distributed under CC BY-SA 4.0; the independent application code remains MIT. No endorsement is implied."
+    }
+  ]
+}
