@@ -349,7 +349,7 @@ public class AndroidUiStateTest {
    SmartHomeController smart=new SmartHomeController(a);smart.onResume();
    View previous=a.findViewById(R.id.smartReflection);previous.performClick();
    android.app.AlertDialog reading=org.robolectric.shadows.ShadowAlertDialog.getLatestAlertDialog();
-   smart.onPause();smart.onResume();View current=a.findViewById(R.id.smartReflection);assertNotSame(previous,current);
+   smart.onPause();UiTheme.select(a,2);smart.onResume();View current=a.findViewById(R.id.smartReflection);assertNotSame(previous,current);
    View decor=a.getWindow().getDecorView();
    decor.measure(View.MeasureSpec.makeMeasureSpec(1920,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(1080,View.MeasureSpec.EXACTLY));
    decor.layout(0,0,1920,1080);org.robolectric.shadows.ShadowLooper.idleMainLooper();
@@ -360,6 +360,7 @@ public class AndroidUiStateTest {
 
  @Test public void moveMenuIgnoresOpeningHoldRepeatsAndCancelledReleases() throws Exception {
   try(ActivityController<MainActivity> c=Robolectric.buildActivity(MainActivity.class).setup()) {
+   c.visible().windowFocusChanged(true);
    MainActivity a=c.get();
    java.lang.reflect.Method add=MainActivity.class.getDeclaredMethod("addSettingsMenuRow",
      android.widget.LinearLayout.class,android.widget.PopupWindow.class,int.class,Runnable.class);
@@ -380,6 +381,7 @@ public class AndroidUiStateTest {
     assertEquals("cancelled press cannot activate Move",0,actions.get());
     listener.onKey(row,code,new KeyEvent(KeyEvent.ACTION_DOWN,code));
     listener.onKey(row,code,new KeyEvent(KeyEvent.ACTION_UP,code));
+    org.robolectric.shadows.ShadowLooper.idleMainLooper();
     assertEquals("next deliberate OK activates Move once",1,actions.get());
    }
   }

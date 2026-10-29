@@ -273,4 +273,12 @@
     <string name="favorites_page">Page %1$d of %2$d</string>
     <string name="reorder_ready">Reorder mode · OK: pick up · Back: save and exit</string>
     <string name="reorder_moving">Moving %1$s · Arrows: move · OK/Back: place · Back again: save</string>
+    <string name="font_style">Font Style</string>
+    <string name="font_default">Default · Ufuq</string>
+    <string name="wallpaper_name_0">Desert sunset</string>
+    <string name="wallpaper_name_1">Silver peaks</string>
+    <string name="wallpaper_name_2">Golden dunes</string>
+    <string name="wallpaper_name_3">Turquoise horizon</string>
+    <string name="wallpaper_name_4">Moraine Lake</string>
+    <string name="font_style_state">Font Style: %1$s</string>
 </resources>

@@ -33,6 +33,7 @@ final class SmartHomeController {
     private final Map<String, SmartModuleView> cards = new HashMap<>();
     private final SharedPreferences.OnSharedPreferenceChangeListener cacheListener;
     private ReflectionView reflection;
+    private String builtSignature;
     private boolean active;
     private boolean requestInFlight;
 
@@ -63,7 +64,16 @@ final class SmartHomeController {
 
     private boolean arabic() { return "ar".equals(activity.getResources().getConfiguration().locale.getLanguage()); }
 
+    private String signature() {
+        return arabic() + ":" + UiTheme.selected(activity) + ":" + UiFont.selection(activity)
+                + ":" + p.getBoolean(SmartPreferences.MINIMAL,false)
+                + ":" + SmartPreferences.enabled(p,SmartPreferences.CONTENT)
+                + ":" + SmartPreferences.enabled(p,SmartPreferences.PRAYER)
+                + ":" + SmartPreferences.enabled(p,SmartPreferences.FOOTBALL);
+    }
+
     private void build() {
+        builtSignature = signature();
         composition.clearModules(); cards.clear(); reflectionHost.removeAllViews(); reflection = null;
         renderClockBlock();
         if (p.getBoolean(SmartPreferences.MINIMAL, false)) {
@@ -144,7 +154,9 @@ final class SmartHomeController {
     }
 
     void onResume() {
-        active = true; api.setActive(true); build();
+        active = true; api.setActive(true);
+        if (!signature().equals(builtSignature)) build();
+        else { renderClockBlock(); renderOffline(); }
         if (cards.containsKey(SmartPreferences.FOOTBALL)) refreshFootball();
     }
 
@@ -384,8 +396,9 @@ final class SmartHomeController {
     }
 
     private void linkifyDialog(AlertDialog dialog) {
-        UiTheme.apply(dialog.getWindow().getDecorView());
         android.widget.TextView messageView = dialog.findViewById(android.R.id.message);
+        if (messageView != null) messageView.setTag(UiFont.KEEP_APPROVED);
+        UiTheme.apply(dialog.getWindow().getDecorView());
         if (messageView != null) {
             android.text.util.Linkify.addLinks(messageView, android.text.util.Linkify.WEB_URLS);
             messageView.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());

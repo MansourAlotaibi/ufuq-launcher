@@ -609,6 +609,7 @@ final class AppLibraryDialog {
             action.run();
         });
         rows.addView(row);
+        UiFont.apply(row);
         final boolean[] pressed = {false};
         row.setOnKeyListener((v, key, event) -> {
             int index = rows.indexOfChild(v);
@@ -705,6 +706,7 @@ final class AppLibraryDialog {
             if (home) check.setBackgroundResource(R.drawable.library_check);
             else check.setBackground(surface(UiTheme.accent(activity), 8));
             check.setVisibility(home || recent ? View.VISIBLE : View.GONE);
+            UiFont.apply(holder.itemView);
             holder.itemView.setOnClickListener(v -> {
                 if (selectionMode) changeHome(app, !onHome.test(pkg));
                 else open(app);

@@ -1,6 +1,6 @@
 # Current candidate: RC2 hold-OK / reflection correction
 
-See [latest correction and manual remote gate](REORDER-GLASS-VALIDATION.md). Required local checks pass 305 tests; release lint 0 errors / 147 warnings; release build passes. Physical remote acceptance is explicitly pending.
+Latest: [final RC2 functional/UX refinement](UX-REFINEMENT.md). Required local checks pass 323 tests; release lint 0 errors / 147 warnings; release build passes. Native API 19 evidence and physical-remote limits are distinguished in that report. The preceding [hold-OK/glass correction](REORDER-GLASS-VALIDATION.md) remains historical evidence.
 
 # Preceding candidate: RC2 functional-parity correction
 

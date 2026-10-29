@@ -40,6 +40,7 @@ final class ReflectionView extends LinearLayout {
         addView(kicker, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         quote = label(22, 0xFFFDF8EF, R.string.font_light);
+        quote.setTag(UiFont.KEEP_APPROVED);
         quote.setGravity(Gravity.RIGHT);
         quote.setTextDirection(TEXT_DIRECTION_RTL);
         quote.setLineSpacing(dp(4), 1.08f);

@@ -42,6 +42,7 @@ final class UiTheme {
                 || id == R.id.btnInputs || id == R.id.btnReorder;
     }
     static void apply(View v) {
+        UiFont.applyOne(v);
         // Native Holo dialog chrome is outside the app's resource IDs. Tint known framework
         // title/divider views when present; unfamiliar OEM dialogs retain their safe platform style.
         if (v.getId() != View.NO_ID && v.getResources() != null && v.getContext() != null) {

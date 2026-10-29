@@ -63,7 +63,8 @@ class SmartModuleView extends TextView {
             // Team names and the source/timestamp can span four visual lines in RTL.
             // Keep the station inside the information rail on the 720p CVTE canvas.
             setTextSize(15);
-            setLineSpacing(0, 1.0f);
+            setLineSpacing(dp(2), 1.0f);
+            setMaxLines(5);
             setPadding(dp(6), dp(14), dp(6), dp(3));
         }
     }
@@ -93,6 +94,15 @@ class SmartModuleView extends TextView {
             styled.setSpan(new RelativeSizeSpan(.78f), second + 1, raw.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             styled.setSpan(new ForegroundColorSpan(0xBDFBF4E8), second + 1, raw.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+        if (SmartPreferences.FOOTBALL.equals(module) && first > 0) {
+            // Gap follows the measured metrics of the enlarged fixture runs.
+            android.text.style.LineHeightSpan gap = (text,start,end,spanStart,top,fm) -> {
+                fm.descent += dp(4); fm.bottom = Math.max(fm.bottom, fm.descent);
+            };
+            styled.setSpan(gap, 0, second < 0 ? raw.length() : second + 1,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        UiFont.prepare(this, styled);
         super.setText(styled, type);
         setContentDescription(raw.replace('\n', ' '));
     }

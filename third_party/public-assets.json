@@ -34,5 +34,17 @@
     "sha256": "adb3041e3ac2de4cf3e7c3d186ea2c39a1a811b4a5fff4f888a6711579833d5f",
     "license": "Public domain dedication by author, worldwide; fallback unrestricted use grant",
     "evidence": "third_party/wallpaper-provenance.json"
+  },
+  {
+    "path": "launcher/app/src/main/assets/fonts/Amiri-Regular.ttf",
+    "sha256": "ab391c4147d054c48976e98322ad0eefe1427aa0e0502a12a4c75d80a70cfcd7",
+    "license": "SIL OFL 1.1",
+    "source": "https://raw.githubusercontent.com/google/fonts/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/amiri/Amiri-Regular.ttf"
+  },
+  {
+    "path": "launcher/app/src/main/assets/fonts/Lato-Regular.ttf",
+    "sha256": "d636e4683231f931eda222d588e944d082bfd3bdba02f928bee461c0f185b251",
+    "license": "SIL OFL 1.1",
+    "source": "https://raw.githubusercontent.com/google/fonts/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/lato/Lato-Regular.ttf"
   }
 ]

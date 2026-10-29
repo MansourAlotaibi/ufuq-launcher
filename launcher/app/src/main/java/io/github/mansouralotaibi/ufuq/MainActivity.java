@@ -159,6 +159,14 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     private boolean cinematic;
     /** A wallpaper-led cinematic shelf: its copy stays stable while focus moves through apps. */
     private boolean sceneHero;
+    private int resumeFocusId = View.NO_ID;
+    private Object resumeFocusTag;
+    private String resumeTileKey;
+    private long lastOkDownTime = Long.MIN_VALUE;
+    private Runnable pendingMenuAction;
+    private java.util.Map<String, ?> appliedSettings;
+    private String appliedLanguage;
+    private int appliedPalette;
     private boolean recreationPosted;
     private int shelfScalePercent = AppAdapter.DEFAULT_SHELF_SCALE;
     /** config.xml ambient_glow, overridable by a theme. Off: the glow view is gone and no fade or colour animator
@@ -388,6 +396,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.util.Log.i("Ufuq.Lifecycle", "Home created instance=" + System.identityHashCode(this));
         setContentView(R.layout.activity_main);
         density = getResources().getDisplayMetrics().density;
         // config.xml, overlaid by config.json from a pushed theme (see Config and tools/theme.sh).
@@ -397,6 +406,9 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // off the list (needs WRITE_SECURE_SETTINGS, granted by build-and-install with RESTORE_KEY_SERVICES=1).
         if (cfg.restoreKeyServices) ServiceRepair.restore(this);
         settingsRevision = settingsRevision();
+        appliedSettings = new java.util.HashMap<>(getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE).getAll());
+        appliedLanguage = LocalePreferences.current(this);
+        appliedPalette = UiTheme.selected(this);
         applyViewInputsHandler(cfg.handleViewInputs);
         settingsKeycodes = cfg.settingsKeycodes;
         settingsKeyPanel = cfg.settingsKeyPanel;
@@ -482,6 +494,13 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         if (!cfg.dockTitle) hero.setVisibility(View.GONE);
         greeting = findViewById(R.id.greeting);
         clockBlock = findViewById(R.id.leftBlock);
+        if (sceneHero) {
+            // The legacy invisible clock must not enlarge the cinematic navigation header
+            // when an alternate font has taller metrics. Preserve its approved 48dp lane.
+            View header = findViewById(R.id.homeHeader);
+            ViewGroup.LayoutParams lane = header.getLayoutParams();
+            lane.height = Math.round(48 * density); header.setLayoutParams(lane);
+        }
         clockView = findViewById(R.id.clock);
         amPmView = findViewById(R.id.ampm);
         cinematicClockPanel = findViewById(R.id.cinematicClockPanel);
@@ -975,6 +994,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     @Override
     protected void onResume() {
         super.onResume();
+        android.util.Log.i("Ufuq.Lifecycle", "Home resumed instance=" + System.identityHashCode(this));
         // A festival that started or ended while Home was in the background: rebuild with or without it.
         if (festive != festival.active(LocalDate.now())) {
             scheduleSettingsRecreation();
@@ -984,8 +1004,14 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // delivered their RESULT_OK; Home (the remote's button) clears them off this task and the result comes
         // back cancelled, so a new wallpaper or layout waited for the next process start.
         if (Config.settingsChanged(settingsRevision, settingsRevision())) {
-            scheduleSettingsRecreation();
-            return;
+            if (!appliedLanguage.equals(LocalePreferences.current(this))
+                    || changedSetting("columns") || changedSetting(Config.ROWS_BELOW_DOCK_KEY)
+                    || changedSetting(Config.DOCK_OPACITY_KEY)) {
+                // A new per-Activity locale context must reinflate direction/string resources on API 19.
+                scheduleSettingsRecreation();
+                return;
+            }
+            applySettingsInPlace();
         }
         restartIdleClock();
         promptsPaused = false;
@@ -1021,6 +1047,15 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         sky.update();
         wallpaperPlayer.start();
         smartHome.onResume();
+        UiFont.apply(root);
+        if (resumeFocusId == R.id.card && resumeTileKey != null) {
+            int at = adapter.positionOf(resumeTileKey);
+            if (at >= 0) focusTile(at);
+        } else if (resumeFocusId != View.NO_ID) {
+            View target = resumeFocusTag instanceof String ? root.findViewWithTag(resumeFocusTag)
+                    : findViewById(resumeFocusId);
+            if (target != null && target.isShown()) target.requestFocusFromTouch();
+        }
         handler.postDelayed(minuteTick, MINUTE_MS);
         if (festive && diya != null) {
             diya.start();
@@ -1048,10 +1083,49 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                 && data != null && data.getBooleanExtra(LauncherSettingsActivity.EXTRA_REORDER, false)) {
             getIntent().putExtra(LauncherSettingsActivity.EXTRA_REORDER, true);
             // The old activity must not consume the pending action, or rebuild a second time in onResume.
-            settingsRecreationPending = true;
-            settingsRevision = settingsRevision();
-            scheduleSettingsRecreation();
+            settingsRecreationPending = false;
+            // onResume applies settings in place, then the existing tile-ready gate starts reorder.
+            root.post(this::startPendingSettingsReorder);
         }
+    }
+
+    private boolean changedSetting(String key) {
+        return !java.util.Objects.equals(appliedSettings.get(key),
+                getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE).getAll().get(key));
+    }
+
+    private void applySettingsInPlace() {
+        Config cfg = Config.load(this);
+        boolean wallpaperChanged = changedSetting(Config.WALLPAPER_CHOICE_KEY)
+                || changedSetting(Config.WALLPAPER_RANDOM_KEY) || changedSetting(Config.WALLPAPER_DIM_KEY)
+                || changedSetting(Config.ROTATION_MINUTES_KEY) || changedSetting(SceneReadability.KEY_MODE);
+        if (wallpaperChanged) {
+            // Decode the replacement before removing the old image: no plain-black intermediate frame.
+            WallpaperPlayer previous = wallpaperPlayer;
+            wallpaperPlayer = new WallpaperPlayer(this, root, cfg);
+            previous.detach();
+        }
+        animations = cfg.animations;
+        advancedEffects = cfg.animations && cfg.advancedEffects;
+        boolean tilesChanged = changedSetting("animations") || changedSetting("advanced_effects")
+                || changedSetting(Config.SHELF_SCALE_KEY)
+                || changedSetting("font_ar") || changedSetting("font_en") || appliedPalette != UiTheme.selected(this);
+        if (tilesChanged) {
+            shelfScalePercent = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
+                    .getInt(Config.SHELF_SCALE_KEY, AppAdapter.DEFAULT_SHELF_SCALE);
+            adapter = new AppAdapter(this, this, COLUMNS, cfg);
+            Order order = Order.load(Order.file(this));
+            adapter.setSavedOrder(Order.ranks(order, dockApps), Order.docked(order, dockApps));
+            grid.setAdapter(adapter);
+            reloadApps(false, true, false);
+            grid.invalidateItemDecorations();
+        }
+        applyClockPreferences();
+        glass.setAccent(UiTheme.accent(this));
+        UiTheme.apply(root);
+        settingsRevision = settingsRevision();
+        appliedPalette = UiTheme.selected(this);
+        appliedSettings = new java.util.HashMap<>(getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE).getAll());
     }
 
     private void scheduleSettingsRecreation() {
@@ -1202,9 +1276,15 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
 
     @Override
     protected void onPause() {
+        View departingFocus = getCurrentFocus();
+        if (departingFocus != null) {
+            resumeFocusId = departingFocus.getId(); resumeFocusTag = departingFocus.getTag();
+            resumeTileKey = lastFocusedKey;
+        }
         super.onPause();
         root.removeCallbacks(showIdleClock);
         tileMenuKey.reset();
+        pendingMenuAction = null;
         endReorder();   // Home or another app while reordering keeps the order so far
         wallpaperPlayer.stop();
         smartHome.onPause();
@@ -1259,6 +1339,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
+            runPendingMenuAction();
             startPendingSettingsReorder();
             if (libraryFocusPending && appLibrary == null) focusLibrary();
             showCardPrompt();
@@ -1316,10 +1397,13 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        runPendingMenuAction();
         if (handleSettingsKey(event)) return true;
         int keyCode = event.getKeyCode();
         boolean okKey = keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER
                 || keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER;
+        if (okKey && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0)
+            lastOkDownTime = event.getDownTime();
         // Once a hold opened the popup, consume its remaining repeats and release before the newly focused first
         // action can see them. This also prevents the card's normal click from launching the app on key-up.
         if (okKey && tileMenuKey.active()) {
@@ -3353,17 +3437,19 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
 
         int alignment = getResources().getBoolean(R.bool.rtl_menu_bar) != underGear ? Gravity.END : Gravity.START;
         dropIn(popup, panel, anchor, alignment);
-        rows.getChildAt(0).requestFocus();
+        rows.getChildAt(0).requestFocusFromTouch();
     }
 
     private PopupWindow glassPopup(View panel, int width) {
         final PopupWindow popup = new PopupWindow(panel, width, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));   // needed for Back to dismiss
+        UiFont.apply(panel);
         popup.setOutsideTouchable(true);
         popup.setAnimationStyle(0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) popup.setElevation(0f);
         popup.setOnDismissListener(() -> {
             if (openPopup == popup) openPopup = null;
+            root.post(this::runPendingMenuAction);
         });
         openPopup = popup;
         return popup;
@@ -3408,10 +3494,13 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             dot.setVisibility(View.GONE);
         }
         row.setOnClickListener(v -> {
+            if (pendingMenuAction != null) return;
+            pendingMenuAction = action;
             popup.dismiss();
-            action.run();
+            root.post(this::runPendingMenuAction);
         });
         rows.addView(row);
+        UiFont.apply(row);
     }
 
     // ---- launcher settings and module cards -------------------------------------------------------
@@ -3442,7 +3531,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         panel.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         popup.setWidth(Math.max((int) (220 * density), Math.min(panel.getMeasuredWidth(), (int) (360 * density))));
         dropIn(popup, panel, anchor, getResources().getBoolean(R.bool.rtl_menu_bar) ? Gravity.START : Gravity.END);
-        rows.getChildAt(0).requestFocus();
+        rows.getChildAt(0).requestFocusFromTouch();
     }
 
     /** The header opens launcher settings directly; hold OK keeps the extra home actions available. */
@@ -3461,7 +3550,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // Hebrew puts Settings at the left of the header: grow the menu inward from it.
         dropIn(popup, panel, anchor, getResources().getBoolean(R.bool.rtl_menu_bar)
                 ? Gravity.START : Gravity.END);
-        rows.getChildAt(0).requestFocus();
+        rows.getChildAt(0).requestFocusFromTouch();
     }
 
     /**
@@ -3510,7 +3599,24 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             panel.animate().alpha(1f).scaleY(1f).translationY(0f).setDuration(220)
                     .setInterpolator(new android.view.animation.DecelerateInterpolator(1.6f)).start();
         }
-        rows.getChildAt(0).requestFocus();
+        rows.getChildAt(0).requestFocusFromTouch();
+        // A focus request before PopupWindow's first traversal can be lost on KitKat.
+        // Set the first row once its real bounds exist, so the first OK selects it.
+        rows.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override public void onLayoutChange(View v,int l,int t,int r,int b,int ol,int ot,int or,int ob) {
+                if (r<=l || b<=t) return;
+                rows.removeOnLayoutChangeListener(this);
+                if (popup.isShowing()) rows.getChildAt(0).requestFocusFromTouch();
+            }
+        });
+    }
+
+    private void runPendingMenuAction() {
+        if (pendingMenuAction == null || !hasWindowFocus() || openPopup != null || isFinishing()) return;
+        Runnable action = pendingMenuAction;
+        pendingMenuAction = null;
+        tileMenuKey.reset();
+        action.run();
     }
 
     private void addSettingsMenuRow(LinearLayout rows, PopupWindow popup, int title, Runnable action) {
@@ -3520,29 +3626,34 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         row.findViewById(R.id.status).setVisibility(View.GONE);
         ((TextView) row.findViewById(R.id.title)).setText(title);
         row.setOnClickListener(v -> {
+            if (pendingMenuAction != null) return;
+            pendingMenuAction = action;
             popup.dismiss();
-            action.run();
+            root.post(this::runPendingMenuAction);
         });
         // The OK-up after opening the menu must not activate its first row.
         final boolean[] pressed = {false};
+        final long openingGesture = lastOkDownTime;
         row.setOnKeyListener((v, code, event) -> {
             if (code != KeyEvent.KEYCODE_DPAD_CENTER && code != KeyEvent.KEYCODE_ENTER
                     && code != KeyEvent.KEYCODE_NUMPAD_ENTER) return false;
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                 // A deliberate OK always has its own DOWN. The release that opened this popup has no matching
                 // DOWN in the row, so pressed remains false and is safely ignored without a time gate.
-                if (event.getRepeatCount() == 0 && !event.isLongPress()) pressed[0] = true;
+                // Identify the gesture, not a sticky OEM long-press flag/repeat count on the next press.
+                boolean fresh = openingGesture != Long.MIN_VALUE
+                        ? event.getDownTime() != openingGesture
+                        : event.getRepeatCount() == 0 && !event.isLongPress();
+                if (fresh) pressed[0] = true;
                 return true;
             }
             boolean activate = pressed[0] && event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled();
             pressed[0] = false;
-            if (activate) {
-                popup.dismiss();
-                action.run();
-            }
+            if (activate) row.performClick();
             return true;
         });
         rows.addView(row);
+        UiFont.apply(row);
     }
 
     /**
@@ -3669,6 +3780,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                 return null;
             }, null));
             rows.addView(row);
+        UiFont.apply(row);
         }
         updateCardStates(rows);
         // Scroll inside the panel instead of running off the bottom of a 720p screen.
@@ -3680,7 +3792,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // Hebrew places Settings on the left: align the outer panel inward, like its parent menu.
         dropIn(popup, panel, anchor, getResources().getBoolean(R.bool.rtl_menu_bar)
                 ? Gravity.START : Gravity.END);
-        rows.getChildAt(0).requestFocus();
+        rows.getChildAt(0).requestFocusFromTouch();
     }
 
     private Cards.Card cardFor(String pkg) {

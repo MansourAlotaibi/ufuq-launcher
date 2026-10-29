@@ -46,3 +46,11 @@ material, API 19/28/34 framework tests and fixes for locale-layout/style startup
 - Enable the original cinematic Move menu without a private theme; ignore trailing hold repeats/cancelled menu releases and keep persistent reorder feedback.
 - Restore exact Classic reflection glass opacity, border and focus underline; palette variants share the original geometry and alpha.
 - Preserve whole-card pages, selected-team cache fixes, licensed content and independent signing. Physical remote validation remains a manual gate.
+
+### RC2 final functional and UX refinement
+
+- Defer menu actions until Home regains focus and identify distinct OK gestures.
+- Apply current cinematic settings in place; retain documented locale/legacy-geometry recreation exceptions.
+- Add independent Arabic/English font choices with static, pinned OFL fonts and protected reading/clock typography.
+- Disable rotation frequency in Fixed mode, retain it in Random, and localize bundled scene names.
+- Add measured football paragraph leading without redesigning the information horizon.

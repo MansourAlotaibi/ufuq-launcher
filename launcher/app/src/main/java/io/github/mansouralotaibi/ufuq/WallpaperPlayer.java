@@ -93,6 +93,7 @@ final class WallpaperPlayer {
         // Ufuq integrates information into the horizon and intentionally leaves the Scene unobstructed.
         // Keep caption metadata loaded for rotation/themes, but do not add a floating name to Ufuq Home.
         caption = names.isEmpty() || sceneHero ? null : makeCaption(context, root, false);
+        if (!config.wallpaperEnabled || files.isEmpty()) root.setBackgroundColor(config.backgroundColor);
         if (config.wallpaperEnabled && !files.isEmpty()) {
             root.addView(image, 0, new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -148,6 +149,14 @@ final class WallpaperPlayer {
             sun = WallpaperMood.sun(sunDay, latitude, longitude, ZoneId.systemDefault());
         }
         return WallpaperMood.select(files, moods, WallpaperMood.timeOfDay(now.getHour() * 60 + now.getMinute(), sun[0], sun[1]));
+    }
+
+    void detach() {
+        close();
+        root.removeView(image);
+        if (caption != null) root.removeView(caption);
+        image.setImageDrawable(null);
+        current = null;
     }
 
     void close() {

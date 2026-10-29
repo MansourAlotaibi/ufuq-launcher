@@ -37,6 +37,9 @@ if a.apk:
    assert hashlib.sha256(z.read('assets/wallpapers/'+e['file'])).hexdigest()==e['sha256']
   for name in ['OFL-Outfit.txt','Apache-2.0.txt','desugar-LICENSE.txt','CC-BY-3.0.txt','CC-BY-SA-4.0.txt']:
    assert z.read('assets/licenses/'+name)==(r/'launcher/app/src/main/assets/licenses'/name).read_bytes()
+  for e in json.loads((r/'third_party/ui-font-provenance.json').read_text())['files']:
+   asset=e['file'].split('/assets/',1)[1]
+   assert hashlib.sha256(z.read('assets/'+asset)).hexdigest()==e['sha256'],'Font/license package mismatch'
   assert z.read('assets/daily_reflection.json')==(r/'launcher/app/src/main/assets/daily_reflection.json').read_bytes()
   assert not any('version-control-info' in n for n in z.namelist()),'Private history metadata must not be packaged'
 if a.sources:

@@ -2,14 +2,14 @@
   {
     "file": "AppAdapter.java",
     "originalSha256": "7c6b20cb8871fbba6fa767c1c3817306670c9d21eea47267e59a814c545848d9",
-    "publicSha256": "86f266bfc74e01bcbe1c9783e88461da2c15978ec17b40dcb3348d7e03233747",
+    "publicSha256": "638dcc8456bda680ae2c7001a7b7b011551b901cb4e95c2e4d296f6449c0a297",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
   {
     "file": "AppLibraryDialog.java",
     "originalSha256": "6b9e66bc5b58e47bca87fd8530441ca355926cc2db79f5f0676c1ad73b8b35f3",
-    "publicSha256": "4241f693081fae7531f912a6a1933969be1205b5a1f91120dbf411adb66ba6ee",
+    "publicSha256": "1155d88fd77cb7c69863506e70573da93b83c8f50294bb8be9779554ab06a2da",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -198,7 +198,7 @@
   {
     "file": "LauncherSettingsActivity.java",
     "originalSha256": "e47c891888b690e797d25cf0623e43831723c592b0464e560296eb40d377497a",
-    "publicSha256": "1b6e73b6fc090ec339da2960d2e7c71241a2adb3219bfc937a945b57a76c2c8e",
+    "publicSha256": "2bc087639d1fb44ff35e7f4bade41368775d3024ef3c80751d6a14cfa73c3a35",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -233,7 +233,7 @@
   {
     "file": "MainActivity.java",
     "originalSha256": "842c3f8e2765b5918c09a839638c9260d1d049bff822e26e73de953cb49b43a8",
-    "publicSha256": "aaa2aab9406ea922dedfcab827c2e9041ce9d964018b3d77319677e27d838c15",
+    "publicSha256": "86cad4757501f3c508f87d819b2f12ba76bf67dfa4480230f540929922f14679",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -324,7 +324,7 @@
   {
     "file": "ReflectionView.java",
     "originalSha256": "731d5d0611506c79ce4cda2d666d563e34c95c499af810341a8ecc0ae9588470",
-    "publicSha256": "6dd3af55ef700a296a4fa63179b138242b0108c0af99ac8fed4246a5f8370fe1",
+    "publicSha256": "c2b5418f6ec2a6350d9b33828368ce5362ee3249269d7579ce8779a7b306c60a",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -380,14 +380,14 @@
   {
     "file": "SmartHomeController.java",
     "originalSha256": "0970336f9c3acfa2b8f51b9e032438a30513d5a62ad4b39ab4b8d4a5fb730c27",
-    "publicSha256": "d37541bb8426767cc3bb89b24a90a9b383692cdf550d074f8e98d101f7cceada",
+    "publicSha256": "72568ba4e22b269251ba459e17a826c0f3e4e4b88fd1765052156e03d6800d9c",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
   {
     "file": "SmartModuleView.java",
     "originalSha256": "8069d8d1e06fbf65d7d68b41d72b0fd0a3c09e4e831bb5bd90efbdeef250300b",
-    "publicSha256": "6f9b7940f9872666bac08f92aab7c4d8a127d00a88830efd6c780b165f07cc05",
+    "publicSha256": "a32f9d531b5dc4e047a1af093c4319a4d10b1d8bf2280f5438f6812b6a561378",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -478,8 +478,8 @@
   {
     "file": "UiFont.java",
     "originalSha256": "8a0a8dc3b66b84377e45c1772aa2802d37fe4e5c96c8abe71eb753850e58a6c9",
-    "publicSha256": "0fb5141291dbd0ec85c22c12c63c0789239167b76861e380185b0aac73e7a478",
-    "normalizedStatus": "identical",
+    "publicSha256": "e4e95e40e3aff578d2f49a71a68b65599751476f5160334e68576dd9b36e5041",
+    "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
   {
@@ -506,8 +506,8 @@
   {
     "file": "WallpaperPlayer.java",
     "originalSha256": "2b6a31a84d71aecf830a5a4b5ad67be06614bafe8f4a87e2a8762a0c8683d7cb",
-    "publicSha256": "b5f1a6c084bfce4ee94ad9c70e526e499914e697363b67005c9589782eeb516c",
-    "normalizedStatus": "identical",
+    "publicSha256": "cc36603adc3834c3de6a5d14c747b385d0da7bf268670bed4872eba01eb535a2",
+    "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
   {
@@ -575,7 +575,14 @@
   },
   {
     "file": "UiTheme.java",
-    "publicSha256": "6b312984500b0f5c83e370c13fca09b13c956e51733d2398074d8e9dee8f4f18",
+    "publicSha256": "f929afcc6be4ceeec0701208357a8c011fd1a0f7a802b298735327a1015aa453",
     "normalizedStatus": "public addition"
+  },
+  {
+    "file": "WallpaperNames.java",
+    "originalSha256": null,
+    "publicSha256": "c633deb085fed5b80f90f23bb6f9cc5e6da7cfb3eae5b2f724a2cd1932c526de",
+    "normalizedStatus": "public addition",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   }
 ]

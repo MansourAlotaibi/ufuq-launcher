@@ -1,10 +1,11 @@
 # Functional and stability comparison: MansourTV Ufuq 2.8.5 → public RC2
 
-Latest follow-up: [hold-OK route and original reflection glass correction](REORDER-GLASS-VALIDATION.md). The preceding Settings-driven reorder test did not validate the disabled hold-OK entry route; that regression is corrected separately. The source hash inventory is updated to current source. Verification counts below describe the preceding c2d9cd0 iteration.
+Latest follow-up: [final RC2 settings, fonts, football spacing and Move transition](UX-REFINEMENT.md). Previous follow-up: [hold-OK route and original reflection glass correction](REORDER-GLASS-VALIDATION.md). The preceding Settings-driven reorder test did not validate the disabled hold-OK entry route; that regression is corrected separately. The source hash inventory is updated to current source. Verification counts below describe the preceding c2d9cd0 iteration.
+
 
 ## Scope and evidence rules
 
-The authoritative baseline is the actual owner-named MansourTV source reporting version **2.8.5 / code 15**, read without modification. The comparison covers all 77 original Java files, settings resources/defaults, preferences, manifest, native navigation and lifecycle paths. All 77 Java files remain in public Ufuq; namespace/identity changes are normalized separately from functional changes. The final inventory has **55 normalized-identical files, 22 changed files and 8 public additions**; see [file hashes](FUNCTIONAL-SOURCE-INVENTORY.json). A file inventory records hashes, rather than publishing personal configuration or raw private diffs.
+The authoritative baseline is the actual owner-named MansourTV source reporting version **2.8.5 / code 15**, read without modification. The comparison covers all 77 original Java files, settings resources/defaults, preferences, manifest, native navigation and lifecycle paths. All 77 Java files remain in public Ufuq; namespace/identity changes are normalized separately from functional changes. The final inventory has **53 normalized-identical files, 24 changed files and 9 public additions**; see [file hashes](FUNCTIONAL-SOURCE-INVENTORY.json). A file inventory records hashes, rather than publishing personal configuration or raw private diffs.
 
 “Original behavior” below distinguishes source-defined behavior from the owner's accepted stable installation. The protected installation was **not** used for destructive A/B tests, settings changes, cache manipulation or force-stop experiments. Its private preferences were not extracted or copied. A source match does not prove runtime equivalence.
 

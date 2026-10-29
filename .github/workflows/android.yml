@@ -24,6 +24,7 @@ jobs:
         run: |
           python3 tools/security_audit.py
           python3 tools/verify_reflection_content.py
+          python3 tools/verify_ui_fonts.py
       - name: Unit tests, release lint, unsigned build
         working-directory: launcher
         run: ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease

@@ -141,3 +141,6 @@ screen and applies the user's dimming preference at runtime. Author credit is pr
 and in the bundled in-app notices; no endorsement is implied. These photographs are not
 claimed as MIT-authored Ufuq artwork. Original dimensions, source URLs, verification date
 and exact SHA-256 hashes are in `third_party/wallpaper-provenance.json`.
+
+
+Additional optional UI fonts: Amiri Regular, copyright 2010–2022 The Amiri Project Authors; Lato Regular, copyright 2010–2014 tyPoland Łukasz Dziedzic, Reserved Font Name Lato. Unmodified static fonts, SIL Open Font License 1.1. Complete notices are packaged in assets/licenses/amiri-OFL.txt and assets/licenses/lato-OFL.txt; pinned sources and hashes are in third_party/ui-font-provenance.json. Font licenses remain separate from application licensing. Approved clock/religious-text typography is retained.

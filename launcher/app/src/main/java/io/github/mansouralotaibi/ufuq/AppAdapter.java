@@ -486,6 +486,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             h.label.setText(e.label);
             h.label.setVisibility(modernShelf ? View.GONE : View.VISIBLE);
         }
+        UiFont.apply(h.itemView);
         h.card.setOnClickListener(v -> launch(e));
         h.card.setOnLongClickListener(v -> {
             if (tileMenu) {

@@ -67,10 +67,21 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                     .setSingleChoiceItems(names, UiTheme.selected(this), (d, which) -> {
                         UiTheme.select(this, which);
                         d.dismiss();
-                        recreate();
+                        UiTheme.apply(getWindow().getDecorView());
+                        refresh();
                     }).setNegativeButton(android.R.string.cancel, null).create();
             dialog.show();
             UiTheme.apply(dialog.getWindow().getDecorView());
+        });
+        TextView font = findViewById(R.id.fontChoice);
+        font.setText(R.string.font_style);
+        font.setOnClickListener(v -> {
+            String[] fontNames = {getString(R.string.font_default), UiFont.arabic(this) ? "Amiri · أميري" : "Lato"};
+            new ThemedDialogBuilder(this).setTitle(R.string.font_style)
+                    .setSingleChoiceItems(fontNames, UiFont.selection(this), (d, which) -> {
+                        UiFont.select(this, which); d.dismiss(); changed();
+                        UiFont.apply(getWindow().getDecorView()); refresh();
+                    }).setNegativeButton(android.R.string.cancel, null).show();
         });
         Config config = Config.load(this);
         languageChoice = findViewById(R.id.languageChoice);
@@ -196,6 +207,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                     }).setNegativeButton(android.R.string.cancel, null).show();
         });
         findViewById(R.id.rotationIntervalChoice).setOnClickListener(v -> {
+            if (!v.isEnabled()) return;
             int[] values = {1, 5, 15, 30, 60};
             String[] labels = new String[values.length];
             for (int i = 0; i < values.length; i++) labels[i] = getString(R.string.rotation_interval_label, values[i]);
@@ -343,7 +355,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         File single = dir == null ? null : new File(dir, Config.WALLPAPER_NAME);
         if (single != null && single.isFile()) images.add(0, single);
         String[] labels = new String[images.size() + 1];
-        for (int i = 0; i < images.size(); i++) labels[i] = images.get(i).getName();
+        for (int i = 0; i < images.size(); i++) labels[i] = WallpaperNames.label(this, images.get(i).getName());
         labels[images.size()] = getString(R.string.wallpaper_none);
         String current = choices.getString(Config.WALLPAPER_CHOICE_KEY, null);
         int checked = "none".equals(current) ? images.size()
@@ -386,7 +398,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
             editor.apply();
         } else choices.edit().putBoolean(Config.WALLPAPER_RANDOM_KEY, true)
                 .remove(Config.WALLPAPER_CHOICE_KEY).apply();
-        changed(); refresh();
+        changed(); refreshWallpaper();
     }
 
     private static int indexOf(List<File> images, String name) {
@@ -415,6 +427,10 @@ public final class LauncherSettingsActivity extends ThemedActivity {
     }
 
     private void refresh() {
+        ((TextView)findViewById(R.id.paletteChoice)).setText(getString(R.string.ufuq_theme,
+                getResources().getStringArray(R.array.ufuq_themes)[UiTheme.selected(this)]));
+        ((TextView)findViewById(R.id.fontChoice)).setText(getString(R.string.font_style_state,
+                UiFont.selection(this)==0 ? getString(R.string.font_default) : UiFont.arabic(this) ? "Amiri · أميري" : "Lato"));
         String language = LocalePreferences.current(this);
         int languageName = LocalePreferences.ARABIC.equals(language) ? R.string.language_arabic
                 : LocalePreferences.ENGLISH.equals(language) ? R.string.language_english
@@ -443,6 +459,14 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                 getString(advancedEffects ? R.string.on : R.string.off)));
         advancedChoice.setEnabled(animations);
         advancedChoice.setAlpha(animations ? 1f : 0.5f);
+        refreshWallpaper();
+        readabilityChoice.setText(getString(R.string.readability_state,
+                getString(SceneReadability.GLOBAL.equals(readabilityMode)
+                        ? R.string.readability_global : R.string.readability_scene)));
+        followThemeChoice.setSelected(!hasOnTvChoices());
+    }
+
+    private void refreshWallpaper() {
         String wallpaperCurrent = choices.getString(Config.WALLPAPER_CHOICE_KEY, null);
         boolean randomWallpaper = choices.getBoolean(Config.WALLPAPER_RANDOM_KEY,
                 !choices.contains(Config.WALLPAPER_CHOICE_KEY));
@@ -452,14 +476,16 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         wallpaperChoice.setAlpha(randomWallpaper ? 0.55f : 1f);
         wallpaperChoice.setText(getString(R.string.wallpaper_state,
                 "none".equals(wallpaperCurrent) ? getString(R.string.wallpaper_none)
-                        : wallpaperCurrent != null ? wallpaperCurrent
+                        : wallpaperCurrent != null ? WallpaperNames.label(this, wallpaperCurrent)
                         : getString(R.string.wallpaper_theme_default)));
         ((TextView) findViewById(R.id.wallpaperDimChoice)).setText(getString(R.string.wallpaper_dim_label, Config.load(this).wallpaperDim));
-        ((TextView) findViewById(R.id.rotationIntervalChoice)).setText(getString(R.string.rotation_interval_label, Config.load(this).wallpaperRotationMinutes));
-        readabilityChoice.setText(getString(R.string.readability_state,
-                getString(SceneReadability.GLOBAL.equals(readabilityMode)
-                        ? R.string.readability_global : R.string.readability_scene)));
-        followThemeChoice.setSelected(!hasOnTvChoices());
+        View rotation = findViewById(R.id.rotationIntervalChoice);
+        rotation.setEnabled(randomWallpaper);
+        rotation.setFocusable(randomWallpaper);
+        rotation.setAlpha(randomWallpaper ? 1f : .4f);
+        ((TextView) rotation).setTextColor(randomWallpaper ? 0xFFF5F5F5 : 0xFF86909B);
+        ((TextView) rotation).setText(getString(R.string.rotation_interval_label, Config.load(this).wallpaperRotationMinutes));
+        UiTheme.apply(rotation);
     }
 
     private boolean hasOnTvChoices() {
