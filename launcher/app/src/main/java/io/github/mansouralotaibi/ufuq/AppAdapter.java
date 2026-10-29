@@ -412,10 +412,10 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         int inner = width - parent.getPaddingLeft() - parent.getPaddingRight();
         int w = tileWidthPx(inner, parent.getHeight(), dockSize, rowsBelowDock, dockTitle, dockRow, density), h = tileHeightPx(w);
         if (modernShelf) {
-            w = modernShelfWidthPx(w, shelfScale);
+            w = ShelfGeometry.tile(inner, density, shelfScale);
             h = tileHeightPx(w);
             RecyclerView.LayoutParams item = new RecyclerView.LayoutParams(
-                    w + Math.round(24 * density), ViewGroup.LayoutParams.WRAP_CONTENT);
+                    ShelfGeometry.cell(inner, density, shelfScale), ViewGroup.LayoutParams.WRAP_CONTENT);
             v.setLayoutParams(item);
         }
         View card = v.findViewById(R.id.card);

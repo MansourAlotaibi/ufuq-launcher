@@ -28,6 +28,19 @@ final class UiTheme {
                 focus ? accent(c) : 0x55FFFFFF);
         return d;
     }
+    private static GradientDrawable homePill(Context c, boolean focus) {
+        GradientDrawable d = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                focus ? new int[]{accent(c), accent(c)} : new int[]{0x2EFFFFFF, 0x14FFFFFF});
+        d.setCornerRadius(21 * c.getResources().getDisplayMetrics().density);
+        d.setStroke((int) Math.ceil(c.getResources().getDisplayMetrics().density),
+                focus ? accent(c) : 0x38FFFFFF);
+        return d;
+    }
+    private static boolean topControl(View v) {
+        int id = v.getId();
+        return id == R.id.btnSettings || id == R.id.btnLibraryTop || id == R.id.btnWifi
+                || id == R.id.btnInputs || id == R.id.btnReorder;
+    }
     static void apply(View v) {
         // Native Holo dialog chrome is outside the app's resource IDs. Tint known framework
         // title/divider views when present; unfamiliar OEM dialogs retain their safe platform style.
@@ -55,11 +68,11 @@ final class UiTheme {
             TextView t = (TextView) v;
             if (t.isFocusable() && t.isClickable()) {
                 StateListDrawable bg = new StateListDrawable();
-                bg.addState(new int[]{android.R.attr.state_focused}, shape(v.getContext(), true));
-                bg.addState(new int[]{android.R.attr.state_pressed}, shape(v.getContext(), true));
-                bg.addState(new int[]{android.R.attr.state_activated}, shape(v.getContext(), true));
-                bg.addState(new int[]{android.R.attr.state_selected}, shape(v.getContext(), true));
-                bg.addState(new int[]{}, shape(v.getContext(), false));
+                bg.addState(new int[]{android.R.attr.state_focused}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
+                bg.addState(new int[]{android.R.attr.state_pressed}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
+                bg.addState(new int[]{android.R.attr.state_activated}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
+                bg.addState(new int[]{android.R.attr.state_selected}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
+                bg.addState(new int[]{}, (topControl(v) ? homePill(v.getContext(), false) : shape(v.getContext(), false)));
                 t.setBackground(bg);
                 t.setTextColor(new ColorStateList(new int[][]{{android.R.attr.state_focused}, {android.R.attr.state_activated}, {android.R.attr.state_selected}, {}},
                         new int[]{0xFF10151F, 0xFF10151F, 0xFF10151F, 0xFFF5F5F5}));

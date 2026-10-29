@@ -223,4 +223,5 @@
     <string name="football_retry">بانتظار إعادة محاولة تحميل الفريق</string>
     <string name="wallpaper_dim_label_title">تعتيم الخلفية</string>
     <string name="rotation_interval_title">فترة تبديل الخلفية</string>
+    <string name="favorites_page">صفحة %1$d من %2$d</string>
 </resources>

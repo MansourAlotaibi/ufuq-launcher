@@ -124,7 +124,7 @@ final class ReflectionView extends LinearLayout {
 
     @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        glass.setShader(new LinearGradient(0, 0, w, h, 0x48142C3A, 0x18131D2A,
+        glass.setShader(new LinearGradient(0, 0, w, h, 0x20142C3A, 0x08131D2A,
                 Shader.TileMode.CLAMP));
         post(this::fitText);
     }
@@ -133,11 +133,11 @@ final class ReflectionView extends LinearLayout {
         float inset = isFocused() ? dp(2) : dp(1);
         bounds.set(inset, inset, getWidth() - inset, getHeight() - inset);
         canvas.drawRoundRect(bounds, dp(22), dp(22), glass);
-        edge.setColor(isFocused() ? UiTheme.accent(getContext()) : 0x1FFBF4E8);
+        edge.setColor(isFocused() ? UiTheme.accent(getContext()) : 0x0CFBF4E8);
         edge.setStrokeWidth(isFocused() ? dp(3) : Math.max(1f, dp(1) * .65f));
         canvas.drawRoundRect(bounds, dp(22), dp(22), edge);
         if (isFocused()) {
-            edge.setColor(0x99F2B25B);
+            edge.setColor(UiTheme.accent(getContext()));
             edge.setStrokeWidth(dp(2));
             canvas.drawLine(dp(24), getHeight() - dp(8), getWidth() - dp(24),
                     getHeight() - dp(8), edge);

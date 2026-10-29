@@ -143,6 +143,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
 
     private AppAdapter adapter;
     private RecyclerView grid;
+    private int shelfPageStart;
     private FrameLayout root;
     private WallpaperPlayer wallpaperPlayer;
     private SmartHomeController smartHome;
@@ -542,6 +543,13 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         if (sceneHero) {
             grid.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false) {
                 @Override protected boolean isLayoutRTL() { return rtlAppGrid; }
+                @Override public boolean canScrollHorizontally() {
+                    return false; // Page changes use layout offsets; free pixel scrolling would clip cards.
+                }
+                @Override public boolean requestChildRectangleOnScreen(@NonNull RecyclerView parent,
+                        @NonNull View child, @NonNull Rect rect, boolean immediate, boolean focusedChildVisible) {
+                    return false; // Explicit whole-page focus routing owns horizontal scrolling.
+                }
             });
         } else grid.setLayoutManager(new GridLayoutManager(this, COLUMNS) {
             @Override
@@ -582,6 +590,18 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         if (!sceneHero) ((GridLayoutManager) grid.getLayoutManager()).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) { return adapter != null && adapter.isLibraryAt(position) ? COLUMNS : 1; }
         });
+        if (sceneHero) grid.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override public void getItemOffsets(@NonNull Rect out, @NonNull View view,
+                    @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                int width = parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight();
+                int slots = ShelfGeometry.slots(width, density, shelfScalePercent);
+                if (parent.getChildAdapterPosition(view) == state.getItemCount() - 1) {
+                    int tail = ShelfGeometry.tail(state.getItemCount(), slots)
+                            * ShelfGeometry.cell(width, density, shelfScalePercent);
+                    if (rtlAppGrid) out.left = tail; else out.right = tail;
+                }
+            }
+        });
         grid.setHasFixedSize(true);
         grid.setItemAnimator(null);
         // Tiles that scroll out while one is carried come back from the view cache without a rebind; set their
@@ -590,6 +610,11 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             @Override
             public void onChildViewAttachedToWindow(@NonNull View v) {
                 v.setAlpha(tileAlpha(grid.getChildAdapterPosition(v)));
+                if (sceneHero) {
+                    int position = grid.getChildAdapterPosition(v);
+                    v.setVisibility(position >= shelfPageStart && position < shelfPageStart + shelfSlots()
+                            ? View.VISIBLE : View.INVISIBLE);
+                }
             }
 
             @Override
@@ -619,7 +644,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             // Item height follows the tile size, which follows the columns and the rows that must fit (AppAdapter.tileWidthPx).
             int inner = (r - l) - grid.getPaddingLeft() - grid.getPaddingRight();
             int tileW = AppAdapter.tileWidthPx(inner, h, COLUMNS, rowsBelowDock, cfg.dockTitle, cfg.dockRow, density);
-            if (sceneHero) tileW = AppAdapter.modernShelfWidthPx(tileW, shelfScalePercent);
+            if (sceneHero) tileW = ShelfGeometry.tile(inner, density, shelfScalePercent);
             int itemH = AppAdapter.itemHeightPx(AppAdapter.tileHeightPx(tileW), density);
             int dockRow = itemH + (int) (AppAdapter.DOCK_EXTRA_DP * density);   // item height plus DockDecoration offsets
             int gridRows = itemH * rowsBelowDock;
@@ -627,7 +652,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             // even when the theme requests an extra visible row below the dock.
             int shelfClearance = cfg.appLibrary ? hero.getMeasuredHeight() + (int) (40 * density) : 0;
             int want = sceneHero
-                    ? Math.max(0, h - itemH - (int) (36 * density))
+                    ? Math.max(0, h - itemH - (int) (93 * density))
                     : Math.max(shelfClearance, h - dockRow - gridRows - (int) (AppAdapter.BOTTOM_ROOM_DP * density));
             // Where the rows cannot fit even at the smallest tile (3 rows with the title on), the title keeps its
             // room above the dock and the last rows run off the bottom instead of the title drawing over the clock.
@@ -640,6 +665,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             // Cold start or column count > 4: the first focus can run before the grid has its final width or
             // padding, leaving the glass at the XML design size until a key is pressed.
             grid.post(this::refitGlass);
+            if (sceneHero) updateShelfPage(lastFocused);
         });
 
         // Keep the glass glued to its tile while the grid scrolls.
@@ -1094,6 +1120,10 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             lastFocused = Math.max(0, Math.min(pos >= 0 ? pos : returnSlot, adapter.appCount() - 1));
             lastFocusedKey = adapter.keyAt(lastFocused);
             if (pos < 0) hideHero();
+            if (sceneHero) grid.post(() -> {
+                View focused = getCurrentFocus();
+                if (focused == null || focused.getId() != R.id.card) showSceneHeroAtRest();
+            });
             // A newly installed app may have brought a card with it.
             tilesReady = true;
             startPendingSettingsReorder();
@@ -1680,15 +1710,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         }
         View item = (View) card.getParent();
         if (sceneHero) {
-            // Keep the active card at a stable visual anchor once the shelf becomes wider than the screen.
-            // Merely revealing its nearest edge made the second "page" look lopsided and left the focus glass
-            // crowded against the overscan boundary. A physical-centre delta works in both LTR and RTL; RecyclerView
-            // clamps it naturally for the first and last cards, while middle cards remain balanced.
-            int visibleLeft = grid.getPaddingLeft();
-            int visibleRight = grid.getWidth() - grid.getPaddingRight();
-            int viewportCenter = (visibleLeft + visibleRight) / 2;
-            int dx = item.getLeft() + item.getWidth() / 2 - viewportCenter;
-            if (dx != 0) grid.scrollBy(dx, 0);
+            updateShelfPage(position);
         }
         // Tile rect in root coordinates, using layout positions (ignores the scale animation).
         Rect r = tileRect;
@@ -1866,6 +1888,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             if (card.getGlobalVisibleRect(bounds)) dockTop = bounds.top - rootLocation[1];
         }
         showHero(position, dockTop);
+        heroName.setText(R.string.scenes_hero_title);
     }
 
     /** The shelf's text for this dock app: its name and, on the cinematic shelf, "Last opened" and the dots. */
@@ -2347,7 +2370,9 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                 }
                 int first = adapter.focusablePosition(0);
                 int last = adapter.focusablePosition(count - 1);
-                return forward ? position >= last : position <= first;
+                int next = position + (forward ? 1 : -1);
+                if (next >= first && next <= last) focusTile(next);
+                return true;
             }
             if (forward && position == adapter.focusablePosition(count - 1) && adapter.isLibraryAt(count)) {
                 focusLibrary();
@@ -2357,6 +2382,12 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             int rowCount = position < COLUMNS ? Math.min(count, adapter.dockFilled()) : count;
             return GridNavigation.atHorizontalEdge(position, rowCount, COLUMNS,
                     rtlAppGrid, keyCode == KeyEvent.KEYCODE_DPAD_LEFT);
+        }
+        if (sceneHero) {
+            if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                if (smartHome == null || !smartHome.focusFirstCard()) firstTopButton().requestFocus();
+            }
+            return true; // One shelf row: Down stays put; Up exits from every page/slot.
         }
         if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
             if (position < COLUMNS) {
@@ -2472,6 +2503,25 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         }
     }
 
+    private int shelfSlots() {
+        return ShelfGeometry.slots(grid.getWidth() - grid.getPaddingLeft() - grid.getPaddingRight(),
+                density, shelfScalePercent);
+    }
+
+    private void updateShelfPage(int position) {
+        TextView page = findViewById(R.id.shelfPage);
+        int slots = shelfSlots(), pages = (adapter.appCount() + slots - 1) / slots;
+        shelfPageStart = ShelfGeometry.pageStart(position, slots);
+        for (int i = 0; i < grid.getChildCount(); i++) {
+            View item = grid.getChildAt(i);
+            int at = grid.getChildAdapterPosition(item);
+            item.setVisibility(at >= shelfPageStart && at < shelfPageStart + slots
+                    ? View.VISIBLE : View.INVISIBLE);
+        }
+        page.setVisibility(sceneHero && pages > 1 ? View.VISIBLE : View.GONE);
+        page.setText(getString(R.string.favorites_page, position / slots + 1, pages));
+    }
+
     private void focusTile(int position) {
         libraryFocusPending = false;
         cancelPendingFocusScroll();
@@ -2481,6 +2531,20 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             return;
         }
         final int pos = adapter.focusablePosition(Math.max(0, Math.min(position, adapter.appCount() - 1)));
+        if (sceneHero) {
+            int slots = shelfSlots();
+            int start = ShelfGeometry.pageStart(pos, slots);
+            LinearLayoutManager lm = (LinearLayoutManager) grid.getLayoutManager();
+            if (ShelfGeometry.pageStart(Math.max(0, lm.findFirstVisibleItemPosition()), slots) != start) {
+                updateShelfPage(pos);
+                lm.scrollToPositionWithOffset(start, 0);
+                grid.post(() -> {
+                    RecyclerView.ViewHolder h = grid.findViewHolderForAdapterPosition(pos);
+                    if (h != null) h.itemView.findViewById(R.id.card).requestFocus();
+                });
+                return;
+            }
+        }
         RecyclerView.ViewHolder vh = grid.findViewHolderForAdapterPosition(pos);
         if (vh != null) {
             View card = vh.itemView.findViewById(R.id.card);

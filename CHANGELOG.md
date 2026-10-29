@@ -1,5 +1,9 @@
 # Changelog
 
+## RC2 visual-parity review
+
+Whole-card paged favorites with RTL/LTR navigation, original Home anchors and glass controls, subtler reflection, and two provenance-verified photographic wallpapers. See [measured differences and validation](docs/VISUAL-PARITY.md).
+
 ## 1.0.0-rc2 — local review candidate
 
 - Restore cinematic clock, saved greeting, independent Gregorian/Hijri dates and the original Home hierarchy.

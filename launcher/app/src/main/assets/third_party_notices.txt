@@ -123,3 +123,21 @@ The archive preserves source notices and upstream build material; Ufuq does not 
 
 The Gradle wrapper matches Gradle's official 8.9 wrapper checksum and is Apache-2.0; see
 third_party/gradle-wrapper-provenance.json. No signing key or password is part of the public snapshot.
+
+
+### Photographic cinematic wallpapers (visual-parity update)
+
+- **Desert sunset scenic** — Steve Hillebrand, U.S. Fish and Wildlife Service.
+  Source: https://commons.wikimedia.org/wiki/File:Desert_sunset_scenic.jpg
+  The file description identifies an official U.S. federal employee work, public domain;
+  permission expressly allows commercial use. See https://www.fws.gov/disclaimer .
+- **Moraine Lake 17092005** — Gorgo, via Wikimedia Commons.
+  Source: https://commons.wikimedia.org/wiki/File:Moraine_Lake_17092005.jpg
+  Author dedicates the photograph to the public domain worldwide, with an unrestricted
+  any-purpose permission fallback where dedication is not legally possible.
+
+Both original JPEG files are included without pixel edits. The launcher crops them to the
+screen and applies the user's dimming preference at runtime. Author credit is preserved here
+and in the bundled in-app notices; no endorsement is implied. These photographs are not
+claimed as MIT-authored Ufuq artwork. Original dimensions, source URLs, verification date
+and exact SHA-256 hashes are in `third_party/wallpaper-provenance.json`.

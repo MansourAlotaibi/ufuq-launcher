@@ -22,5 +22,17 @@
     "sha256": "848a1cb9df28c4522deaf8c3d10a37638a3b4a4422e46ababae3f18deb4f2943",
     "license": "MIT",
     "evidence": "third_party/wallpaper-provenance.json"
+  },
+  {
+    "path": "launcher/app/src/main/assets/wallpapers/desert-sunset.jpg",
+    "sha256": "6518c11e737e862dda625f0a4a582df73ddb120e6ed17e09b1338b8feb7ca485",
+    "license": "Public domain (U.S. federal government official work)",
+    "evidence": "third_party/wallpaper-provenance.json"
+  },
+  {
+    "path": "launcher/app/src/main/assets/wallpapers/moraine-lake.jpg",
+    "sha256": "adb3041e3ac2de4cf3e7c3d186ea2c39a1a811b4a5fff4f888a6711579833d5f",
+    "license": "Public domain dedication by author, worldwide; fallback unrestricted use grant",
+    "evidence": "third_party/wallpaper-provenance.json"
   }
 ]

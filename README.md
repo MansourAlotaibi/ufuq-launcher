@@ -44,7 +44,7 @@ Outfit is SIL OFL 1.1. Content and external services have their own terms, not t
   Do not resell the API or embed premium/private keys. No team logos or provider images are downloaded.
   Selected-team fixtures appear from the private local cache immediately. Freshness is one hour; retries have a one-minute floor per team, foreground only.
   The provider currently documents 30 requests/minute for the free tier; availability and data quality vary.
-- **Wallpapers:** the full local wallpaper engine is retained. Three original MIT procedural cinematic landscapes are now bundled. No wallpaper collection was
+- **Wallpapers:** the full local wallpaper engine is retained. Two verified public-domain landscape photographs and three original MIT procedural landscapes are bundled; see [wallpaper credits](THIRD-PARTY-NOTICES.md#photographic-cinematic-wallpapers-visual-parity-update). No wallpaper collection was
   present in the protected source import; these are new public-project assets.
   Import only images whose rights permit your intended use/distribution. Private wallpaper
   folders and device screenshots are not accessed or bundled. In-app images remain independent of palettes.

@@ -544,6 +544,17 @@
         </FrameLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/shelfPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp"
+        android:textSize="12sp"
+        android:textColor="#99FFFFFF"
+        android:visibility="gone"
+        android:importantForAccessibility="no" />
+
     <!-- The single floating glass highlight that springs between tiles. -->
     <io.github.mansouralotaibi.ufuq.GlassView
         android:id="@+id/glass"
