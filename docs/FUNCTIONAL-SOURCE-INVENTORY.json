@@ -1,0 +1,581 @@
+[
+  {
+    "file": "AppAdapter.java",
+    "originalSha256": "7c6b20cb8871fbba6fa767c1c3817306670c9d21eea47267e59a814c545848d9",
+    "publicSha256": "86f266bfc74e01bcbe1c9783e88461da2c15978ec17b40dcb3348d7e03233747",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "AppLibraryDialog.java",
+    "originalSha256": "6b9e66bc5b58e47bca87fd8530441ca355926cc2db79f5f0676c1ad73b8b35f3",
+    "publicSha256": "4241f693081fae7531f912a6a1933969be1205b5a1f91120dbf411adb66ba6ee",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ArabicAppLabels.java",
+    "originalSha256": "9dee3717f49b38581008bc784de7b50fdcf03f1e9d7bfdf74073d4c1850ed14b",
+    "publicSha256": "76445f0f1d9ea15b5a77dd7cef453c801354f7878044b865a00e375676fab92d",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "BellDrawable.java",
+    "originalSha256": "6b75970864fdae0046beded5f932b73e2170f27d45bfb69301b7deaab4be3020",
+    "publicSha256": "adc1afe88c09e6f1e4d0f606a5d4b94fa1c5c5a656d28e73532285419f67a947",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "CardFeature.java",
+    "originalSha256": "d25332780a37bc8e3fa7049b571b4113010313eae6613c29e5fc9ba6cba62d23",
+    "publicSha256": "da437eabb63f77a4decaab20a29023f885e306e70956722c05dab909f31e71a8",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Cards.java",
+    "originalSha256": "aea13dcb85e54d2f13038eca8d676d6551fdb0474ae66748b53efa4fd1c52431",
+    "publicSha256": "7e9abae859b2dd3f232dce43d9b9c1c758f1c2cc486b1817dd8832dfbed79e22",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ClockActivity.java",
+    "originalSha256": "ba6540a81bfcd15f065ab7905e421750d157355dcd4438c6f531fbfb3869b232",
+    "publicSha256": "b7384d2911a7db3748f33d94fa161a603be6e10eee42992aa724b4656b9039df",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ClockDream.java",
+    "originalSha256": "71106a176bb43e885dd7521e59bb7735592a3506d8968d3aac4842a9702d7b0a",
+    "publicSha256": "c7e2a4a50de50e8449d1ac969f5e799e76cd7d195ab4253e7d8ec1ea074a3659",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ClockScene.java",
+    "originalSha256": "1dc69fc3db1eb1e58df818621f6a23d99f577e9a4b4f11d7329612ab5e74c275",
+    "publicSha256": "75c7660359a55336a518d373c4da98671803099c6c8cdfce3d36baab4e96bfa0",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Config.java",
+    "originalSha256": "d172e70e65b2b5a5920de3673e322ca5630bcadaeb39cb4b228097404e7a6124",
+    "publicSha256": "0877054763befc01d12eacea1f60499a0489d5a96d1daa2568d4df537b50bf64",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "CoocaaSources.java",
+    "originalSha256": "9b17bf260d08bdb39058087b15cbadbfe0aa076fbc1f8f08d0a4c45ef5fcfb33",
+    "publicSha256": "a2ec840c9d2a7555f72643b93bd4cd5e10377edd48ec8f1febae78cf6e7fd3a3",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "DailyContent.java",
+    "originalSha256": "8bcf328ba84cb359178b12a081d6eeb0fbb43f22bef5ae3d0c7c95d3fc68ae06",
+    "publicSha256": "b146ea55005c2faa1027a79c87d92107047b70d1c90a513855c4df4bc0e78054",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "DayRailView.java",
+    "originalSha256": "fe50833ffbd2aaa49ebfdc3823d671daaaa89a8cbbef8cc9bf53bb6a8d33c5e5",
+    "publicSha256": "0ffce3fc22fc8548e5bb2ac8e9198f951b822d301af8762e3d563d76c0200c07",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "DiyaDrawable.java",
+    "originalSha256": "959dba19176eec0aa243b26cd562f0d9b7df90b3a8b12caa2bef34136a188bf0",
+    "publicSha256": "c4e264d499741136225d15956f7db5f0b5a0a2fb55add3a4993d13ba8865273d",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "DockDecoration.java",
+    "originalSha256": "d7ac6012fb2bc28f0a9035c7f88c65a46e5868540ac3f4163da507d40826d32a",
+    "publicSha256": "4833371a93fdefe1839de529c3f85693f533c4c7e730644e41650adcf19f8765",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "DockSlots.java",
+    "originalSha256": "9ef0b04884d95701541de54591fd990db0fd5314b16218a8b648fb60c29e3e34",
+    "publicSha256": "2bd70a5c3c5a2a51199c7b3d609985aef3ed1a5dde71bed787c08beaa6f4da74",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Festival.java",
+    "originalSha256": "dffe9b487b21f826a3fc9e767c7d4663594aaa17dd717ce3c999fe2878a3dd53",
+    "publicSha256": "34f94bbd48aac0d77e13d54e9c1fc74f85ba105323266df891aeb927f8302b7c",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "FootballFixtureParser.java",
+    "originalSha256": "bc82ae510a64322736f1685b009d466af12eb1a294f3516e5cb33d441052130e",
+    "publicSha256": "7f93a6334c715cea43541db2f6e2277f06c4a29eddd7d10ce9e6c000d86498de",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "GamepadPassthrough.java",
+    "originalSha256": "f617cb1cfd533b25598687f27bb70de00bde2638bcd86477633709f29a7f871f",
+    "publicSha256": "77c0761a53d36f95850f9c78db0efdbc13004cf7aefcce22fc66d38a6f583ce4",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "GlassView.java",
+    "originalSha256": "e1638ad222093532020fc438a95e2a1f462eb5ab6ed3e5a70e3fec4ec576fe27",
+    "publicSha256": "fa5c38e244463fba5eaaa458eac710980ae030d2fac444908ab4eae582b5d181",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "GridNavigation.java",
+    "originalSha256": "2c49f99d3f501c2e2794568f0c616b39e61e1902aa9213c340e39af3904364dd",
+    "publicSha256": "93450a22e7183064d0667ead06db71fcbb213ba970dae6d2336a42d15c8d125b",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "HeroArt.java",
+    "originalSha256": "268948f2596a6a1972ef343d0087010f5fc83ae7d9896a06f7c8c240487bce54",
+    "publicSha256": "0bd0003662f952aeffc34f058d98e33349e13ad922f76971377dfeb8bc4803f1",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "HijriDateFormatter.java",
+    "originalSha256": "76f51345a2c884dd33104838315ee5810d1203403b27356ecb2365608351fc88",
+    "publicSha256": "845d541bba9e2fe09fd6134d8666b656859868d3a44beb52d6b69577d129ea0b",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "HomeKeyService.java",
+    "originalSha256": "5c1c19b84062ccfbe83e69568ec4697fbf6af63a51ad047406ba729b15f92c9f",
+    "publicSha256": "1899fae6edeb5d5367fe8dfb6490b8dd50dfec264a1dbd385eb698ca0939a92c",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "HomeSettingsActivity.java",
+    "originalSha256": "cd56ddc9865a34ba88e772f182229787189fd4eca833a9e70b129b5f02386b18",
+    "publicSha256": "d4de73b3f8600ef8eb4ed35a3f3a8867b11deb26e1028e1f7fe69d90db1d67d9",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "InputKeyService.java",
+    "originalSha256": "7295ce2f8414396d51194aa0fe6a37b6a2fe5e60bb25b42e597b8613ed3273da",
+    "publicSha256": "8b335ea2e1fc9924ba91cfae6439c4ad17e1a4f766f2563289122c1ccab52d85",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "InputsRequestActivity.java",
+    "originalSha256": "cafdf996cc3971f7136cd7e04783e85336cf640c932459c863d4dd56542f977b",
+    "publicSha256": "ea8cfc86a0731457c564f6bf0adb0ae23d85b350b4c97049c4b6d159e54046d1",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "LastOpened.java",
+    "originalSha256": "115214769132a85bfe84653b5d95ccf2d765cf80706f2c6f871f5b1d988ab8c2",
+    "publicSha256": "4199426b71635df1b1307294d76075ff9c3705b0f7e29f54e47f4a5a009fe9e0",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "LauncherSettingsActivity.java",
+    "originalSha256": "e47c891888b690e797d25cf0623e43831723c592b0464e560296eb40d377497a",
+    "publicSha256": "1b6e73b6fc090ec339da2960d2e7c71241a2adb3219bfc937a945b57a76c2c8e",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "LauncherTimeFormat.java",
+    "originalSha256": "c0a8ab9d77ef64ab2a9f5fe997db5a748fb5525fc44c0ace31a38eb0731e80a3",
+    "publicSha256": "aa062e3f96ea99179dcfac86b2f71a54230b45d63a7c9987a72305cb62708b57",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "LibraryApps.java",
+    "originalSha256": "91e8a86de176ac88111ac9a6256d026e286f299a97bfcdb02bc49dce163caaa0",
+    "publicSha256": "8ce479baafa6f1765254e9c6b517920ac3c81260bd6abec2bdc36b469518a207",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "LibraryLoads.java",
+    "originalSha256": "91367e6838efe9163b002306d14e41ff41a911a9cee8bfe09b681cd8f406c616",
+    "publicSha256": "d08e5c268d72a0bf3db069061af3ca8aaff2133572a108774b8146c681322f29",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "LocalePreferences.java",
+    "originalSha256": "8a8f85f7986fa9e501056f1cb73a31a5d1fc137de2f1df06d4ad6161b57e0533",
+    "publicSha256": "86495f364914c999b679ca4941f0b846d83664b6be774539eb2c7d8ad1e4698c",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "MainActivity.java",
+    "originalSha256": "842c3f8e2765b5918c09a839638c9260d1d049bff822e26e73de953cb49b43a8",
+    "publicSha256": "5a2662dd84dde3f09916c1663e9d50726b324315622ae9bd543b0f8486b7cc7c",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "MarigoldDrawable.java",
+    "originalSha256": "39e20949fc5848d77ef71fe9364dd2fb28373a790646d620f46f2743e5a96eea",
+    "publicSha256": "9018031c6ca48e4cbee80d8b6220d425396a4e7e6d79c5226b9cba6f7d2f8e9c",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Motion.java",
+    "originalSha256": "377708690fee11cd634403eddc42ebefdbe225a69be48593cb9695bf4e284d10",
+    "publicSha256": "653c16a42a46012f6962927905ebd64011dd7ff53f69f9f2ac90f26b17eda698",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "NativeApiClient.java",
+    "originalSha256": "6c76eeb326c290fa78f2866131edaaead1c557cb297219b4cefb6a9044b1cf2e",
+    "publicSha256": "61064a3c2c19d2dfd1c599620ee878bbd71fe132adb8dca02800b89415cb9683",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "NumeralStyle.java",
+    "originalSha256": "33ec420d53f61d56c99732e14f18923a275aba223084f68e1cf8f46a0609d93c",
+    "publicSha256": "8be918c4b92a832e1a42aa021d552ba7dee1840486a35495d0ffbfafab683023",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "NumeralTextClock.java",
+    "originalSha256": "dea8185f1a980dc89f13571d8c19b9c12c66e241dbd735c132e98d244f1fd629",
+    "publicSha256": "0b0d3b7ad55b50a425a278682d86d3f928cbf09184ce969201858fa441585f22",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Order.java",
+    "originalSha256": "98d96961c8bbdb89ab8f0245c8c31c9359828bd7ef267adcb661de3322a666c5",
+    "publicSha256": "c7fb7c29f3db571c41d80ba1892afaaa12da98ba12829fd00be0b919246f48b1",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "PetalShowerView.java",
+    "originalSha256": "f5487b5a8826707b5c56bda2960c066be57b66f31bc0f95749bb6aacf6f19bff",
+    "publicSha256": "deb31ffe01c554ccd4d9f64694dfc3b1adbcc6b7dd53a22b12d231310f1f8bf7",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "PrayerCalculator.java",
+    "originalSha256": "ad41c61b9ace204cc939c7b9e7dc9f30a8a64e97c6bab5c322bd97d9a7eb74b2",
+    "publicSha256": "65d519d61197a327efbbd718fa3dfbe2bc39a14039f1608700f21b7765d4beed",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "PrayerRailMath.java",
+    "originalSha256": "2d44fa1929fa41112418ba2708846eb09b4af218eaed98e45d541daa3b74c93b",
+    "publicSha256": "146b5fbe434c2518342ca88836db96123c6eb7edc6a82fe3e1d5b95fc61e0cc8",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ProbeActivity.java",
+    "originalSha256": "3ba0e3a586f8225b578a58544fe3af9124be3a9d84979fb478ceea1a47f62928",
+    "publicSha256": "dddd59dfcacf808556273cb003efec78780abb9b3ef299bc198308294aa275ac",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "QuickSettingsActivity.java",
+    "originalSha256": "e7679ea1c009ca48fa40c9c9c81cd758abac6c3db521bafe1beb0886cc25bf23",
+    "publicSha256": "5c5751935dbffe867fa18afc9a18c4c2a44f972eaa5064c0b77620e989fd1563",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "RaceWeekend.java",
+    "originalSha256": "06dd2090af36f4cb8c6df2875f47f25c4636a753f35c786569bd6465d10b1292",
+    "publicSha256": "97a0f08627330c9f688846f44747aa7f29ce9150be83b0827c0af3d71dd04a7a",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ReflectionView.java",
+    "originalSha256": "731d5d0611506c79ce4cda2d666d563e34c95c499af810341a8ecc0ae9588470",
+    "publicSha256": "dbb6632dbff768bdab75964c85b33372ac837d837bd1241404e787fe4bd6ffa6",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "RemoteKeys.java",
+    "originalSha256": "a6196f149f7e885d3fc200a309b18a52dee6729481ee8b15687021e4e99daf1f",
+    "publicSha256": "ace9ebab4dc8399f03d91138bcf89859d5ddd4c8fc353915ba945c537a93ecc8",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SceneReadability.java",
+    "originalSha256": "731cfca010c1220fb8b3df58303d5a9dfe5694a62404d0c44a622ef0bab59db6",
+    "publicSha256": "8bb4c3c9623b29419ee7bb85a510ed1ec574ff4da57a110403b12c8f7e21829d",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ServiceRepair.java",
+    "originalSha256": "b10510e18307a07da0872c61c1362c265f74f94b57f0e652c6eb42bfe5964374",
+    "publicSha256": "3920a08efccfca4af153a3bb515246c7444147d0ef10a8dd2dfb85533ab34248",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Shamsi.java",
+    "originalSha256": "2d72706d69ba8ca60ad07e4b83b8be8219c6fd7b5864bdad4b55226b7961e725",
+    "publicSha256": "281fe66a478e7b37fe00c52a21aa3f46e31d50ba145f89029acc3de638690312",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Sky.java",
+    "originalSha256": "c13f914f575c91c87cb0bffbe021141e9e094320e06107b52a05b2642089e249",
+    "publicSha256": "b1590cbd22d05fdda099d50b87c4ea288ef61c7bbf91f8e29d561ce3ff284675",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SkyView.java",
+    "originalSha256": "dfbf8146db9200aaaa68a1efe352e476e3a7d6e252d7f0f887ef3440b509fd2a",
+    "publicSha256": "69bb5ddffc8a5ec99f574c412ddac8bf50dde35ddf6c4d3f9a5822ac6c15a2ad",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SmartCompositionLayout.java",
+    "originalSha256": "f355fc435e864247cc59b831cdd11a91aab11a9381f1f80e24f700b7cac454bd",
+    "publicSha256": "aec0229509fe79b7cc21d9137a8d4a6f4455f862d298dbbb71c7715c90f52a8a",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SmartHomeController.java",
+    "originalSha256": "0970336f9c3acfa2b8f51b9e032438a30513d5a62ad4b39ab4b8d4a5fb730c27",
+    "publicSha256": "d37541bb8426767cc3bb89b24a90a9b383692cdf550d074f8e98d101f7cceada",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SmartModuleView.java",
+    "originalSha256": "8069d8d1e06fbf65d7d68b41d72b0fd0a3c09e4e831bb5bd90efbdeef250300b",
+    "publicSha256": "6f9b7940f9872666bac08f92aab7c4d8a127d00a88830efd6c780b165f07cc05",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SmartPreferences.java",
+    "originalSha256": "65965b214e69c55c613e68f57e2f77452457db79c6523aeea3cacf8067b30383",
+    "publicSha256": "04e891e9ad07c8e7322bb10c59d6eb79702e9452bdfd045829976e1664125dc5",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SmartSettingsActivity.java",
+    "originalSha256": "75370c474e204f631c9efc35cba9f146fb41e6185fad40ffb842ceba05c06977",
+    "publicSha256": "d23a5a36f75640eb1f9a818ae5a8ff2feea3a021f3dd418f22884839c20286fe",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "StatsText.java",
+    "originalSha256": "7ff037da01f1e016eadce55c5cd0d9a3b57ee46a332de651e0497fd504e14d17",
+    "publicSha256": "3f1cd4391e30578a744f022b89763e285e73fcd1cde6847b36c77b28b8403aa4",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Sun.java",
+    "originalSha256": "f8aa87a2cd1d11d428761f7fcfcf2a211741b92d1f491f4776a95deced1f1c25",
+    "publicSha256": "4e93d3107bd7d60fcdafbcd3e95a87b26437ffdd21810c321066d7c3bd1b2b01",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "SystemSettings.java",
+    "originalSha256": "5127d8f3a4b1f190d74d9d6e8a88726ee4be85d2fd17fbba8e8826b3f03c90a9",
+    "publicSha256": "dd4b91cc3565caef13b97ca7cd04e30f782f2a53a18215bb3af547e5fdfb79cd",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "TeamCatalog.java",
+    "originalSha256": "9c7905ff9669f12e3bd9bf7039bfca8645f3b4e2acd90a22bbfc8471d95373ce",
+    "publicSha256": "b4b4b0fdf66aab5a54b3f604009356ef15cda83e712a515849ea5371f62a2846",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ThemeFiles.java",
+    "originalSha256": "20cecdea2e8a27822c2ff40d5f61b1866642cdf8da1c3d49f05ce92451d891cd",
+    "publicSha256": "622d55132e310d8a6e4e1042a7858ac3fd093b6c28aab4949b5538c49908a43b",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "ThemeProvider.java",
+    "originalSha256": "d7c650c288fdc9e57d82dd67ad02a00dc541a6f7496c373bae3b95eac44d9c89",
+    "publicSha256": "e6c16257d9fe0f094eae9e74b219053d68c0dbef843876a762f3ab45dbecebf6",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "TileMenuKey.java",
+    "originalSha256": "2650ef289cf08de04efbbce53c2bc686cdb6dbf398f90db0adca246de6803e0e",
+    "publicSha256": "2628418c3c8edb8a6cb3d0dca8b911c645fc7ee53e88e09c3b241627954b5b8f",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "TileRefresh.java",
+    "originalSha256": "043d22b487bbc206b29acba541fe64ac9552affc7a20bce961bd5d00ffdfc1ff",
+    "publicSha256": "34bcc72dac9d2e50175aa53fa02cacc3284c0d45dc69df756a5e43ce93efeec6",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "Tls12SocketFactory.java",
+    "originalSha256": "11e5fc00a0c41e49adc7f8839947955933fc5d3907ead819f42d402459928e23",
+    "publicSha256": "dfb5eb3fa0432b4e6afc077a4e1379844fdef3453c146db368b7e380a8538d82",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "TopFade.java",
+    "originalSha256": "90923ebefdc4817456e89bc197c6496d972af8ed2394e745ae004d5130000ad2",
+    "publicSha256": "718ec4af43605a914547627a40dc4ac6391a8d764dcbade162ffe128c4deebd2",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "UiFont.java",
+    "originalSha256": "8a0a8dc3b66b84377e45c1772aa2802d37fe4e5c96c8abe71eb753850e58a6c9",
+    "publicSha256": "0fb5141291dbd0ec85c22c12c63c0789239167b76861e380185b0aac73e7a478",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "VpnBadge.java",
+    "originalSha256": "83b83ac49d6012152c04173b77255d36949492381b970ba40d762940e81d6902",
+    "publicSha256": "3e41d1a17b96dd0e7f84fd2f842c4136927279042dedcef2357bad3400f5dea5",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WallpaperCaptions.java",
+    "originalSha256": "d3cf81d5da2a4b6515885087baba5a6aaf10144042bd24aafd7e0adecd32020a",
+    "publicSha256": "53af1e73e9a30d2d084c954f3f67757c90b45446def5667e970b35188de2bcc6",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WallpaperMood.java",
+    "originalSha256": "7c9b9b3095c3bae7de690a3a754f31f3276829fad2a38d80ed8b506adb406d00",
+    "publicSha256": "f9215941ebcd0507e41925b9a524c2e4be2dd158bfbec652e8e4cd43874fdc43",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WallpaperPlayer.java",
+    "originalSha256": "2b6a31a84d71aecf830a5a4b5ad67be06614bafe8f4a87e2a8762a0c8683d7cb",
+    "publicSha256": "b5f1a6c084bfce4ee94ad9c70e526e499914e697363b67005c9589782eeb516c",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WallpaperRotation.java",
+    "originalSha256": "eb58c9030edbd136fc5a0facf83f3e39f3d24a274a4c12c81cbcb38fbeaa5fcb",
+    "publicSha256": "94cc26d0be3137c3e697a2b346c2868c7b738a550d84f722fa54a5338c51cd8c",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WallpaperSize.java",
+    "originalSha256": "c5cb7508fd07f38165770c976934bbcc2a4ae0de9e6fccc6b9e8a6248de9e446",
+    "publicSha256": "277ccaa818f91795c4afd7279b74298de698779572dc1945284e12e53079570f",
+    "normalizedStatus": "identical",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WifiPanel.java",
+    "originalSha256": "6e05a686af53be96b9714a4291db703d3bfc8dc632b050904a268734ea7f73f0",
+    "publicSha256": "9e14d5f074e93da59981091a4aae3dc7a9767cbc37991567be60d9cc27549ec6",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "WifiSignalView.java",
+    "originalSha256": "5e2ebafa390f691ea043727f83dbbf9173bce621963cc2ca5ea8a1d9629b0719",
+    "publicSha256": "60e31640d163aaf0bcfc98e3f0922709d4d51d9cec3b8e172dc79e2ebc60cb49",
+    "normalizedStatus": "changed",
+    "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
+  },
+  {
+    "file": "BundledWallpapers.java",
+    "publicSha256": "d37e681d24642ea188e16a462a85e4c9be57928470eb414718c6192761294084",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "DeviceCapabilities.java",
+    "publicSha256": "81e719f3910e246958d1c45a2f7c7d3a912f023d8f63a22f97fee0cbe1a2117b",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "ShelfGeometry.java",
+    "publicSha256": "0125f38c548a4c01a0c5597798e5a4f0a5dbe9edd49a3d74b4b9591aef87bfad",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "ThemePalette.java",
+    "publicSha256": "fef0998abea6b601fc693fbaccafae2e8b2a62a17f715217966ac6426ceb0fc0",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "ThemedActivity.java",
+    "publicSha256": "dac974a62c687a7740a366fb5b530690f0946c483b70ed91a2e5f35561ad53f1",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "ThemedDialogBuilder.java",
+    "publicSha256": "c06bf0befa20d66e0aed0c5127e2a9f5f92e6427aea365c57f0bfe18a96a99d5",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "ThirdPartyCredits.java",
+    "publicSha256": "42860c437d64cbda25a25989ca0e74e25e5333c909c046133dae3252f8515c26",
+    "normalizedStatus": "public addition"
+  },
+  {
+    "file": "UiTheme.java",
+    "publicSha256": "6b312984500b0f5c83e370c13fca09b13c956e51733d2398074d8e9dee8f4f18",
+    "normalizedStatus": "public addition"
+  }
+]

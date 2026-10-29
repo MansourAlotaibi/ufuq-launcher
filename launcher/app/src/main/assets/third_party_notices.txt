@@ -33,8 +33,8 @@ including the update link, is preserved in the source download, selection and ev
 The documentation page's older date range is not substituted for the downloaded copyright block.
 
 Verse strings are copied unchanged; no diacritic normalization, translation or rewriting is performed.
-The Home TextView may visually ellipsize for space; it retains the complete string and the detail view
-shows the complete verse. Source and license URLs are accessible in the same detail view.
+The Home view renders an explicitly marked display excerpt when space is limited; the underlying
+record and detail view retain the complete unchanged verse. Source and license URLs are accessible in the same detail view.
 The Quran data is not relicensed as MIT.
 
 ## Hadith: permitted transcription replacement

@@ -2527,7 +2527,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         cancelPendingFocusScroll();
         if (adapter.appCount() == 0) {
             if (adapter.isLibraryAt(0)) focusLibrary();
-            else firstTopButton().requestFocus();
+            else firstTopButton().requestFocusFromTouch();
             return;
         }
         final int pos = adapter.focusablePosition(Math.max(0, Math.min(position, adapter.appCount() - 1)));
@@ -2540,7 +2540,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                 lm.scrollToPositionWithOffset(start, 0);
                 grid.post(() -> {
                     RecyclerView.ViewHolder h = grid.findViewHolderForAdapterPosition(pos);
-                    if (h != null) h.itemView.findViewById(R.id.card).requestFocus();
+                    if (h != null) h.itemView.findViewById(R.id.card).requestFocusFromTouch();
                 });
                 return;
             }
@@ -2550,7 +2550,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             View card = vh.itemView.findViewById(R.id.card);
             // Already focused (e.g. back from an app): no focus change fires, so restore the glass by hand.
             if (card.isFocused()) onTileFocused(pos, card);
-            else card.requestFocus();
+            else card.requestFocusFromTouch();
             return;
         }
         // Not laid out yet: scroll there, then focus once the scroll settles.
@@ -2558,7 +2558,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             grid.scrollToPosition(pos);
             grid.post(() -> {
                 RecyclerView.ViewHolder h = grid.findViewHolderForAdapterPosition(pos);
-                if (h != null) h.itemView.findViewById(R.id.card).requestFocus();
+                if (h != null) h.itemView.findViewById(R.id.card).requestFocusFromTouch();
             });
             return;
         }
@@ -2571,7 +2571,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                 pendingFocusScroll = null;
                 RecyclerView.ViewHolder h = rv.findViewHolderForAdapterPosition(pos);
                 View target = h != null ? h.itemView.findViewById(R.id.card) : rv.getChildAt(0);
-                if (target != null) target.requestFocus();
+                if (target != null) target.requestFocusFromTouch();
             }
         };
         grid.addOnScrollListener(pendingFocusScroll);

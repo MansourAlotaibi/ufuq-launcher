@@ -19,7 +19,11 @@ final class LocalePreferences {
     static Context wrap(Context base) {
         SharedPreferences prefs = base.getSharedPreferences(Config.SETTINGS_NAME, Context.MODE_PRIVATE);
         String choice = prefs.getString(KEY, SYSTEM);
-        if (SYSTEM.equals(choice)) return base;
+        if (SYSTEM.equals(choice)) {
+            // Undo our process-local override; never write the device's system language.
+            Locale.setDefault(base.getResources().getConfiguration().locale);
+            return base;
+        }
         Locale locale = new Locale(ARABIC.equals(choice) ? ARABIC : ENGLISH);
         Locale.setDefault(locale);
         Configuration config = new Configuration(base.getResources().getConfiguration());

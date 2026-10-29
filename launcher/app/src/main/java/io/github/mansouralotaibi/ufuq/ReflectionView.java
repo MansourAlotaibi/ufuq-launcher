@@ -43,6 +43,11 @@ final class ReflectionView extends LinearLayout {
         quote.setGravity(Gravity.RIGHT);
         quote.setTextDirection(TEXT_DIRECTION_RTL);
         quote.setLineSpacing(dp(4), 1.08f);
+        // KitKat's Arabic glyph ink can extend below its layout metrics; reserve a quiet optical inset.
+        quote.setPadding(0, 0, 0, dp(6));
+        quote.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob) -> {
+            if (r-l != or-ol || b-t != ob-ot) post(this::fitText);
+        });
         LayoutParams quoteParams = new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1f);
         quoteParams.topMargin = dp(7);
         addView(quote, quoteParams);
@@ -94,8 +99,9 @@ final class ReflectionView extends LinearLayout {
             quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
             maxLines = availableLines();
             StaticLayout full = layout(entry.text, width);
-            if (full.getLineCount() <= maxLines && full.getHeight() <= quote.getHeight()) {
+            if (full.getLineCount() <= maxLines && full.getHeight() <= quoteContentHeight()) {
                 quote.setMaxLines(maxLines);
+                quote.setEllipsize(null);
                 quote.setText(entry.text);
                 more.setVisibility(GONE);
                 return;
@@ -104,16 +110,42 @@ final class ReflectionView extends LinearLayout {
 
         quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19f);
         maxLines = availableLines();
-        // Keep the source string intact. TextView clips the presentation only; details show it verbatim.
+        // KitKat's weighted TextView can ignore maxLines for drawing. Use the original 2.8.5
+        // measured display-excerpt algorithm; the entry, asset and full-text dialog stay verbatim.
+        int low = 1, high = entry.text.length(), best = 1;
+        while (low <= high) {
+            int middle = (low + high) >>> 1;
+            StaticLayout measured = layout(preview(entry.text, middle), width);
+            if (measured.getLineCount() <= maxLines && measured.getHeight() <= quoteContentHeight()) {
+                best = middle;
+                low = middle + 1;
+            } else high = middle - 1;
+        }
         quote.setMaxLines(maxLines);
-        quote.setEllipsize(android.text.TextUtils.TruncateAt.END);
-        quote.setText(entry.text);
+        quote.setEllipsize(null);
+        quote.setText(preview(entry.text, best));
         more.setVisibility(VISIBLE);
     }
 
+    private String preview(String text, int limit) {
+        if (limit >= text.length()) return text;
+        int cut = Math.max(1, Math.min(limit, text.length()));
+        while (cut > 1 && !Character.isWhitespace(text.charAt(cut - 1))) cut--;
+        if (cut < Math.min(24, limit / 2)) cut = limit;
+        return text.substring(0, cut).trim() + "…";
+    }
+
+    private int quoteContentHeight() {
+        return Math.max(0, quote.getHeight() - quote.getCompoundPaddingTop() - quote.getCompoundPaddingBottom());
+    }
+
     private int availableLines() {
-        return Math.max(2, Math.min(6, quote.getHeight()
-                / Math.max(1, Math.round(quote.getPaint().getFontSpacing() * 1.08f))));
+        // Font spacing alone omitted the explicit inter-line gap and could expose half a fourth line.
+        StaticLayout measured = layout(entry.text, Math.max(1, quote.getWidth()));
+        int lines = 0;
+        while (lines < Math.min(6, measured.getLineCount())
+                && measured.getLineBottom(lines) <= quoteContentHeight()) lines++;
+        return Math.max(1, lines);
     }
 
     @SuppressWarnings("deprecation")

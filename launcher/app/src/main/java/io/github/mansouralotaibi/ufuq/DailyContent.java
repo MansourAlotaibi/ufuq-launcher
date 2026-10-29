@@ -23,10 +23,10 @@ final class DailyContent {
             this.text=text; this.source=source; this.kind=kind; this.sourceUrl=sourceUrl;
             this.licenseUrl=licenseUrl; this.attribution=attribution; this.notice=notice;
         }
-        String details() {
-            return text + "\n\n" + source + "\n\n" + attribution + "\n" + sourceUrl + "\n"
-                    + licenseUrl + "\n\n" + notice;
+        String readingDetails() {
+            return text + "\n\n" + source + "\n\n" + attribution + "\n" + sourceUrl + "\n" + licenseUrl;
         }
+        String details() { return readingDetails() + "\n\n" + notice; }
         String homePreview(int limit, String more) {
             if (text.length() <= limit) return text;
             int cut = Math.min(limit, text.length());

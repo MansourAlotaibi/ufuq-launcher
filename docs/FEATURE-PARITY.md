@@ -1,3 +1,7 @@
+# Latest comprehensive comparison
+
+See [functional and stability parity](FUNCTIONAL-PARITY.md) and its [file inventory](FUNCTIONAL-SOURCE-INVENTORY.json). The following RC1/early-RC2 snapshot remains historical.
+
 # Feature comparison: MansourTV Ufuq 2.8.5 source import → Ufuq 1.0.0 RC1
 
 Comparison baseline: protected `source-import-2.8.5`, commit

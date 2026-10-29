@@ -1,6 +1,6 @@
-# Current candidate: RC2
+# Current candidate: RC2 functional-parity correction
 
-See the latest [focused visual-parity validation](VISUAL-PARITY.md) for 271 passing tests and [RC2 validation](RC2-VALIDATION.md) for the preceding functional evidence. The following RC1 publication snapshot is retained as historical evidence.
+See [functional/stability parity](FUNCTIONAL-PARITY.md) for 295 passing tests, release lint 0 errors / 147 warnings, a successful release build and current device evidence. [Visual parity](VISUAL-PARITY.md) and [earlier RC2 validation](RC2-VALIDATION.md) record preceding iterations. The following RC1 publication snapshot is retained as historical evidence.
 
 # Final publication validation — 2026-10-29
 

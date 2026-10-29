@@ -107,6 +107,10 @@ final class SmartHomeController {
         } else composition.setModuleFocusUpId(R.id.btnWifi);
         int down = reflection == null ? lower : R.id.smartReflection;
         wireTopFocus(down);
+        reflectionHost.bringToFront();
+        composition.bringToFront();
+        View focusGlass = activity.findViewById(R.id.glass);
+        if (focusGlass != null) focusGlass.bringToFront();
         renderOffline();
     }
 
@@ -229,7 +233,8 @@ final class SmartHomeController {
         String id = p.getString(SmartPreferences.TEAM, "none");
         if ("none".equals(id)) return;
         renderCached(SmartPreferences.FOOTBALL);
-        if (System.currentTimeMillis() - footballCacheAt(id) < FOOTBALL_TTL
+        long cacheAge = System.currentTimeMillis() - footballCacheAt(id);
+        if (cacheAge >= 0 && cacheAge < FOOTBALL_TTL
                 && footballFromRaw() != null) {
             // A request owned by the previous Activity can finish while Home is being recreated after
             // leaving settings. The cache is then fresh, but this Activity built its view just before the
@@ -330,8 +335,11 @@ final class SmartHomeController {
     }
     private String fixtureDetails(FootballFixtureParser.Fixture fixture) {
         String score = fixture.score.length() == 0 ? "" : "\n" + digits(fixture.score);
-        return fixtureDisplay(fixture).replace("\n", "\n\n") + score + "\n\nTheSportsDB · "
-                + updated(cacheAt(SmartPreferences.FOOTBALL));
+        return TeamCatalog.localizedName(activity, fixture.home) + " × "
+                + TeamCatalog.localizedName(activity, fixture.away) + "\n\n"
+                + fixtureDate(fixture.date) + " · " + LauncherTimeFormat.minute(activity, fixture.minute, arabic())
+                + score + "\n\nTheSportsDB · "
+                + updated(footballCacheAt(p.getString(SmartPreferences.TEAM, "none")));
     }
     private String fixtureDate(String isoDate) {
         try {
@@ -353,10 +361,29 @@ final class SmartHomeController {
 
     private void showContentDetails(View returnTo, DailyContent.Entry entry) {
         AlertDialog dialog = new ThemedDialogBuilder(activity).setTitle(R.string.card_content_title)
-                .setMessage(entry.details())
+                .setMessage(entry.readingDetails())
+                .setNeutralButton(R.string.ufuq_credits, null)
                 .setPositiveButton(android.R.string.ok, null).create();
-        dialog.setOnDismissListener(ignored -> returnTo.requestFocus());
+        dialog.setOnDismissListener(ignored -> restoreDetailsFocus(true));
         dialog.show();
+        linkifyDialog(dialog);
+        // Keep the complete, unmodified notice accessible without crowding the reading view.
+        // A separate child dialog leaves the full-text view intact when the notice closes.
+        dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v -> {
+            AlertDialog notice = new ThemedDialogBuilder(activity).setTitle(R.string.ufuq_credits)
+                    .setMessage(entry.details()).setPositiveButton(android.R.string.ok, null).show();
+            linkifyDialog(notice);
+        });
+    }
+
+    private void restoreDetailsFocus(boolean content) {
+        // onResume rebuilds Home while a modal dialog can retain its own window.
+        // Resolve the current view instead of requesting focus on its detached predecessor.
+        View current = content ? reflection : cards.get(SmartPreferences.FOOTBALL);
+        if (current != null && current.isShown()) current.requestFocusFromTouch();
+    }
+
+    private void linkifyDialog(AlertDialog dialog) {
         UiTheme.apply(dialog.getWindow().getDecorView());
         android.widget.TextView messageView = dialog.findViewById(android.R.id.message);
         if (messageView != null) {
@@ -372,11 +399,11 @@ final class SmartHomeController {
                 selected, ZoneId.systemDefault(), ZonedDateTime.now());
         String message = parsed != null && parsed.status == FootballFixtureParser.Status.OK
                 ? fixtureDetails(parsed.fixture)
-                : cacheBody(SmartPreferences.FOOTBALL);
+                : footballFromRaw();
         if (message == null) message = activity.getString(R.string.card_no_fixture);
         AlertDialog dialog = new ThemedDialogBuilder(activity).setTitle(R.string.card_football_title)
                 .setMessage(message + "\n\n" + activity.getString(R.string.ufuq_football_attribution)).setPositiveButton(android.R.string.ok, null).create();
-        dialog.setOnDismissListener(ignored -> returnTo.requestFocus());
+        dialog.setOnDismissListener(ignored -> restoreDetailsFocus(false));
         dialog.show();
         UiTheme.apply(dialog.getWindow().getDecorView());
         android.widget.TextView messageView = dialog.findViewById(android.R.id.message);

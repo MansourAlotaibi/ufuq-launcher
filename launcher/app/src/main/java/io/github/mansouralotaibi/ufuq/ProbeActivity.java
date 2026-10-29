@@ -8,7 +8,7 @@ import android.os.Bundle;
  * whatever was on screen comes back to the front when it closes and sends a window event, so the service can
  * tell the stock home from an HDMI input without reading the screen (#1116).
  */
-public class ProbeActivity extends ThemedActivity {
+public class ProbeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

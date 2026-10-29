@@ -1,5 +1,9 @@
 # Changelog
 
+## RC2 functional-parity correction
+
+Restores the measured 2.8.5 reflection preview on KitKat, separates readable full text from the complete accessible copyright notice, fixes selected-team football details/timestamps/full names and cache clock rollback, and restores native focus after pointer-selected navigation. System-language selection restores the process locale; invisible routing helpers use their original plain Activity. See [functional parity matrix](docs/FUNCTIONAL-PARITY.md).
+
 ## RC2 visual-parity review
 
 Whole-card paged favorites with RTL/LTR navigation, original Home anchors and glass controls, subtler reflection, and two provenance-verified photographic wallpapers. See [measured differences and validation](docs/VISUAL-PARITY.md).
