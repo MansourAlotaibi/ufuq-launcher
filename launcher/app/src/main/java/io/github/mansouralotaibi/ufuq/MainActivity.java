@@ -1204,6 +1204,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     protected void onPause() {
         super.onPause();
         root.removeCallbacks(showIdleClock);
+        tileMenuKey.reset();
         endReorder();   // Home or another app while reordering keeps the order so far
         wallpaperPlayer.stop();
         smartHome.onPause();
@@ -1322,9 +1323,9 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // Once a hold opened the popup, consume its remaining repeats and release before the newly focused first
         // action can see them. This also prevents the card's normal click from launching the app on key-up.
         if (okKey && tileMenuKey.active()) {
-            tileMenuKey.event(event.getAction() == KeyEvent.ACTION_DOWN,
+            int held = tileMenuKey.event(event.getAction() == KeyEvent.ACTION_DOWN,
                     event.getAction() == KeyEvent.ACTION_UP, event.getRepeatCount(), event.isLongPress());
-            return true;
+            if (held != TileMenuKey.PASS) return true;
         }
         if (tileMenuEnabled && !reordering && openPopup == null && cardPrompt == null && okKey) {
             int position = focusedTilePosition();
@@ -1335,10 +1336,8 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                         event.getAction() == KeyEvent.ACTION_UP, event.getRepeatCount(), event.isLongPress());
                 if (result == TileMenuKey.OPEN) {
                     onTileLongPress(position, getCurrentFocus());
-                    // The popup rows already ignore an unmatched OK-up. End the hold here instead of waiting
-                    // for that up event: several CVTE remotes omit it, which left TileMenuKey active and ate
-                    // the owner's first deliberate OK press on Move/Remove/App info.
-                    tileMenuKey.reset();
+                    // Retain the guard until release: the new popup may not own input yet on KitKat.
+                    // TileMenuKey recognizes a fresh DOWN if this remote omitted the opening UP.
                 }
                 if (result != TileMenuKey.PASS) return true;
             } else {
@@ -1435,6 +1434,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         orderAtStart = adapter.movableKeys();
         glass.setAccent(festive && UiTheme.selected(this) == 0 ? festival.accentColor() : UiTheme.accent(this));
         btnReorder.setActivated(true);
+        updateReorderStatus();
         return true;
     }
 
@@ -1553,10 +1553,23 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
 
     /** While a tile is carried, every other tile is dimmed so the carried one stands out; otherwise all are full. */
     private void dimOthers() {
+        updateReorderStatus();
         for (int i = 0; i < grid.getChildCount(); i++) {
             View item = grid.getChildAt(i);
             item.setAlpha(tileAlpha(grid.getChildAdapterPosition(item)));
         }
+    }
+
+    private void updateReorderStatus() {
+        TextView status = findViewById(R.id.reorderStatus);
+        if (status == null) return;
+        status.setVisibility(reordering ? View.VISIBLE : View.GONE);
+        if (!reordering) return;
+        int at = movingKey == null ? -1 : adapter.positionOf(movingKey);
+        status.setText(at >= 0 ? getString(R.string.reorder_moving, adapter.labelAt(at))
+                : getString(R.string.reorder_ready));
+        status.setTextColor(UiTheme.accent(this));
+        status.bringToFront();
     }
 
     /** A tile's alpha: dim unless it is the carried one, or, in edit-dock mode, a dock tile other than the chosen place. */
@@ -1576,6 +1589,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         dockEditAppKey = null;
         drop();
         reordering = false;
+        updateReorderStatus();
         adapter.setReordering(false);
         glass.setAccent(festive && UiTheme.selected(this) == 0 ? festival.accentColor() : UiTheme.accent(this));
         btnReorder.setActivated(false);
@@ -1616,6 +1630,8 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // rtl_app_grid (Hebrew) mirrors the grid: position 0 is on the right, so Left moves towards the end.
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) to = rtlAppGrid ? from + 1 : from - 1;
         else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) to = rtlAppGrid ? from - 1 : from + 1;
+        else if (sceneHero) to = ShelfGeometry.verticalMove(from, n, shelfSlots(),
+                keyCode == KeyEvent.KEYCODE_DPAD_DOWN);
         else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) to = from - COLUMNS;
         else if (from + COLUMNS < n) to = from + COLUMNS;
         else to = from / COLUMNS < (n - 1) / COLUMNS ? n - 1 : from;
@@ -3515,10 +3531,10 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                 // A deliberate OK always has its own DOWN. The release that opened this popup has no matching
                 // DOWN in the row, so pressed remains false and is safely ignored without a time gate.
-                pressed[0] = true;
+                if (event.getRepeatCount() == 0 && !event.isLongPress()) pressed[0] = true;
                 return true;
             }
-            boolean activate = pressed[0];
+            boolean activate = pressed[0] && event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled();
             pressed[0] = false;
             if (activate) {
                 popup.dismiss();

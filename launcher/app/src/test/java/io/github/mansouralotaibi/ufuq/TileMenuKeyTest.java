@@ -32,4 +32,19 @@ public class TileMenuKeyTest {
         assertEquals(TileMenuKey.PASS, key.event(true, false, 0, false));
         assertEquals(TileMenuKey.PASS, key.event(false, true, 0, false));
     }
+    @Test public void openingHoldGuardsUnderlyingTileUntilReleaseWithoutBlockingNextGesture() {
+        TileMenuKey key = new TileMenuKey();
+        assertEquals(TileMenuKey.PASS,key.event(true,false,0,false));
+        assertEquals(TileMenuKey.OPEN,key.event(true,false,1,true));
+        assertEquals(TileMenuKey.CONSUME,key.event(false,true,0,false));
+        assertEquals(TileMenuKey.PASS,key.event(true,false,0,false));
+        assertEquals(TileMenuKey.PASS,key.event(false,true,0,false));
+    }
+    @Test public void missingOpeningReleaseStillAllowsNextFreshPressWithoutAnEarlyReset() {
+        TileMenuKey key = new TileMenuKey();
+        assertEquals(TileMenuKey.OPEN,key.event(true,false,1,true));
+        assertEquals(TileMenuKey.CONSUME,key.event(true,false,2,true));
+        assertEquals(TileMenuKey.PASS,key.event(true,false,0,false));
+        assertEquals(TileMenuKey.PASS,key.event(false,true,0,false));
+    }
 }

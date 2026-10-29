@@ -233,7 +233,7 @@
   {
     "file": "MainActivity.java",
     "originalSha256": "842c3f8e2765b5918c09a839638c9260d1d049bff822e26e73de953cb49b43a8",
-    "publicSha256": "5a2662dd84dde3f09916c1663e9d50726b324315622ae9bd543b0f8486b7cc7c",
+    "publicSha256": "aaa2aab9406ea922dedfcab827c2e9041ce9d964018b3d77319677e27d838c15",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -324,7 +324,7 @@
   {
     "file": "ReflectionView.java",
     "originalSha256": "731d5d0611506c79ce4cda2d666d563e34c95c499af810341a8ecc0ae9588470",
-    "publicSha256": "dbb6632dbff768bdab75964c85b33372ac837d837bd1241404e787fe4bd6ffa6",
+    "publicSha256": "6dd3af55ef700a296a4fa63179b138242b0108c0af99ac8fed4246a5f8370fe1",
     "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
@@ -450,8 +450,8 @@
   {
     "file": "TileMenuKey.java",
     "originalSha256": "2650ef289cf08de04efbbce53c2bc686cdb6dbf398f90db0adca246de6803e0e",
-    "publicSha256": "2628418c3c8edb8a6cb3d0dca8b911c645fc7ee53e88e09c3b241627954b5b8f",
-    "normalizedStatus": "identical",
+    "publicSha256": "3d0be95706eef624c19b9a33791a978e932aa905bc39083ec42322e4539a89c9",
+    "normalizedStatus": "changed",
     "comparisonScope": "Java implementation after namespace normalization; not runtime proof"
   },
   {
@@ -550,12 +550,12 @@
   },
   {
     "file": "ShelfGeometry.java",
-    "publicSha256": "0125f38c548a4c01a0c5597798e5a4f0a5dbe9edd49a3d74b4b9591aef87bfad",
+    "publicSha256": "46e8c03eb3ee8f61c5229519cc36393a5ebb422d63d2282df7769235bf55d1b5",
     "normalizedStatus": "public addition"
   },
   {
     "file": "ThemePalette.java",
-    "publicSha256": "fef0998abea6b601fc693fbaccafae2e8b2a62a17f715217966ac6426ceb0fc0",
+    "publicSha256": "9c53cb17681adc479ce1ea6bae3c81a30623b641095d1ec81942462a0ef91a9e",
     "normalizedStatus": "public addition"
   },
   {

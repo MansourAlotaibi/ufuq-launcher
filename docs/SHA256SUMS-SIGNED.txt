@@ -1,1 +1,1 @@
-71052e5af03a52602ef0fe59b7a1f6f29c2020fe846f2ea5f353e2ac1014853c  ufuq-launcher-1.0.0-rc2.apk
+652065afcfaedf219829b0979577f91fa16ce35e730962abe4eecbca6231c5a7  ufuq-launcher-1.0.0-rc2.apk

@@ -13,6 +13,11 @@ final class TileMenuKey {
 
     int event(boolean down, boolean up, int repeatCount, boolean frameworkLongPress) {
         if (down) {
+            // A fresh press starts a new gesture even when the previous remote omitted UP.
+            if (opened && repeatCount == 0 && !frameworkLongPress) {
+                opened = false;
+                return PASS;
+            }
             if (!opened && (frameworkLongPress || repeatCount > 0)) {
                 opened = true;
                 return OPEN;

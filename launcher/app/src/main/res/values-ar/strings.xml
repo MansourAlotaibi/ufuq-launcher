@@ -224,4 +224,6 @@
     <string name="wallpaper_dim_label_title">تعتيم الخلفية</string>
     <string name="rotation_interval_title">فترة تبديل الخلفية</string>
     <string name="favorites_page">صفحة %1$d من %2$d</string>
+    <string name="reorder_ready">وضع الترتيب · موافق: التقاط · رجوع: حفظ وإنهاء</string>
+    <string name="reorder_moving">نقل %1$s · الأسهم: تحريك · موافق/رجوع: تثبيت · رجوع مرة أخرى: حفظ</string>
 </resources>

@@ -40,3 +40,9 @@ Daily Reflection is fully enabled with seven independently sourced Quran/Hadith 
 Publication preparation adds a clean independent public history, official font provenance, original
 icons and three bundled MIT landscapes, independent local signing, packaged dependency licenses/source
 material, API 19/28/34 framework tests and fixes for locale-layout/style startup risks.
+
+### RC2 hold-OK and glass follow-up
+
+- Enable the original cinematic Move menu without a private theme; ignore trailing hold repeats/cancelled menu releases and keep persistent reorder feedback.
+- Restore exact Classic reflection glass opacity, border and focus underline; palette variants share the original geometry and alpha.
+- Preserve whole-card pages, selected-team cache fixes, licensed content and independent signing. Physical remote validation remains a manual gate.

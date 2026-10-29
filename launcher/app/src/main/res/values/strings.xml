@@ -271,4 +271,6 @@
     <string name="wallpaper_dim_label_title">Wallpaper dimming</string>
     <string name="rotation_interval_title">Rotation interval</string>
     <string name="favorites_page">Page %1$d of %2$d</string>
+    <string name="reorder_ready">Reorder mode · OK: pick up · Back: save and exit</string>
+    <string name="reorder_moving">Moving %1$s · Arrows: move · OK/Back: place · Back again: save</string>
 </resources>

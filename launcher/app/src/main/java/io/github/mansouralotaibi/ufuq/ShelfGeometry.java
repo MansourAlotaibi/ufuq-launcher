@@ -16,5 +16,12 @@ final class ShelfGeometry {
     }
     static int pageStart(int position, int slots) { return Math.max(0, position) / slots * slots; }
     static int tail(int count, int slots) { return (slots - count % slots) % slots; }
+    static int verticalMove(int from, int count, int slots, boolean down) {
+        if (count < 1 || slots < 1 || from < 0 || from >= count) return from;
+        int to = from + (down ? slots : -slots);
+        if (to < 0) return from;
+        if (to < count) return to;
+        return from / slots < (count - 1) / slots ? count - 1 : from;
+    }
     private ShelfGeometry() { }
 }

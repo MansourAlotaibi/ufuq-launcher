@@ -26,4 +26,18 @@ public class ShelfGeometryTest {
   assertEquals(6,ShelfGeometry.pageStart(6,6));
   assertEquals(12,ShelfGeometry.pageStart(13,6));
  }
+ @Test public void reorderUpDownUsesVisiblePageSizeAndClampsIncompletePage() {
+  assertEquals(6,ShelfGeometry.verticalMove(0,7,6,true));
+  assertEquals(6,ShelfGeometry.verticalMove(5,7,6,true));
+  assertEquals(0,ShelfGeometry.verticalMove(6,7,6,false));
+  assertEquals(6,ShelfGeometry.verticalMove(6,7,6,true));
+  assertEquals(5,ShelfGeometry.verticalMove(5,7,6,false));
+  assertEquals(7,ShelfGeometry.verticalMove(13,14,6,false));
+  for(int slots=1;slots<=8;slots++) for(int count=1;count<=30;count++)
+   for(int from=0;from<count;from++) for(boolean down:new boolean[]{true,false}) {
+    int to=ShelfGeometry.verticalMove(from,count,slots,down);
+    assertTrue(to>=0 && to<count);
+    if(to!=from) assertEquals(down ? from/slots+1 : from/slots-1,to/slots);
+   }
+ }
 }

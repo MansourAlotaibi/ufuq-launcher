@@ -1,4 +1,8 @@
-# Current candidate: RC2 functional-parity correction
+# Current candidate: RC2 hold-OK / reflection correction
+
+See [latest correction and manual remote gate](REORDER-GLASS-VALIDATION.md). Required local checks pass 305 tests; release lint 0 errors / 147 warnings; release build passes. Physical remote acceptance is explicitly pending.
+
+# Preceding candidate: RC2 functional-parity correction
 
 See [functional/stability parity](FUNCTIONAL-PARITY.md) for 295 passing tests, release lint 0 errors / 147 warnings, a successful release build and current device evidence. [Visual parity](VISUAL-PARITY.md) and [earlier RC2 validation](RC2-VALIDATION.md) record preceding iterations. The following RC1 publication snapshot is retained as historical evidence.
 

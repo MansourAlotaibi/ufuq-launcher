@@ -563,4 +563,23 @@
         android:layout_gravity="top|left"
         android:alpha="0"
         android:importantForAccessibility="no" />
+    <!-- Persistent, non-focusable feedback; does not change the Home geometry. -->
+    <TextView
+        android:id="@+id/reorderStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:background="#D9182029"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:accessibilityLiveRegion="polite"
+        android:visibility="gone" />
 </FrameLayout>

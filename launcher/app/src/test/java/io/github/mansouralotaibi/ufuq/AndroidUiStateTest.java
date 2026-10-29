@@ -18,6 +18,10 @@ import static org.junit.Assert.*;
 @RunWith(RobolectricTestRunner.class)
 @org.robolectric.annotation.Config(sdk = {19, 28, 34}, application = Application.class, qualifiers = "en-rUS-land-xhdpi")
 public class AndroidUiStateTest {
+ @Test public void publicDefaultsExposeOriginalCinematicMoveMenuWithoutPrivateTheme() {
+  Config config=Config.load(RuntimeEnvironment.getApplication());
+  assertTrue(config.cinematicHome); assertTrue(config.tileMenu);
+ }
  @Test public void allPalettesPersistAcrossSettingsRecreationWithoutChangingWallpaper() {
   Context c=RuntimeEnvironment.getApplication();
   c.getSharedPreferences(Config.SETTINGS_NAME,0).edit()
@@ -351,6 +355,33 @@ public class AndroidUiStateTest {
    decor.layout(0,0,1920,1080);org.robolectric.shadows.ShadowLooper.idleMainLooper();
    assertTrue("current shown",current.isShown());assertTrue("focusable",current.isFocusable());
    reading.dismiss();org.robolectric.shadows.ShadowLooper.idleMainLooper();assertTrue("current focus after dismissal",current.isFocused());smart.close();
+  }
+ }
+
+ @Test public void moveMenuIgnoresOpeningHoldRepeatsAndCancelledReleases() throws Exception {
+  try(ActivityController<MainActivity> c=Robolectric.buildActivity(MainActivity.class).setup()) {
+   MainActivity a=c.get();
+   java.lang.reflect.Method add=MainActivity.class.getDeclaredMethod("addSettingsMenuRow",
+     android.widget.LinearLayout.class,android.widget.PopupWindow.class,int.class,Runnable.class);
+   add.setAccessible(true);
+   for(int code:new int[]{KeyEvent.KEYCODE_DPAD_CENTER,KeyEvent.KEYCODE_ENTER,KeyEvent.KEYCODE_NUMPAD_ENTER}) {
+    android.widget.LinearLayout rows=new android.widget.LinearLayout(a);
+    java.util.concurrent.atomic.AtomicInteger actions=new java.util.concurrent.atomic.AtomicInteger();
+    add.invoke(a,rows,new android.widget.PopupWindow(a),R.string.tile_move,(Runnable)actions::incrementAndGet);
+    a.addContentView(rows,new android.view.ViewGroup.LayoutParams(400,300));
+    View row=rows.getChildAt(0);assertTrue(row.requestFocusFromTouch());
+    Object info=org.robolectric.util.ReflectionHelpers.callInstanceMethod(row,"getListenerInfo");
+    View.OnKeyListener listener=org.robolectric.util.ReflectionHelpers.getField(info,"mOnKeyListener");
+    listener.onKey(row,code,new KeyEvent(0,600,KeyEvent.ACTION_DOWN,code,1));
+    listener.onKey(row,code,new KeyEvent(KeyEvent.ACTION_UP,code));
+    assertEquals("opening repeat/release cannot activate Move",0,actions.get());
+    listener.onKey(row,code,new KeyEvent(KeyEvent.ACTION_DOWN,code));
+    listener.onKey(row,code,new KeyEvent(0,50,KeyEvent.ACTION_UP,code,0,0,0,0,KeyEvent.FLAG_CANCELED));
+    assertEquals("cancelled press cannot activate Move",0,actions.get());
+    listener.onKey(row,code,new KeyEvent(KeyEvent.ACTION_DOWN,code));
+    listener.onKey(row,code,new KeyEvent(KeyEvent.ACTION_UP,code));
+    assertEquals("next deliberate OK activates Move once",1,actions.get());
+   }
   }
  }
 
