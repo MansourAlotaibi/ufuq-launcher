@@ -1,4 +1,4 @@
-# Building 1.0.0-rc1
+# Building 1.0.0-rc2
 
 Use JDK 17, Android SDK platform 34 and build-tools 34.0.0. Set JAVA_HOME and
 ANDROID_HOME locally; never commit local.properties. Gradle 8.9 is checksum-pinned.
@@ -59,3 +59,5 @@ Run `python3 tools/prepare_dependency_sources.py` to prepare the pinned complete
 archive. Publish that archive alongside any future signed binary, plus Ufuq source/build instructions.
 No key, binary or source archive is uploaded by these helpers. VCS metadata is excluded from APKs
 to avoid embedding private development-history references.
+
+The local signing helper verifies the public application ID and derives the output filename from the APK version. It strips non-runtime AGP metadata before alignment/signing, then verifies the pinned public certificate. RC2 does not overwrite the preserved RC1 candidate.

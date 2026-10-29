@@ -4,7 +4,7 @@
 
 A native Java Android TV launcher for API 19 and newer, prepared from the protected
 MansourTV Ufuq 2.8.5 source import. This is the full-feature development project,
-not a deliberately reduced public edition. Version **1.0.0-rc1** is a local candidate;
+not a deliberately reduced public edition. Version **1.0.0-rc2** is a local candidate;
 an independently signed local candidate is prepared, but no release has been published.
 
 Features: cinematic Home, Classic/Midnight/Coast palettes, fixed/random local wallpapers,
@@ -42,7 +42,7 @@ Outfit is SIL OFL 1.1. Content and external services have their own terms, not t
   that clause is not treated as a blanket ban on this GitHub project, nor as permission
   for every commercial/production distribution. Recheck terms for the intended channel.
   Do not resell the API or embed premium/private keys. No team logos or provider images are downloaded.
-  Successful data is cached for one hour; retries have a one-minute floor, foreground only.
+  Selected-team fixtures appear from the private local cache immediately. Freshness is one hour; retries have a one-minute floor per team, foreground only.
   The provider currently documents 30 requests/minute for the free tier; availability and data quality vary.
 - **Wallpapers:** the full local wallpaper engine is retained. Three original MIT procedural cinematic landscapes are now bundled. No wallpaper collection was
   present in the protected source import; these are new public-project assets.

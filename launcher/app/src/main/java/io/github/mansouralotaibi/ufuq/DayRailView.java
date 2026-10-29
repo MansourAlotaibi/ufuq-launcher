@@ -69,7 +69,7 @@ final class DayRailView extends SmartModuleView {
         accent.setStrokeWidth(isFocused() ? dp(3) : dp(2));
         if (arabic) canvas.drawLine(right, y, sun, y, accent);
         else canvas.drawLine(left, y, sun, y, accent);
-        accent.setColor(0x46F2B25B);
+        accent.setColor(0x46000000 | (UiTheme.accent(getContext()) & 0x00FFFFFF));
         canvas.drawCircle(sun, y, dp(12), accent);
         accent.setColor(UiTheme.accent(getContext()));
         canvas.drawCircle(sun, y, dp(7), accent);

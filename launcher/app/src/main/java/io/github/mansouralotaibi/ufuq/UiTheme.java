@@ -29,10 +29,27 @@ final class UiTheme {
         return d;
     }
     static void apply(View v) {
+        // Native Holo dialog chrome is outside the app's resource IDs. Tint known framework
+        // title/divider views when present; unfamiliar OEM dialogs retain their safe platform style.
+        if (v.getId() != View.NO_ID && v.getResources() != null && v.getContext() != null) {
+            try {
+                String name = "android".equals(v.getResources().getResourcePackageName(v.getId()))
+                        ? v.getResources().getResourceEntryName(v.getId()) : "";
+                if ("alertTitle".equals(name) && v instanceof TextView)
+                    ((TextView) v).setTextColor(accent(v.getContext()));
+                else if ("titleDivider".equals(name) || "titleDividerTop".equals(name))
+                    v.setBackgroundColor(accent(v.getContext()));
+            } catch (android.content.res.Resources.NotFoundException ignored) { }
+        }
         if (v instanceof android.widget.ListView) {
             GradientDrawable selector = shape(v.getContext(), false);
             selector.setStroke((int) Math.ceil(2 * v.getResources().getDisplayMetrics().density), accent(v.getContext()));
             ((android.widget.ListView) v).setSelector(selector);
+        }
+        if (v instanceof SmartModuleView) {
+            v.setBackground(null);
+            v.invalidate();
+            return;
         }
         if (v instanceof TextView) {
             TextView t = (TextView) v;

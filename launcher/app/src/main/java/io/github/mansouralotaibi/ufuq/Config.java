@@ -45,6 +45,8 @@ final class Config {
     static final String WALLPAPER_RANDOM_KEY = "wallpaper_random";
     static final String DOCK_OPACITY_KEY = "dock_opacity";
     static final String SHELF_SCALE_KEY = "shelf_scale";
+    static final String WALLPAPER_DIM_KEY = "wallpaper_dim_choice";
+    static final String ROTATION_MINUTES_KEY = "rotation_minutes_choice";
     /**
      * Counts the changes made in Launcher settings. Home remembers the count it was built with and rebuilds on
      * resume when it differs, however the settings were left (see MainActivity#onResume).
@@ -488,6 +490,7 @@ final class Config {
         if (!wallpaperEnabled) wallpaper = null;
         int rotationMinutes = json == null ? 0 : integer(json, "wallpaper_rotation_minutes", 0, 0, 1440);
         int wallpaperDim = json == null ? 0 : integer(json, "wallpaper_dim", 0, 0, 90);
+        wallpaperDim = SceneReadability.clamp(choices.getInt(WALLPAPER_DIM_KEY, wallpaperDim));
         int dockOpacity = json == null ? 100 : integer(json, "dock_opacity", 100, 30, 100);
         dockOpacity = chosenDockOpacity(choices.getInt(DOCK_OPACITY_KEY, -1), dockOpacity);
         String wallpaperOrder = json == null ? WallpaperRotation.ORDER_SHUFFLE
@@ -505,6 +508,8 @@ final class Config {
             wallpaper = wallpapers.get(0);
             if (rotationMinutes == 0) rotationMinutes = 15;
         }
+        rotationMinutes = Math.max(1, Math.min(1440, choices.getInt(ROTATION_MINUTES_KEY,
+                rotationMinutes > 0 ? rotationMinutes : 15)));
         // An on-TV wallpaper pick overrides the theme: a filename from the wallpapers/
         // collection, or "none". Unset means the theme decides (off by default).
         boolean randomWallpaper = choices.getBoolean(WALLPAPER_RANDOM_KEY,

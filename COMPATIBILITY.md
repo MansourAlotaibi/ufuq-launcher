@@ -1,28 +1,25 @@
 # Compatibility
 
-| Target | Evidence for this RC | Status |
+## RC2 evidence — 29 October 2026
+
+| Target | Evidence | Status |
 |---|---|---|
-| API 19 / Android 4.4 | minSdk 19, desugaring, release lint | Build target; runtime untested |
-| API 21–34 | guarded TV-input APIs and package discovery | Runtime untested |
-| API 35+ | no runtime evidence | Untested |
-| Nobel/CVTE | no device accessed | Protected; not a test target |
-| D-pad / physical remote | JVM navigation tests only | Physical remote untested |
-| Arabic RTL / English LTR | resources and unit tests | Visual/device verification pending |
-| Three palettes / persistence | persisted preference IDs and palette tests | Runtime visual verification pending |
+| Nobel/CVTE SMART, board CVTM638_768_PC822, Android 4.4.4 / API 19, 1920×1080 | Independently signed public package exercised on the physical TV | Tested for the specific flows in the RC2 report; not a firmware-wide certification |
+| API 19, 28, 34 | Robolectric framework regression tests, release lint/build | Simulated; API 28/34 hardware not tested |
+| API 21–34 other devices | Runtime guards, package discovery and desugaring | Hardware untested |
+| API 35+ | No runtime evidence | Untested |
+| Arabic RTL / English LTR, Classic / Midnight / Coast | Actual TV captures and framework tests | Tested screens only |
+| D-pad | Injected Android key events on physical TV | A physical remote press/scan code is not verified |
+| Process restart | Only the independent public package may be stopped for recovery testing | Does not establish TV reboot or low-memory soak behavior |
 
-Wi-Fi API 19–28 retains the native panel; API 23–28 requires a user-approved scan permission and
-may require system location services enabled. Permission denial opens system settings. API 29+ uses
-system settings because ordinary apps cannot use the legacy configuration APIs. Missing handlers show unavailable.
-TV input discovery is guarded by Android version; streaming boxes may have no inputs.
-Vendor source integrations are optional configuration and off by default.
-Application discovery uses package-manager intent queries; vendor restrictions can hide apps.
-Layouts use Android density units; extreme overscan, density and aspect ratios require visual tests.
-HOME support is controlled by firmware and user settings, never an automatic installation step.
-TLS uses platform trust and hostname validation; old trust stores may reject modern servers.
-No emulator executable was available in the inspected SDK. No connected-device commands were run.
+The public application ID is `io.github.mansouralotaibi.ufuq`. It cannot update the protected personal package. Installation does not set HOME, disable another launcher or grant accessibility/system permissions. The owner expressly authorized a single read-only reference capture of the installed personal Home; its settings and installation were not changed.
 
-Before final release: test cold starts, Back, every D-pad edge, focus restoration, RTL/LTR,
-all palettes, process restart persistence, fixed/random wallpapers and low-memory recovery
-on disposable targets. Do not infer compatibility from installation alone.
+Wi-Fi API 19–28 retains the native panel; API 23–28 requires user-approved scan permission and may require system location services. API 29+ uses system settings because ordinary apps cannot use legacy configuration APIs. Missing handlers show unavailable. No Wi-Fi connection was changed in the device tests.
 
-See [feature comparison](docs/FEATURE-PARITY.md) for source evidence and differences from 2.8.5.
+TV inputs are guarded by Android version and actual handlers. API 19 lacks the standard TV Input Framework; a firmware-specific input button in the personal installation is not evidence that an independent application can use it generically. Vendor mappings remain optional, not public defaults. Streaming boxes may have no physical inputs.
+
+Application discovery uses package-manager intent queries; firmware can hide apps. HOME behavior remains firmware/user controlled. Legacy TLS uses platform certificate/hostname verification with TLS 1.2 enabled where needed; old trust stores can still reject a provider. Live provider success on one TV is not universal network compatibility.
+
+Layouts use native Android Views and density units. Extreme density, overscan, font scale and aspect ratios need additional visual testing. No emulator was available in the installed SDK. No synthetic mockup is device evidence.
+
+See [feature comparison](docs/FEATURE-PARITY.md) and [validation](docs/VALIDATION.md). Private screenshots, device dumps and APKs are deliberately excluded from the source repository.

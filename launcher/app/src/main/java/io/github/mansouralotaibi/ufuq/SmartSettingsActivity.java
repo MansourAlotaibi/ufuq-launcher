@@ -120,10 +120,7 @@ public final class SmartSettingsActivity extends ThemedActivity {
     private void selectTeam(TeamCatalog.Team selected) {
         p.edit().putString(SmartPreferences.TEAM, selected.id)
                 .putBoolean(SmartPreferences.FOOTBALL, selected != TeamCatalog.NONE)
-                .remove("cache_" + SmartPreferences.FOOTBALL)
-                .remove("cache_" + SmartPreferences.FOOTBALL + "_display")
-                .remove("cache_" + SmartPreferences.FOOTBALL + "_at")
-                .remove("cache_" + SmartPreferences.FOOTBALL + "_team").commit();
+                .commit();
         // Team selection changes content, not the Ufuq layout. Bumping the layout revision here recreated
         // Home while its network request was completing, leaving the newly created view on its placeholder.
         // The existing controller refreshes the selected team when Home resumes.

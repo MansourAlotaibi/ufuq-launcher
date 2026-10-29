@@ -41,7 +41,7 @@ No claim is made that a source comparison proves runtime or visual parity.
 | Private branding raster files | Replaced | Native Ufuq shapes; original files remain in protected history with unresolved file-level provenance |
 | Weather live provider | No new omission | Imported composition itself only builds prayer/football modules; no live weather provider existed in that baseline |
 
-## Validation boundaries
+## RC1 preparation snapshot — historical validation boundaries
 
 Local JVM tests and release lint/build cover code/data behavior. A desktop read-only TheSportsDB
 request returned an event; it does not prove Android API 19 TLS or runtime operation.
@@ -49,7 +49,7 @@ No TV, ADB, protected application, original project or personal backup was acces
 No emulator executable was available. Runtime persistence, all three palettes, RTL/LTR, physical
 D-pad, low-memory behavior, Wi-Fi and vendor input behavior still require non-production testing.
 
-## Remaining publication gates
+## RC1 preparation snapshot — publication gates
 
 Separate public signing, historical asset/content provenance, packaged dependency notices,
 private security contact, lint-warning review and runtime verification remain. GitHub remains private;
@@ -59,3 +59,13 @@ Public snapshot update: old unresolved asset history is excluded through a new i
 Outfit now has a pinned official source, icons have original replacements, and three original
 wallpapers are bundled. Android framework simulation now covers locales, focus and persistence.
 See VALIDATION.md for scope; no physical/visual equivalence is inferred.
+
+## RC2 physical-TV findings and restoration
+
+RC1's built-in defaults selected a legacy app-art grid even though the cinematic Home implementation was present. Greeting/Hijri views were updated inside a hidden panel; shelf-size controls were hidden by that same layout predicate. Early screenshots with no prayer/football also had those optional modules disabled in saved preferences. Enabling them rendered the modules; the generic palette pass then incorrectly painted dashboard backgrounds on the custom TextViews. These were configuration/binding/style problems, not content licensing removals.
+
+RC2 uses the existing cinematic composition independently of the wallpaper-caption/art switches, restores visible app labels and compact header controls, exposes Large-by-default favorite sizing, and keeps the prayer/football rail unboxed. Gregorian and Hijri choices are independent. Navigation has a stable touch area when either date is hidden. The direct app library remains accessible.
+
+Wallpaper dimming and rotation interval are separate local preferences. Football paints validated selected-team cache data before network refresh, keeps per-team caches/retry timestamps, and discards responses for a different currently selected team. Quran/Hadith data, notices, source hashes, fonts and original procedural wallpapers are unchanged.
+
+A single owner-approved read-only capture of installed MansourTV 2.8.5 supplied the visual reference. The restricted personal wallpaper and personal favorite configuration were not copied into public source. Runtime comparison images remain private. Device evidence applies to the tested Nobel/CVTE API 19 TV only; framework tests cover API 19/28/34. Physical remote scan codes, other firmware and long-duration behavior remain separate validation limits.

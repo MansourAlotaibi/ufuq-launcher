@@ -262,4 +262,12 @@
     <!-- Cinematic top shelf (cinematic_home): the line under the focused dock app's name; %1$s is when it was
          last opened, e.g. "5 minutes ago" or "yesterday, 9:40 pm". -->
     <string name="last_opened">Last opened %1$s</string>
+
+    <string name="wallpaper_dim_label">Wallpaper dimming: %1$d%%</string>
+    <string name="rotation_interval_label">Wallpaper rotation: %1$d min</string>
+    <string name="football_loading">Loading selected team…</string>
+    <string name="football_choose_team">Choose a team in Home Information</string>
+    <string name="football_retry">Waiting to retry selected team</string>
+    <string name="wallpaper_dim_label_title">Wallpaper dimming</string>
+    <string name="rotation_interval_title">Rotation interval</string>
 </resources>

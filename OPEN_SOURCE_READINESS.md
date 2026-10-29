@@ -1,17 +1,14 @@
-# Publication preparation — full-feature 1.0.0 RC1
+# Publication preparation — full-feature 1.0.0 RC2
 
-- Accepted 32a44a93 feature set preserved; no football or Quran/Hadith reduction.
-- New independent public root excludes old unresolved asset/history blobs; local refs retained.
-- Official OFL font, new MIT icons, three MIT cinematic procedural wallpapers and licensed reflection corpus.
-- New independent public signing identity and signed local candidate; secret material ignored and owner-only.
-- Release-critical stale locale layouts and modern style inheritance fixed; draw allocations reduced.
-- API 19/28/34 Android framework simulations cover palettes, locale layouts, D-pad focus and persistence.
-- Required unit/lint/build and source/asset/history/APK audits recorded in docs/.
+- Accepted full feature baseline retained; football and Quran/Hadith remain enabled implementations with accurate provider/content attribution.
+- Cinematic clock/dates, personalized greeting, reflection, unboxed prayer/football horizon and bottom favorites dock restored from the owner-approved installed 2.8.5 reference.
+- Three independent palettes; Large default favorite sizing; persistent fixed/random wallpapers, dimming and rotation interval.
+- Selected-team cache is shown before foreground refresh; per-team caches preserve RC1 data and stale responses trigger the current team request safely.
+- KitKat lifecycle recreation and date-off navigation hit-area defects fixed and regression-tested.
+- Independently signed public RC2 remains local; public package cannot overwrite the personal installation.
+- Clean public root and normal development history preserved; protected import/local main remain intact.
+- See [RC2 validation](docs/RC2-VALIDATION.md), [compatibility](COMPATIBILITY.md), [building](BUILDING.md), and [third-party notices](THIRD-PARTY-NOTICES.md).
 
-No emulator or physical remote test has been performed. Visual quality on real screens, vendor inputs,
-Wi-Fi hardware, API 19 network trust and low-memory behavior remain unverified. Before public binary
-publication, owner must complete separate encrypted signing-key recovery custody and retain accompanying
-dependency source in the release package. Private security reporting/contact must be enabled/tested.
+Remaining review/publication gates: owner review of the local RC2 commit and actual private screenshots; physical remote scan-code testing; other firmware/display validation and longer soak tests. Separate encrypted signing-key recovery custody, binary dependency-source packaging and tested private security reporting remain publication operations. No private screenshot, APK, keystore or device dump is committed.
 
-Initial push requires explicit approval. Public visibility and GitHub Release require separate approval.
-See docs/PUBLIC-PUSH-PLAN.md, docs/RELEASE-READINESS.md and THIRD-PARTY-NOTICES.md.
+The GitHub repository remains private. Remote main is preserved until review. No RC2 push, visibility change, signed artifact upload or GitHub Release is authorized by this document.

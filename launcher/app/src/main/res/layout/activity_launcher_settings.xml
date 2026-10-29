@@ -196,6 +196,10 @@
             style="@style/SettingsRow"
             android:layout_marginTop="12dp" />
 
+        <TextView android:id="@+id/wallpaperDimChoice" style="@style/SettingsRow" android:text="@string/wallpaper_dim_label" />
+
+        <TextView android:id="@+id/rotationIntervalChoice" style="@style/SettingsRow" android:text="@string/rotation_interval_label" />
+
         <TextView
             android:id="@+id/readabilityChoice"
             style="@style/SettingsRow"

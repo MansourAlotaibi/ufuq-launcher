@@ -5,8 +5,9 @@ import argparse,subprocess,json,hashlib,zipfile
 r=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--ref',default='HEAD');p.add_argument('--apk',type=Path);p.add_argument('--sources',type=Path);a=p.parse_args()
 def git(*args):return subprocess.check_output(['git',*args],cwd=r).decode()
-assert len(git('rev-list',a.ref).splitlines())==1,'Public branch must have one independent root commit'
-assert len(git('rev-list','--parents','-n','1',a.ref).split())==1,'Public root must have no parent'
+roots=git('rev-list','--max-parents=0',a.ref).splitlines()
+assert roots==['0d5faa9df40f968d7270c048fcee66f9a603922c'],'Public history must descend only from the audited clean root'
+assert len(git('rev-list','--parents','-n','1',roots[0]).split())==1,'Public root must have no parent'
 paths=git('ls-tree','-r','--name-only',a.ref).splitlines()
 for forbidden in ['launcher/app/src/main/res/drawable-nodpi/banner.jpg','launcher/app/src/main/res/mipmap-xhdpi/ic_launcher.jpg','launcher/app/src/main/res/drawable/ic_mansourtv.xml']:
  assert forbidden not in paths,'Unresolved inherited art included'
@@ -16,6 +17,16 @@ for name in paths:
  if Path(name).suffix.lower() in ['.ttf','.png','.jpg','.jpeg','.webp']:
   assert name in allow,'Uninventoried image/font: '+name
   assert hashlib.sha256((r/name).read_bytes()).hexdigest()==allow[name]['sha256']
+# Check every reachable revision, including assets later deleted or replaced.
+for revision in git('rev-list',a.ref).splitlines():
+ for name in git('ls-tree','-r','--name-only',revision).splitlines():
+  assert name not in ['launcher/app/src/main/res/drawable-nodpi/banner.jpg',
+      'launcher/app/src/main/res/mipmap-xhdpi/ic_launcher.jpg',
+      'launcher/app/src/main/res/drawable/ic_mansourtv.xml'],'Unresolved inherited asset in history'
+  if Path(name).suffix.lower() in ['.ttf','.png','.jpg','.jpeg','.webp']:
+   assert name in allow,'Uninventoried historical image/font: '+name
+   data=subprocess.check_output(['git','show',revision+':'+name],cwd=r)
+   assert hashlib.sha256(data).hexdigest()==allow[name]['sha256'],'Unverified historical asset: '+name
 f=json.loads((r/'third_party/font-provenance.json').read_text())
 assert hashlib.sha256((r/'launcher/app/src/main/res/font/outfit.ttf').read_bytes()).hexdigest()==f['sha256']
 w=json.loads((r/'third_party/gradle-wrapper-provenance.json').read_text())
@@ -36,4 +47,4 @@ if a.sources:
   keys=[name.split('/',1)[1] for name in z.namelist() if not name.endswith('/') and re.search(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',z.read(name))]
   assert sorted(keys)==sorted(source['publicTestFixtureKeyFiles']),'Unexpected source archive key material'
  print('Source archive hash verified; only the two documented public upstream Harmony test-key fixtures are present.')
-print('PASS: one parentless public commit; prohibited inherited art absent; font/wrapper hashes and image allowlist verified; packaged assets/licenses match.')
+print('PASS: audited parentless public root preserved; prohibited inherited art absent; font/wrapper hashes and image allowlist verified; packaged assets/licenses match.')

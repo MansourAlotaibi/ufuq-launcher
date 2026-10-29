@@ -171,7 +171,7 @@ final class AppLibraryDialog {
         panel.setOrientation(LinearLayout.VERTICAL);
         panel.setPadding(dp(54), dp(28), dp(54), dp(34));
         // This is a destination, not a modal card: no Home wallpaper or shelf may bleed through it.
-        panel.setBackground(surface(0xFF0B1726, 0));
+        panel.setBackground(surface(ThemePalette.SURFACES[UiTheme.selected(activity)], 0));
         View decor = activity.getWindow().getDecorView();
         catalogWidth = Math.max(dp(640), decor.getWidth() - dp(108));
         int width = decor.getWidth();
@@ -429,6 +429,7 @@ final class AppLibraryDialog {
         list.setAdapter(new Catalog());
         shelf.addView(list, new FrameLayout.LayoutParams(-1, -1));
         highlight = new GlassView(activity, null);
+        highlight.setAccent(UiTheme.accent(activity));
         highlight.setRadius(dp(20));
         highlight.setAlpha(0f);
         highlight.setFocusable(false);

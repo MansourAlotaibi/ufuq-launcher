@@ -29,21 +29,31 @@ final class SmartHomeController {
     private final SmartCompositionLayout composition;
     private final FrameLayout reflectionHost;
     private final SharedPreferences p;
-    private final NativeApiClient api = new NativeApiClient();
+    private final NativeApiClient api;
     private final Map<String, SmartModuleView> cards = new HashMap<>();
     private final SharedPreferences.OnSharedPreferenceChangeListener cacheListener;
     private ReflectionView reflection;
     private boolean active;
+    private boolean requestInFlight;
 
-    SmartHomeController(Activity activity) {
+    SmartHomeController(Activity activity) { this(activity, new NativeApiClient()); }
+
+    SmartHomeController(Activity activity, NativeApiClient api) {
+        this.api = api;
         this.activity = activity;
         composition = activity.findViewById(R.id.smartCards);
         reflectionHost = activity.findViewById(R.id.reflectionHost);
         p = SmartPreferences.get(activity);
+        // Preserve the RC1 last-team cache before any RC2 response replaces the legacy slot.
+        String previousTeam = p.getString("cache_football_team", "none");
+        String previousRaw = p.getString("cache_football", null);
+        if (!"none".equals(previousTeam) && previousRaw != null
+                && !p.contains("fixture_" + previousTeam + "_raw")) {
+            p.edit().putString("fixture_" + previousTeam + "_raw", previousRaw)
+                    .putLong("fixture_" + previousTeam + "_at", p.getLong("cache_football_at", 0)).apply();
+        }
         cacheListener = (preferences, key) -> {
-            if (active && ("cache_football_team".equals(key)
-                    || "cache_football_display".equals(key)
-                    || "cache_football_at".equals(key))) {
+            if (active && key != null && (key.startsWith("cache_football") || key.startsWith("fixture_"))) {
                 activity.runOnUiThread(() -> renderCached(SmartPreferences.FOOTBALL));
             }
         };
@@ -134,10 +144,17 @@ final class SmartHomeController {
         if (cards.containsKey(SmartPreferences.FOOTBALL)) refreshFootball();
     }
 
+    void tick() { renderClockBlock(); renderOffline(); }
+
     void onPause() { active = false; api.setActive(false); }
     void close() {
         p.unregisterOnSharedPreferenceChangeListener(cacheListener);
         api.close();
+    }
+
+    boolean focusReflectionOrModules() {
+        if (reflection != null && reflection.requestFocus()) return true;
+        return composition.getVisibility() == View.VISIBLE && composition.focusEntry();
     }
 
     boolean focusFirstCard() {
@@ -171,7 +188,9 @@ final class SmartHomeController {
     private void renderCached(String key) {
         SmartModuleView card = cards.get(key); if (card == null) return;
         String value = SmartPreferences.FOOTBALL.equals(key) ? footballFromRaw() : cacheBody(key);
-        if (value == null) card.setText(cardTitle(key) + "\n" + activity.getString(R.string.card_unavailable));
+        if (value == null) card.setText(cardTitle(key) + "\n" + activity.getString(
+                "none".equals(p.getString(SmartPreferences.TEAM, "none"))
+                        ? R.string.football_choose_team : requestInFlight ? R.string.football_loading : R.string.football_retry));
         else if (SmartPreferences.FOOTBALL.equals(key)) card.setText(cardTitle(key) + "\n" + value);
         else card.setText(cardTitle(key) + "\n" + value + "\n" + updated(cacheAt(key)));
         if (SmartPreferences.FOOTBALL.equals(key)) card.setOnClickListener(v -> showFootballDetails(card));
@@ -209,24 +228,30 @@ final class SmartHomeController {
     private void refreshFootball() {
         String id = p.getString(SmartPreferences.TEAM, "none");
         if ("none".equals(id)) return;
-        if (id.equals(cachedFootballTeam()) && fresh(SmartPreferences.FOOTBALL, FOOTBALL_TTL)) {
+        renderCached(SmartPreferences.FOOTBALL);
+        if (System.currentTimeMillis() - footballCacheAt(id) < FOOTBALL_TTL
+                && footballFromRaw() != null) {
             // A request owned by the previous Activity can finish while Home is being recreated after
             // leaving settings. The cache is then fresh, but this Activity built its view just before the
             // write. Repaint here instead of returning with the pre-request placeholder still visible.
             renderCached(SmartPreferences.FOOTBALL);
             return;
         }
-        // Foreground-only requests: hourly successful cache plus a global one-minute retry floor.
+        // Foreground-only requests: hourly successful cache plus a per-team one-minute retry floor.
         long now = System.currentTimeMillis();
-        long last = p.getLong("football_last_attempt", 0);
-        if (last > 0 && now >= last && now - last < 60_000L) return;
-        p.edit().putLong("football_last_attempt", now).apply();
+        long last = p.getLong("football_last_attempt_" + id, 0);
+        if (requestInFlight || last > 0 && now >= last && now - last < 60_000L) return;
+        p.edit().putLong("football_last_attempt_" + id, now).apply();
+        requestInFlight = true;
+        renderCached(SmartPreferences.FOOTBALL);
         String endpoint = "https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id=" + Uri.encode(id);
         api.get(endpoint, response -> {
+            requestInFlight = false;
             String selectedNow = p.getString(SmartPreferences.TEAM, "none");
             if (!id.equals(selectedNow)) {
                 android.util.Log.i("MansourFootball", "team=" + id
                         + " status=DISCARDED_STALE_RESPONSE selected=" + selectedNow);
+                if (active) refreshFootball();
                 return;
             }
             if (!response.successful()) {
@@ -255,13 +280,24 @@ final class SmartHomeController {
 
     private String footballFromRaw() {
         String selected = p.getString(SmartPreferences.TEAM, "none");
-        if (!selected.equals(cachedFootballTeam())) return null;
-        String raw = p.getString("cache_" + SmartPreferences.FOOTBALL, null);
-        if (raw == null) return cacheBody(SmartPreferences.FOOTBALL);
+        String raw = footballRaw(selected);
+        if (raw == null) return null;
         FootballFixtureParser.Result parsed = FootballFixtureParser.parse(raw, selected,
                 ZoneId.systemDefault(), ZonedDateTime.now());
         return parsed.status == FootballFixtureParser.Status.OK
-                ? fixtureDisplay(parsed.fixture) : cacheBody(SmartPreferences.FOOTBALL);
+                ? fixtureDisplay(parsed.fixture)
+                : parsed.status == FootballFixtureParser.Status.EMPTY ? activity.getString(R.string.card_fixture_free_empty)
+                : parsed.status == FootballFixtureParser.Status.PAST_ONLY ? activity.getString(R.string.card_fixture_past_only) : null;
+    }
+
+    private String footballRaw(String team) {
+        return p.getString("fixture_" + team + "_raw", team.equals(cachedFootballTeam())
+                ? p.getString("cache_football", null) : null);
+    }
+
+    private long footballCacheAt(String team) {
+        return p.getLong("fixture_" + team + "_at", team.equals(cachedFootballTeam())
+                ? p.getLong("cache_football_at", 0) : 0);
     }
 
     private String cachedFootballTeam() {
@@ -269,7 +305,9 @@ final class SmartHomeController {
     }
 
     private void saveFootball(String teamId, String raw, String display) {
-        p.edit().putString("cache_" + SmartPreferences.FOOTBALL, raw)
+        p.edit().putString("fixture_" + teamId + "_raw", raw)
+                .putLong("fixture_" + teamId + "_at", System.currentTimeMillis())
+                .putString("cache_" + SmartPreferences.FOOTBALL, raw)
                 .putString("cache_" + SmartPreferences.FOOTBALL + "_display", display)
                 .putString("cache_" + SmartPreferences.FOOTBALL + "_team", teamId)
                 .putLong("cache_" + SmartPreferences.FOOTBALL + "_at", System.currentTimeMillis()).commit();
@@ -328,8 +366,8 @@ final class SmartHomeController {
     }
 
     private void showFootballDetails(View returnTo) {
-        String raw = p.getString("cache_" + SmartPreferences.FOOTBALL, null);
         String selected = p.getString(SmartPreferences.TEAM, "none");
+        String raw = footballRaw(selected);
         FootballFixtureParser.Result parsed = raw == null ? null : FootballFixtureParser.parse(raw,
                 selected, ZoneId.systemDefault(), ZonedDateTime.now());
         String message = parsed != null && parsed.status == FootballFixtureParser.Status.OK

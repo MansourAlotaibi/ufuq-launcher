@@ -4,7 +4,7 @@ Provisioning files stay in ignored private/public-signing with owner-only permis
 Move recovery material to separate encrypted/offline storage before public publication.
 """
 from pathlib import Path
-import argparse,os,secrets,subprocess,hashlib,json,zipfile
+import argparse,os,secrets,subprocess,hashlib,json,zipfile,re
 r=Path(__file__).resolve().parents[1];p=r/'private/public-signing';key=p/'ufuq-public.p12';password=p/'store-password.txt'
 parser=argparse.ArgumentParser();parser.add_argument('action',choices=['init','sign']);parser.add_argument('--apk',type=Path);args=parser.parse_args()
 def run(cmd,**kw):
@@ -36,7 +36,13 @@ else:
  for file in [key,password]:
   if file.stat().st_mode & 0o077:raise SystemExit('Signing material must have owner-only permissions.')
  dest=r/'release-local';dest.mkdir(exist_ok=True)
- output=dest/'ufuq-launcher-1.0.0-rc1.apk'
+ badging=run([str(sdk/'build-tools/34.0.0/aapt'),'dump','badging',str(args.apk)],env=env).stdout
+ identity=re.search(r"package: name='([^']+)' versionCode='[^']+' versionName='([^']+)'",badging)
+ if not identity or identity.group(1)!='io.github.mansouralotaibi.ufuq':
+  raise SystemExit('Refusing to sign an APK outside the independent public identity.')
+ version=identity.group(2)
+ if not re.fullmatch(r'[A-Za-z0-9._+-]+',version):raise SystemExit('Unsafe version label')
+ output=dest/('ufuq-launcher-'+version+'.apk')
  # AGP's build metadata is not runtime input and is excluded from v1 JAR coverage.
  # Remove it before signing, then restore standard APK alignment for API 19+.
  stripped=dest/'signing-input.apk';aligned=dest/'signing-aligned.apk'

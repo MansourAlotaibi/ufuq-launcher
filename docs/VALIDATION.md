@@ -1,3 +1,7 @@
+# Current candidate: RC2
+
+See [RC2 validation](RC2-VALIDATION.md) for 267 passing tests, release lint/build and actual Nobel TV evidence. The following RC1 publication snapshot is retained as historical evidence.
+
 # Final publication validation — 2026-10-29
 
 Command from launcher/: `./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease`.

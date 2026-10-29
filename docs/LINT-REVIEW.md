@@ -38,3 +38,7 @@ Exact final counts are recorded in VALIDATION.md; this table describes the dispo
 
 Robolectric tests are framework simulations, not graphical/device proof. RTL visual polish, vendor APIs,
 legacy Wi-Fi hardware and performance still require non-production device/emulator evidence.
+
+## RC2 follow-up
+
+Release lint: 0 errors, 147 warnings. The accepted RC1 result was 146 warnings. The additional warning is the now-unused `card_unavailable` string after selected-team loading/retry states replaced the misleading generic placeholder. It is non-executable and removed by resource shrinking. No suppression or lint baseline was added. A duplicate top-navigation lookup warning introduced during the header fix was resolved by reusing the same container reference. Existing category dispositions remain applicable; unsupported API/runtime claims still require device evidence.

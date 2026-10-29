@@ -239,7 +239,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.advancedEffects = cfg.animations && cfg.advancedEffects;
         this.showHomeSettings = cfg.showHomeSettingsShortcut;
         this.showLibrary = cfg.appLibrary;
-        this.modernShelf = cfg.cinematicHome && cfg.wallpaperCaptions && cfg.cinematicArt == 0;
+        this.modernShelf = cfg.cinematicHome;
         this.sceneCardBackground = ContextCompat.getDrawable(ctx, R.drawable.tile_bg_scene);
         this.shelfScale = ctx.getSharedPreferences(Config.SETTINGS_NAME, Context.MODE_PRIVATE)
                 .getInt(Config.SHELF_SCALE_KEY, DEFAULT_SHELF_SCALE);

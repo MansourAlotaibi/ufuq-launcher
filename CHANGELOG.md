@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0-rc2 — local review candidate
+
+- Restore cinematic clock, saved greeting, independent Gregorian/Hijri dates and the original Home hierarchy.
+- Preserve three palettes without adding dashboard backgrounds to the native prayer/football rail; apply palette accents to dock/Apps focus and guarded native dialog chrome.
+- Expose Large-by-default favorite sizing, readable app labels and direct Apps access.
+- Add persistent native wallpaper dimming and rotation-interval settings, independent of palette and wallpaper choice.
+- Render validated selected-team fixtures from cache immediately; refresh asynchronously with per-team retry limits and stale-response protection.
+- Defer settings-driven Home recreation until lifecycle callback delivery completes on KitKat.
+- Derive local signed-candidate filenames from verified public APK identity/version; preserve the existing independent signing identity.
+
+Physical-device results and remaining limits are recorded in the RC2 validation report. This candidate is local; main and publication remain gated on review.
+
 ## 1.0.0-rc1 — local preparation, 2026-10-29
 
 - Independent public package and namespace; protected identity overrides rejected.

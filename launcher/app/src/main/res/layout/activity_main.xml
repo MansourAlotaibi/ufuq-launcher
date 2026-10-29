@@ -302,6 +302,8 @@
 
         <!-- No clipping down to the pills: with advanced effects a focused pill scales up past its row. -->
         <RelativeLayout
+            android:id="@+id/homeHeader"
+            android:minHeight="48dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipChildren="false"

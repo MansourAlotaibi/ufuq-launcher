@@ -27,8 +27,8 @@ restricts external callers with that system permission; it does not grant the ap
 Football is off by default; selecting a team and enabling the card sends that public team ID to
 TheSportsDB, along with normal connection metadata (including the network's public address).
 No device identifier, SSID, personalized greeting or favorites list is sent. The provider has its own
-terms/privacy policy linked from its site. Successful results are cached for one hour; attempts have a
-one-minute floor and occur only on foreground lifecycle events. Last successful data can remain visible
+terms/privacy policy linked from its site. Successful per-team results have a one-hour freshness window and remain in the private local cache until replaced or Ufuq data is removed; attempts have a
+one-minute floor per team and occur only on foreground lifecycle events. Last successful data can remain visible
 when offline. Clearing Ufuq app data removes preferences and caches.
 
 The HTTPS worker uses platform certificate and hostname validation, 8-second connection/read timeouts,

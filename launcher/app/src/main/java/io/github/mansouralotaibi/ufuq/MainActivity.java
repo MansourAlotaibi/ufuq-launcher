@@ -158,6 +158,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     private boolean cinematic;
     /** A wallpaper-led cinematic shelf: its copy stays stable while focus moves through apps. */
     private boolean sceneHero;
+    private boolean recreationPosted;
     private int shelfScalePercent = AppAdapter.DEFAULT_SHELF_SCALE;
     /** config.xml ambient_glow, overridable by a theme. Off: the glow view is gone and no fade or colour animator
      *  is started for it, so a focus move costs nothing extra on a launcher that runs all day. */
@@ -449,7 +450,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         heroDots = findViewById(R.id.heroDots);
         heroArt = findViewById(R.id.heroArt);
         cinematic = cfg.cinematicHome;
-        sceneHero = cinematic && cfg.wallpaperCaptions && cfg.cinematicArt == 0;
+        sceneHero = cinematic;
         SharedPreferences appearance = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE);
         shelfScalePercent = appearance.getInt(Config.SHELF_SCALE_KEY, AppAdapter.DEFAULT_SHELF_SCALE);
         // 112 was the old implicit default. Migrate that default once to Ufuq's new large shelf while
@@ -518,7 +519,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         raceSessions = findViewById(R.id.raceSessions);
         showStats = cfg.showStats;
         shamsi = cfg.shamsiDate;
-        greetingName = cfg.greetingName;
+        greetingName = SmartPreferences.get(this).getString(SmartPreferences.GREETING_NAME, cfg.greetingName).trim();
         if (shamsi) {
             shamsiDate.setVisibility(View.VISIBLE);
             TextView date = findViewById(R.id.date);
@@ -626,7 +627,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             // even when the theme requests an extra visible row below the dock.
             int shelfClearance = cfg.appLibrary ? hero.getMeasuredHeight() + (int) (40 * density) : 0;
             int want = sceneHero
-                    ? Math.max(0, h - dockRow - (int) (68 * density))
+                    ? Math.max(0, h - itemH - (int) (36 * density))
                     : Math.max(shelfClearance, h - dockRow - gridRows - (int) (AppAdapter.BOTTOM_ROOM_DP * density));
             // Where the rows cannot fit even at the smallest tile (3 rows with the title on), the title keeps its
             // room above the dock and the last rows run off the bottom instead of the title drawing over the clock.
@@ -725,6 +726,18 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // Ufuq removes the old Home/Apps tabs. Keep Apps one D-pad stop away as a compact capsule,
         // rather than making the visually quieter Home lose its only library route.
         btnLibraryTop.setVisibility(cfg.appLibrary && (sceneHero || cfg.libraryButton) ? View.VISIBLE : View.GONE);
+        LinearLayout topControls = findViewById(R.id.topButtons);
+        if (sceneHero) {
+            // Navigation must not inherit the height of hidden legacy date/clock text. On KitKat
+            // that left painted buttons outside their parent's hit rectangle when dates were off.
+            RelativeLayout.LayoutParams navigation = (RelativeLayout.LayoutParams) topControls.getLayoutParams();
+            navigation.removeRule(RelativeLayout.ALIGN_BOTTOM);
+            navigation.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            navigation.topMargin = Math.round(5 * density);
+            navigation.bottomMargin = 0;
+            topControls.setLayoutParams(navigation);
+        }
+
         iconOnlyButtons = cfg.iconOnlyButtons;
         topMenu = cfg.topMenu;
         wifiIconOnly = iconOnlyButtons && cfg.wifiLabelWidth <= 0;
@@ -743,7 +756,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             if (!iconOnlyButtons) makeIconOnly((TextView) btnSettings);
             btnSettings.setOnClickListener(v -> showTopMenu());
             // The lone gear sits at the header's middle, not on its bottom line like the row of pills.
-            LinearLayout topButtons = findViewById(R.id.topButtons);
+            LinearLayout topButtons = topControls;
             RelativeLayout.LayoutParams tlp = (RelativeLayout.LayoutParams) topButtons.getLayoutParams();
             tlp.addRule(RelativeLayout.ALIGN_TOP, R.id.leftBlock);
             tlp.bottomMargin = 0;
@@ -769,6 +782,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             if (keyCode == KeyEvent.KEYCODE_DPAD_UP) return true;
             if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 // Back to the dock tile Up came from, not wherever the focus finder lands.
+                if (sceneHero && smartHome.focusReflectionOrModules()) return true;
                 focusTile(lastFocused % COLUMNS);
                 return true;
             }
@@ -937,14 +951,14 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         super.onResume();
         // A festival that started or ended while Home was in the background: rebuild with or without it.
         if (festive != festival.active(LocalDate.now())) {
-            recreate();
+            scheduleSettingsRecreation();
             return;
         }
         // Something changed in Launcher settings: rebuild with it, however the settings were left. Only Back
         // delivered their RESULT_OK; Home (the remote's button) clears them off this task and the result comes
         // back cancelled, so a new wallpaper or layout waited for the next process start.
         if (Config.settingsChanged(settingsRevision, settingsRevision())) {
-            recreate();
+            scheduleSettingsRecreation();
             return;
         }
         restartIdleClock();
@@ -1010,8 +1024,17 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             // The old activity must not consume the pending action, or rebuild a second time in onResume.
             settingsRecreationPending = true;
             settingsRevision = settingsRevision();
-            recreate();
+            scheduleSettingsRecreation();
         }
+    }
+
+    private void scheduleSettingsRecreation() {
+        if (recreationPosted) return;
+        recreationPosted = true;
+        root.post(() -> {
+            recreationPosted = false;
+            if (!isFinishing()) recreate();
+        });
     }
 
     private void startPendingSettingsReorder() {
@@ -1692,7 +1715,8 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         // Cinematic shelf: the highlight glows in the dock app's colour, plain white in the grid (and on the dock with
         // cinematic_white_focus). app_glow: every tile.
         boolean coloured = (appGlow || cinematic && !cinematicWhiteFocus && position < COLUMNS) && !festive;
-        int accent = coloured ? adapter.ambientColorAt(position) : 0;
+        int accent = sceneHero && !cinematicWhiteFocus ? UiTheme.accent(this)
+                : coloured ? adapter.ambientColorAt(position) : 0;
         if ((cinematic || appGlow) && !festive && accent != glassAccent) {
             glassAccent = accent;
             glass.setAccent(accent);
@@ -2500,7 +2524,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         SharedPreferences prefs = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE);
         boolean showClock = prefs.getBoolean(SHOW_CLOCK_KEY, true);
         boolean showDate = prefs.getBoolean(SHOW_DATE_KEY, true);
-        boolean smartStage = sceneHero && smartHome != null && smartHome.isSmartMode();
+        boolean smartStage = sceneHero;
         clockBlock.setVisibility(valid && (showClock || showDate) && !smartStage ? View.VISIBLE : View.INVISIBLE);
         handler.removeCallbacks(clockCheck);
         if (valid) {
@@ -2521,7 +2545,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         String clockPattern = twelve ? "h:mm" : "HH:mm";
         clockView.setFormat12Hour(clockPattern);
         clockView.setFormat24Hour(clockPattern);
-        boolean smartStage = sceneHero && smartHome != null && smartHome.isSmartMode();
+        boolean smartStage = sceneHero;
         clockView.setVisibility(showClock && !smartStage ? View.VISIBLE : View.GONE);
         amPmView.setText(getString(Calendar.getInstance().get(Calendar.AM_PM) == Calendar.AM
                 ? R.string.clock_am : R.string.clock_pm));
@@ -2543,6 +2567,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     }
 
     private void updateGreeting() {
+        if (smartHome != null) smartHome.tick();
         if (amPmView != null && amPmView.getVisibility() == View.VISIBLE) {
             amPmView.setText(getString(Calendar.getInstance().get(Calendar.AM_PM) == Calendar.AM
                     ? R.string.clock_am : R.string.clock_pm));

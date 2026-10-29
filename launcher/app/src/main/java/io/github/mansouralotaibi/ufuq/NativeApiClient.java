@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
 /** One bounded HTTPS worker. Uses Android's normal certificate and hostname verification. */
-final class NativeApiClient {
+class NativeApiClient {
     private static final String TAG = "MansourApi";
     static final class Result {
         final String body, error;
@@ -52,7 +52,7 @@ final class NativeApiClient {
                 connection.setUseCaches(false);
                 connection.setInstanceFollowRedirects(false);
                 connection.setRequestProperty("Accept", "application/json");
-                connection.setRequestProperty("User-Agent", "Ufuq/1.0.0-rc1 Android-TV");
+                connection.setRequestProperty("User-Agent", "Ufuq/1.0.0-rc2 Android-TV");
                 httpCode = connection.getResponseCode();
                 if (httpCode == 200) {
                     BufferedInputStream in = new BufferedInputStream(connection.getInputStream());

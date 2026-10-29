@@ -215,4 +215,12 @@
         <item quantity="other">%1$d تطبيق</item>
     </plurals>
     <string name="greeting_with_name">%1$s، %2$s</string>
+
+    <string name="wallpaper_dim_label">تعتيم الخلفية: %1$d%%</string>
+    <string name="rotation_interval_label">تبديل الخلفية: كل %1$d دقيقة</string>
+    <string name="football_loading">جارٍ تحميل الفريق المختار…</string>
+    <string name="football_choose_team">اختر فريقًا من معلومات الرئيسية</string>
+    <string name="football_retry">بانتظار إعادة محاولة تحميل الفريق</string>
+    <string name="wallpaper_dim_label_title">تعتيم الخلفية</string>
+    <string name="rotation_interval_title">فترة تبديل الخلفية</string>
 </resources>

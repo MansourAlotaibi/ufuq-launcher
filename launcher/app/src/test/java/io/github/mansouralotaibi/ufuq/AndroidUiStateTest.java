@@ -91,4 +91,130 @@ public class AndroidUiStateTest {
   }
  }
 
+ @Test public void cinematicDefaultsExposeLargeShelfAndIndependentWallpaperControls() {
+  Context c=RuntimeEnvironment.getApplication();
+  Config config=Config.load(c);
+  assertTrue(config.cinematicHome); assertTrue(config.appLibrary); assertEquals(0,config.cinematicArt);
+  assertEquals(130,AppAdapter.DEFAULT_SHELF_SCALE);
+  try(ActivityController<LauncherSettingsActivity> a=Robolectric.buildActivity(LauncherSettingsActivity.class).setup()) {
+   assertEquals(View.VISIBLE,a.get().findViewById(R.id.shelfSizeChoices).getVisibility());
+   assertTrue(a.get().findViewById(R.id.shelfLarge).isSelected());
+   assertTrue(a.get().findViewById(R.id.wallpaperDimChoice).isFocusable());
+   assertTrue(a.get().findViewById(R.id.rotationIntervalChoice).isFocusable());
+  }
+ }
+ @Test public void userDimmingAndIntervalSurviveThemeChangesAndFixedWallpaper() {
+  Context c=RuntimeEnvironment.getApplication();
+  c.getSharedPreferences(Config.SETTINGS_NAME,0).edit()
+   .putInt(Config.WALLPAPER_DIM_KEY,45).putInt(Config.ROTATION_MINUTES_KEY,1)
+   .putBoolean(Config.WALLPAPER_RANDOM_KEY,false).putString(Config.WALLPAPER_CHOICE_KEY,"silver-peaks.png").commit();
+  for(int i=0;i<3;i++) {
+   UiTheme.select(c,i);
+   Config config=Config.load(c);assertEquals(45,config.wallpaperDim);assertEquals(1,config.wallpaperRotationMinutes);
+   assertEquals(45,SceneReadability.load(c,config.wallpaperDim).dimFor(new File("silver-peaks.png")));
+   assertEquals(1,config.wallpapers.size());
+  }
+ }
+ @Test public void themeNeverAddsDashboardBackgroundToNativePrayerAndFootballViews() {
+  Context c=RuntimeEnvironment.getApplication();
+  for(int i=0;i<3;i++) {
+   UiTheme.select(c,i);
+   SmartModuleView football=new SmartModuleView(c,false);
+   DayRailView prayer=new DayRailView(c,false);
+   UiTheme.apply(football);UiTheme.apply(prayer);
+   assertNull(football.getBackground());assertNull(prayer.getBackground());
+  }
+ }
+ @Test public void cachedFixturesAppearDuringConstructionAndNeverCrossSelectedTeams() {
+  try(ActivityController<android.app.Activity> controller=Robolectric.buildActivity(android.app.Activity.class).setup()) {
+   android.app.Activity a=controller.get();a.setContentView(R.layout.activity_main);
+   android.content.SharedPreferences p=SmartPreferences.get(a);
+   p.edit().putBoolean(SmartPreferences.FOOTBALL,true).putString(SmartPreferences.TEAM,"136013")
+    .putString("fixture_136013_raw","{\"events\":[{\"idHomeTeam\":\"136013\",\"idAwayTeam\":\"2\",\"strHomeTeam\":\"Test Hilal\",\"strAwayTeam\":\"Test Away\",\"strTimestamp\":\"2099-10-29T18:00:00\"}]}").commit();
+   SmartHomeController smart=new SmartHomeController(a);
+   android.view.ViewGroup modules=a.findViewById(R.id.smartCards);
+   assertTrue(((android.widget.TextView)modules.getChildAt(0)).getText().toString().contains("Test Hilal"));
+   smart.close();
+   p.edit().putString(SmartPreferences.TEAM,"999").commit();
+   smart=new SmartHomeController(a);
+   assertFalse(((android.widget.TextView)modules.getChildAt(0)).getText().toString().contains("Test Hilal"));
+   smart.close();
+  }
+ }
+
+ @Test public void homeRendersSavedGreetingAndIndependentDatesWithBothModules() {
+  Context c=RuntimeEnvironment.getApplication();
+  SmartPreferences.get(c).edit().putString(SmartPreferences.GREETING_NAME,"Ufuq RC2")
+   .putBoolean(SmartPreferences.PRAYER,true).putBoolean(SmartPreferences.FOOTBALL,true).commit();
+  for(boolean gregorian:new boolean[]{false,true})for(boolean hijri:new boolean[]{false,true}) {
+   c.getSharedPreferences(Config.SETTINGS_NAME,0).edit().putBoolean(MainActivity.SHOW_DATE_KEY,gregorian).commit();
+   SmartPreferences.get(c).edit().putBoolean(SmartPreferences.HIJRI,hijri).commit();
+   try(ActivityController<MainActivity> controller=Robolectric.buildActivity(MainActivity.class).setup()) {
+    MainActivity a=controller.get();
+    assertTrue(((android.widget.TextView)a.findViewById(R.id.ufuqGreeting)).getText().toString().contains("Ufuq RC2"));
+    assertEquals(View.VISIBLE,a.findViewById(R.id.cinematicClockPanel).getVisibility());
+    assertEquals(gregorian?View.VISIBLE:View.GONE,a.findViewById(R.id.ufuqGregorian).getVisibility());
+    assertEquals(hijri?View.VISIBLE:View.GONE,a.findViewById(R.id.ufuqHijri).getVisibility());
+    assertEquals(2,((android.view.ViewGroup)a.findViewById(R.id.smartCards)).getChildCount());
+    View decor=a.getWindow().getDecorView();
+    decor.measure(View.MeasureSpec.makeMeasureSpec(1920,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(1080,View.MeasureSpec.EXACTLY));
+    decor.layout(0,0,1920,1080);
+    View navigation=a.findViewById(R.id.topButtons),header=a.findViewById(R.id.homeHeader);
+    assertTrue("Navigation must remain inside its touch parent's bounds",navigation.getBottom()<=header.getHeight());
+
+   }
+  }
+ }
+
+ @Test public void rc1CacheSurvivesAnotherTeamReplacingTheLegacySlot() {
+  try(ActivityController<android.app.Activity> controller=Robolectric.buildActivity(android.app.Activity.class).setup()) {
+   android.app.Activity a=controller.get();a.setContentView(R.layout.activity_main);
+   android.content.SharedPreferences p=SmartPreferences.get(a);
+   String raw="{\"events\":[{\"idHomeTeam\":\"136013\",\"idAwayTeam\":\"2\",\"strHomeTeam\":\"Legacy Hilal\",\"strAwayTeam\":\"Legacy Away\",\"strTimestamp\":\"2099-10-29T18:00:00\"}]}";
+   p.edit().putBoolean(SmartPreferences.FOOTBALL,true).putString(SmartPreferences.TEAM,"136013")
+    .putString("cache_football_team","136013").putString("cache_football",raw).commit();
+   SmartHomeController smart=new SmartHomeController(a);smart.close();
+   p.edit().putString("cache_football_team","999").putString("cache_football","{\"events\":null}").commit();
+   smart=new SmartHomeController(a);
+   android.view.ViewGroup modules=a.findViewById(R.id.smartCards);
+   assertTrue(((android.widget.TextView)modules.getChildAt(0)).getText().toString().contains("Legacy Hilal"));
+   smart.close();
+  }
+ }
+
+ @Test public void slowOldTeamResponseStartsSelectedTeamRequestWithoutDisplayingOldTeam() {
+  class Requests extends NativeApiClient {
+   final java.util.List<String> urls=new java.util.ArrayList<>();
+   final java.util.List<Callback> callbacks=new java.util.ArrayList<>();
+   @Override void get(String url,Callback callback){urls.add(url);callbacks.add(callback);}
+  }
+  try(ActivityController<android.app.Activity> controller=Robolectric.buildActivity(android.app.Activity.class).setup()) {
+   android.app.Activity a=controller.get();a.setContentView(R.layout.activity_main);
+   android.content.SharedPreferences p=SmartPreferences.get(a);
+   p.edit().putBoolean(SmartPreferences.FOOTBALL,true).putString(SmartPreferences.TEAM,"136013").commit();
+   Requests requests=new Requests();SmartHomeController smart=new SmartHomeController(a,requests);smart.onResume();
+   assertEquals(1,requests.urls.size());smart.onPause();p.edit().putString(SmartPreferences.TEAM,"999").commit();smart.onResume();
+   requests.callbacks.get(0).complete(new NativeApiClient.Result("{\"events\":null}",200,null));
+   assertEquals(2,requests.urls.size());assertTrue(requests.urls.get(1).endsWith("id=999"));
+   String raw="{\"events\":[{\"idHomeTeam\":\"999\",\"idAwayTeam\":\"2\",\"strHomeTeam\":\"Selected Team\",\"strAwayTeam\":\"Selected Away\",\"strTimestamp\":\"2099-10-29T18:00:00\"}]}";
+   requests.callbacks.get(1).complete(new NativeApiClient.Result(raw,200,null));
+   android.view.ViewGroup modules=a.findViewById(R.id.smartCards);
+   assertTrue(((android.widget.TextView)modules.getChildAt(0)).getText().toString().contains("Selected Team"));
+   smart.close();
+  }
+ }
+
+ @Test public void nativeDialogTitleUsesTheChosenPaletteAcrossSupportedFrameworks() {
+  try(ActivityController<android.app.Activity> controller=Robolectric.buildActivity(android.app.Activity.class).setup()) {
+   android.app.Activity a=controller.get();
+   for(int i=0;i<3;i++) {
+    UiTheme.select(a,i);
+    android.app.AlertDialog d=new ThemedDialogBuilder(a).setTitle("Ufuq").setPositiveButton(android.R.string.ok,null).show();
+    int title=a.getResources().getIdentifier("alertTitle","id","android");
+    android.widget.TextView view=d.findViewById(title);assertNotNull(view);
+    assertEquals(ThemePalette.ACCENTS[i],view.getCurrentTextColor());d.dismiss();
+   }
+  }
+ }
+
 }

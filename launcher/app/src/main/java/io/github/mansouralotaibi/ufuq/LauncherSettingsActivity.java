@@ -97,7 +97,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                 refresh();
             });
         }
-        boolean cinematicShelf = config.cinematicHome && config.wallpaperCaptions && config.cinematicArt == 0;
+        boolean cinematicShelf = config.cinematicHome;
         // The Google-TV Scenes Home deliberately has one horizontally scrolling favourites shelf; its remaining
         // applications live in Apps. The legacy columns/rows controls never affected that LinearLayoutManager,
         // so showing selected values was misleading. Do not offer controls that cannot change this layout.
@@ -183,6 +183,28 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         wallpaperChoice.setOnClickListener(v -> showWallpaperPicker());
         wallpaperModeChoice = findViewById(R.id.wallpaperModeChoice);
         wallpaperModeChoice.setOnClickListener(v -> toggleWallpaperMode());
+        findViewById(R.id.wallpaperDimChoice).setOnClickListener(v -> {
+            int[] values = {0, 15, 30, 45, 60, 75, 90};
+            String[] labels = new String[values.length];
+            for (int i = 0; i < values.length; i++) labels[i] = values[i] + "%";
+            new ThemedDialogBuilder(this).setTitle(R.string.wallpaper_dim_label_title)
+                    .setItems(labels, (d, which) -> {
+                        choices.edit().putInt(Config.WALLPAPER_DIM_KEY, values[which])
+                                .putString(SceneReadability.KEY_MODE, SceneReadability.GLOBAL).apply();
+                        readabilityMode = SceneReadability.GLOBAL;
+                        changed(); refresh();
+                    }).setNegativeButton(android.R.string.cancel, null).show();
+        });
+        findViewById(R.id.rotationIntervalChoice).setOnClickListener(v -> {
+            int[] values = {1, 5, 15, 30, 60};
+            String[] labels = new String[values.length];
+            for (int i = 0; i < values.length; i++) labels[i] = getString(R.string.rotation_interval_label, values[i]);
+            new ThemedDialogBuilder(this).setTitle(R.string.rotation_interval_title)
+                    .setItems(labels, (d, which) -> {
+                        choices.edit().putInt(Config.ROTATION_MINUTES_KEY, values[which]).apply();
+                        changed(); refresh();
+                    }).setNegativeButton(android.R.string.cancel, null).show();
+        });
         readabilityChoice = findViewById(R.id.readabilityChoice);
         readabilityChoice.setOnClickListener(v -> {
             readabilityMode = SceneReadability.GLOBAL.equals(readabilityMode)
@@ -220,7 +242,8 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                     .remove("advanced_effects").remove(Config.WALLPAPER_CHOICE_KEY)
                     .remove(Config.WALLPAPER_RANDOM_KEY)
                     .remove(Config.DOCK_OPACITY_KEY).remove(Config.SHELF_SCALE_KEY)
-                    .remove(SceneReadability.KEY_MODE).commit();
+                    .remove(SceneReadability.KEY_MODE).remove(Config.WALLPAPER_DIM_KEY)
+                    .remove(Config.ROTATION_MINUTES_KEY).commit();
             Config current = Config.load(this);
             columns = current.columns;
             rowsBelowDock = current.rowsBelowDock;
@@ -431,6 +454,8 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                 "none".equals(wallpaperCurrent) ? getString(R.string.wallpaper_none)
                         : wallpaperCurrent != null ? wallpaperCurrent
                         : getString(R.string.wallpaper_theme_default)));
+        ((TextView) findViewById(R.id.wallpaperDimChoice)).setText(getString(R.string.wallpaper_dim_label, Config.load(this).wallpaperDim));
+        ((TextView) findViewById(R.id.rotationIntervalChoice)).setText(getString(R.string.rotation_interval_label, Config.load(this).wallpaperRotationMinutes));
         readabilityChoice.setText(getString(R.string.readability_state,
                 getString(SceneReadability.GLOBAL.equals(readabilityMode)
                         ? R.string.readability_global : R.string.readability_scene)));
@@ -442,7 +467,8 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                 || choices.contains("animations") || choices.contains("advanced_effects")
                 || choices.contains(Config.WALLPAPER_CHOICE_KEY) || choices.contains(Config.WALLPAPER_RANDOM_KEY)
                 || choices.contains(Config.DOCK_OPACITY_KEY)
-                || choices.contains(Config.SHELF_SCALE_KEY) || choices.contains(SceneReadability.KEY_MODE);
+                || choices.contains(Config.SHELF_SCALE_KEY) || choices.contains(SceneReadability.KEY_MODE)
+                || choices.contains(Config.WALLPAPER_DIM_KEY) || choices.contains(Config.ROTATION_MINUTES_KEY);
     }
 
     private void open(Intent intent) {
