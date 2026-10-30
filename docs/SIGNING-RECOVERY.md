@@ -1,6 +1,26 @@
 # Public signing-key backup and recovery — owner procedure
 
-Scope: only the independent Ufuq public signing identity. Never copy or open a personal MansourTV key, ADB key, existing personal backup or unrelated credential. These steps are prepared for the owner; no backup, secret disclosure or recovery operation has been performed by the assistant.
+Scope: only the independent Ufuq public signing identity. Never copy or open a personal MansourTV key, ADB key, existing personal backup or unrelated credential. The procedure is owner-executed. The assistant does not receive encryption passphrases or signing secrets. The dated status below distinguishes owner-confirmed execution from remaining disaster-recovery custody.
+
+## Verified local recovery — 2026-10-30
+
+**COMPLETED — owner-executed and owner-confirmed in a private local Terminal.** This records the owner's reported results, not an assistant-observed signing session or a new application test.
+
+| Check | Result |
+|---|---|
+| AES-256 encrypted image integrity | PASS |
+| Recovery from a separate local encrypted-image copy | PASS |
+| Recovered file checksums | PASS |
+| Recovered public certificate SHA-256 | MATCH — fingerprint below |
+| Disposable APK signed using the recovered key | PASS |
+| API 19 v1/JAR signature verification | PASS |
+| v2 signature verification | PASS |
+| Image unmounted and temporary test material removed | PASS |
+| Recovery script completion | RECOVERY TEST COMPLETE |
+
+The existing public identity was preserved; no replacement key was generated. No secret values, secret-file digests, backup location, image contents or private terminal transcript are recorded here. The owner confirmed cleanup; no claim of physical SSD erasure is made. This local exercise does not establish that a passphrase can be recovered after loss of this Mac, or that another machine can recover the key.
+
+**OUTSTANDING — independent off-device disaster-recovery custody.** Copy the closed encrypted image and its integrity record to new owner-controlled offline storage, verify its checksum, keep it physically separate, and test recovery from that copy. Keep the encryption passphrase independently recoverable outside this Mac and separate from the image. Do not overwrite or touch personal backups. The local backup and separate local test copy do not satisfy this requirement. Preserve the verified local backup; do not recreate it simply because this procedure has been updated. The procedure copy inside the existing backup reflects the version at backup time and its existing manifest must remain valid.
 
 Expected certificate SHA-256:
 

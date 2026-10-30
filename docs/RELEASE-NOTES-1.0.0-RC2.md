@@ -2,7 +2,7 @@
 
 Status: accepted source baseline pushed to the existing **private** repository. No public release, APK upload, visibility change or release tag has been authorized or performed. These notes are prepared locally for owner review.
 
-Approved source: `7091b90f9bd669823918e947f6e4af6c0e9028f3`.
+Approved application source: `7091b90f9bd669823918e947f6e4af6c0e9028f3`. Later local documentation/gallery commits preserve that application tree. The final publication source commit and tag must be approved separately; these notes do not claim those commits are already on GitHub.
 
 [Private CI run](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41077946236): success; 355 tests with zero failures/errors/skips, release lint: 0 errors / 149 warnings / 243 informational findings, release assembly and security/content/license-policy checks passed. CI artifacts are unsigned validation builds, not official signed releases.
 
@@ -42,4 +42,4 @@ See [COMPATIBILITY](../COMPATIBILITY.md), [INSTALLATION](../INSTALLATION.md), [f
 
 APK signatures v1/v2/v3 and alignment were locally verified; v1 preserves API 19 installation. No personal signing material is used. The candidate must be distributed unchanged after approval; any APK modification requires re-signing and new checksums.
 
-Eventual binary distribution must include this exact signed APK, its checksum, full Ufuq source corresponding to the approved commit, applicable notices/licenses and the verified pinned desugaring source companion. The ZIP's two documented public upstream test-key fixtures are not personal credentials. Do not attach device evidence, raw logs, other APKs, passwords or private backup files. The owner recovery test and private reporting route remain publication gates.
+Eventual binary distribution must include this exact signed APK, its checksum, full Ufuq source corresponding to the approved commit, applicable notices/licenses and the verified pinned desugaring source companion. The ZIP's two documented public upstream test-key fixtures are not personal credentials. Do not attach device evidence, raw logs, other APKs, passwords or private backup files. The encrypted local backup and separate-local-copy recovery test were completed and owner-confirmed on 2026-10-30, including recovered-key disposable signing, the exact certificate match, API 19 v1/v2 verification and cleanup. Independent off-device backup/recovery custody and a verified private reporting route remain publication gates. See [recovery status](SIGNING-RECOVERY.md).

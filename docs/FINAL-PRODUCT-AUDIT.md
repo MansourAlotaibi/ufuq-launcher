@@ -8,7 +8,7 @@ Reviewed baseline: `96932baba086b222a830a0a6c65b81afa1e6ffc0`. Work is isolated 
 
 The product has a coherent cinematic composition, three shared-geometry palettes, meaningful offline information, bounded optional football networking and remote-first favorites. The largest remaining limitations are breadth of hardware/accessibility certification, curated religious-content breadth, legacy optional configuration complexity and operational publication/recovery gates. They do not justify a release-time architecture rewrite or reduced public edition.
 
-Owner gates before public publication: verify encrypted/offline signing-key recovery custody and recovery test; establish/test a private vulnerability-reporting route; approve exact source SHA/destination and subsequently public visibility/binary release separately. No push or public action is performed here. Promotional screenshots require a separate privacy-clean capture set; private test evidence must not be published.
+Owner gates before public publication: the owner confirmed the encrypted local backup and separate-local-copy signing recovery test PASS on 2026-10-30; independent off-device encrypted/offline recovery custody remains outstanding (see [current recovery status](SIGNING-RECOVERY.md)); establish/test a private vulnerability-reporting route; approve exact source SHA/destination and subsequently public visibility/binary release separately. No push or public action is performed here. Promotional screenshots require a separate privacy-clean capture set; private test evidence must not be published.
 
 ## Review method and evidence levels
 

@@ -81,7 +81,7 @@ cd ufuq-launcher/launcher
 ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease
 ```
 
-The default build is unsigned. Follow [BUILDING](BUILDING.md) for reproducible tool configuration, public-only signing and accompanying dependency source. Never reuse a personal MansourTV signing key or commit credentials. [Backup/recovery instructions](docs/SIGNING-RECOVERY.md) are for the owner; recovery is not assumed complete merely because the procedure exists.
+The default build is unsigned. Follow [BUILDING](BUILDING.md) for reproducible tool configuration, public-only signing and accompanying dependency source. Never reuse a personal MansourTV signing key or commit credentials. [Backup/recovery status](docs/SIGNING-RECOVERY.md): the owner completed the encrypted local backup and separate-copy signing recovery test, including API 19 v1/v2 verification. Independent off-device disaster-recovery custody remains outstanding.
 
 The accepted application source at `7091b90` passed [GitHub CI](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41077946236):355 tests, 0 failures and release lint 0 errors / 149 warnings, plus release build and security/license-policy checks. This gallery is a local documentation update, not a new hardware test or a new CI run.
 

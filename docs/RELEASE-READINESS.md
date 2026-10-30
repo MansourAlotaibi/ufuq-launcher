@@ -1,6 +1,16 @@
 # Ufuq Launcher 1.0.0 RC1 — initial-push evidence
 
-Current assessment: [final product/release audit](FINAL-PRODUCT-AUDIT.md). Earlier revision-specific results below are historical evidence.
+## Current publication assessment — 2026-10-30
+
+**CONDITIONALLY READY** in the owner-tested Nobel API 19 scope. See [final product/release audit](FINAL-PRODUCT-AUDIT.md) and [publication checklist](PUBLICATION-CHECKLIST.md).
+
+- Owner confirms encrypted local signing backup integrity, separate-local-copy recovery, copied-file checksums, original certificate match, disposable APK signing, API 19 v1/v2 verification and cleanup all PASS. The encrypted local recovery test is completed; it is not an off-device disaster-recovery backup.
+- Independent offline/off-device custody and recovery, independently recoverable passphrase custody, a verified private vulnerability-reporting route, final channel/asset review and exact owner publication approvals remain gates.
+- Accepted application source is 7091b90 with recorded CI: 355 passing tests, lint 0 errors / 149 warnings, successful release assembly and security/content/license checks. Later local documentation/gallery commits do not change the application or signed APK.
+- Bilingual READMEs and 21 full-frame privacy-redacted real TV images cover the same 14 feature groups. Some English-gallery panels explicitly share Arabic captures; no new runtime test or translated screenshot is claimed.
+- Current signed APK SHA-256 is `17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766`. See [release notes](RELEASE-NOTES-1.0.0-RC2.md).
+
+The RC1 sections below are preserved historical evidence, not current signing, hardware or publication status.
 
 
 The accepted full-feature baseline at 32a44a93 is retained. Public preparation adds three original MIT
