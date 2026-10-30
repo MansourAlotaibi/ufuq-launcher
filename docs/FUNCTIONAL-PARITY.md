@@ -1,5 +1,7 @@
 # Functional and stability comparison: MansourTV Ufuq 2.8.5 → public RC2
 
+Final review: [product, UX, architecture and release audit](FINAL-PRODUCT-AUDIT.md).
+
 Latest follow-up: [five Arabic fonts, menu ownership and aligned horizon](ARABIC-FONTS-HORIZON.md). Earlier results below describe preceding revisions.
 
 
@@ -8,7 +10,7 @@ Latest follow-up: [final RC2 settings, fonts, football spacing and Move transiti
 
 ## Scope and evidence rules
 
-The authoritative baseline is the actual owner-named MansourTV source reporting version **2.8.5 / code 15**, read without modification. The comparison covers all 77 original Java files, settings resources/defaults, preferences, manifest, native navigation and lifecycle paths. All 77 Java files remain in public Ufuq; namespace/identity changes are normalized separately from functional changes. The final inventory has **53 normalized-identical files, 24 changed files and 10 public additions**; see [file hashes](FUNCTIONAL-SOURCE-INVENTORY.json). A file inventory records hashes, rather than publishing personal configuration or raw private diffs.
+The authoritative baseline is the actual owner-named MansourTV source reporting version **2.8.5 / code 15**, read without modification. The comparison covers all 77 original Java files, settings resources/defaults, preferences, manifest, native navigation and lifecycle paths. All 77 Java files remain in public Ufuq; namespace/identity changes are normalized separately from functional changes. The final inventory has **53 normalized-identical files, 24 changed files and 11 public additions**; see [file hashes](FUNCTIONAL-SOURCE-INVENTORY.json). A file inventory records hashes, rather than publishing personal configuration or raw private diffs.
 
 “Original behavior” below distinguishes source-defined behavior from the owner's accepted stable installation. The protected installation was **not** used for destructive A/B tests, settings changes, cache manipulation or force-stop experiments. Its private preferences were not extracted or copied. A source match does not prove runtime equivalence.
 

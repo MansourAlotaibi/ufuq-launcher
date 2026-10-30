@@ -16,6 +16,7 @@ public class WifiPanelTest {
         assertFalse(WifiPanel.sameNetwork("", "\"Living room\""));
     }
     @Test public void enterpriseAndModernSecurityUseSystemSettings() {
+        assertFalse(WifiPanel.supportedSecurity("[WEP][ESS]"));
         assertFalse(WifiPanel.supportedSecurity("[WPA2-EAP-CCMP][ESS]"));
         assertFalse(WifiPanel.supportedSecurity("[SAE][ESS]"));
         assertFalse(WifiPanel.supportedSecurity("[OWE][ESS]"));

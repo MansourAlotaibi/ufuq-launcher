@@ -164,6 +164,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     private String resumeTileKey;
     private long lastOkDownTime = Long.MIN_VALUE;
     private Runnable pendingMenuAction;
+    private WifiPanel wifiPanel;
     private java.util.Map<String, ?> appliedSettings;
     private String appliedLanguage;
     private int appliedPalette;
@@ -1352,6 +1353,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         unregisterReceiver(packageReceiver);
         wallpaperPlayer.close();
         smartHome.close();
+        if (wifiPanel != null) { wifiPanel.close(); wifiPanel = null; }
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TvInputManager tim = (TvInputManager) getSystemService(TV_INPUT_SERVICE);
@@ -2999,7 +3001,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
         super.onRequestPermissionsResult(requestCode, permissions, results);
         if (requestCode == WifiPanel.LOCATION_REQUEST) {
-            if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) new WifiPanel(this).show();
+            if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) showWifiPanel();
             else {
                 Toast.makeText(this, R.string.ufuq_wifi_permission_denied, Toast.LENGTH_LONG).show();
                 WifiPanel.systemSettings(this);
@@ -3059,12 +3061,18 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
     }
 
     /** The network pill opens the VPN app when one is configured and installed, otherwise Wi-Fi settings. */
+    private void showWifiPanel() {
+        if (wifiPanel != null) wifiPanel.close();
+        wifiPanel = new WifiPanel(this);
+        wifiPanel.show();
+    }
+
     private void openNetworkPill() {
         Intent i = vpnApp.isEmpty() || Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? null
                 : getPackageManager().getLeanbackLaunchIntentForPackage(vpnApp);
         if (i == null && !vpnApp.isEmpty()) i = getPackageManager().getLaunchIntentForPackage(vpnApp);
         if (i == null) {
-            new WifiPanel(this).show();
+            showWifiPanel();
             return;
         }
         open(i);

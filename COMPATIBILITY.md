@@ -1,6 +1,6 @@
 # Compatibility
 
-## RC2 evidence — 29 October 2026
+## RC2 evidence — 30 October 2026
 
 | Target | Evidence | Status |
 |---|---|---|
@@ -9,7 +9,7 @@
 | API 21–34 other devices | Runtime guards, package discovery and desugaring | Hardware untested |
 | API 35+ | No runtime evidence | Untested |
 | Arabic RTL / English LTR, Classic / Midnight / Coast | Actual TV captures and framework tests | Tested screens only |
-| D-pad | Injected Android key events on physical TV | A physical remote press/scan code is not verified |
+| D-pad | Injected events and owner-reported complete Arabic/English physical-remote flow on reviewed 96932ba | Physical baseline verified by owner; changes in the audit candidate require the separately recorded follow-up scope |
 | Process restart | Only the independent public package may be stopped for recovery testing | Does not establish TV reboot or low-memory soak behavior |
 
 The public application ID is `io.github.mansouralotaibi.ufuq`. It cannot update the protected personal package. Installation does not set HOME, disable another launcher or grant accessibility/system permissions. The owner expressly authorized a single read-only reference capture of the installed personal Home; its settings and installation were not changed.
@@ -23,3 +23,5 @@ Application discovery uses package-manager intent queries; firmware can hide app
 Layouts use native Android Views and density units. Extreme density, overscan, font scale and aspect ratios need additional visual testing. No emulator was available in the installed SDK. No synthetic mockup is device evidence.
 
 See [feature comparison](docs/FEATURE-PARITY.md) and [validation](docs/VALIDATION.md). Private screenshots, device dumps and APKs are deliberately excluded from the source repository.
+
+All supported prayer cities are Saudi cities. Prayer dates, displayed times and the marker use UTC+03:00; Home calendars/clock and football match display remain device-local. No global device timezone is changed. WEP, enterprise and modern security schemes use system Wi-Fi configuration rather than the legacy WPA-PSK form.

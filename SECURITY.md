@@ -1,6 +1,6 @@
 # Security policy
 
-The 1.0.0-rc1 candidate is under review and has no production security-support guarantee.
+The 1.0.0-rc2 candidate is under review and has no production security-support guarantee.
 Do not post vulnerabilities, keys or private device data in public issues.
 Use GitHub private vulnerability reporting if enabled by the owner. If it is unavailable,
 wait for an owner-provided private reporting channel; do not disclose sensitive details publicly.

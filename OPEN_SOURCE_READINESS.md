@@ -1,5 +1,8 @@
 # Publication preparation — full-feature 1.0.0 RC2
 
+Current assessment: [final product/release audit](docs/FINAL-PRODUCT-AUDIT.md). Earlier revision-specific results below are historical evidence.
+
+
 Latest: [Arabic fonts and horizon follow-up](docs/ARABIC-FONTS-HORIZON.md).
 
 

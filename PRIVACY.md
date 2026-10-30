@@ -15,7 +15,7 @@ are in the package's external-files theme directory. Theme selection and wallpap
 | READ/WRITE_EXTERNAL_STORAGE | API 19 only for app-owned wallpaper files on legacy FUSE firmware |
 | Yandex TV-source permission | Optional vendor input launching; ignored elsewhere |
 
-On Android 10+, configuration opens system Wi-Fi settings. Permission denial also offers system settings.
+WEP, enterprise and modern security variants use system Wi-Fi settings; the legacy password form is for WPA/WPA2-PSK. On Android 10+, configuration opens system Wi-Fi settings. Permission denial also offers system settings.
 Legacy Wi-Fi passwords are entered by the user and passed to Android's Wi-Fi configuration API; Ufuq
 does not save them in its own preferences or log them. SSIDs and signal are shown locally and are not
 sent to TheSportsDB. Do not include Wi-Fi/account details in screenshots or reports.

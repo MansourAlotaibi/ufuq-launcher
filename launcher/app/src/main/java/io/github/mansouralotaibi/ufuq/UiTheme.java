@@ -20,20 +20,25 @@ final class UiTheme {
         android.content.SharedPreferences p = c.getSharedPreferences(Config.SETTINGS_NAME, 0);
         p.edit().putLong(Config.SETTINGS_REVISION_KEY, p.getLong(Config.SETTINGS_REVISION_KEY, 0) + 1).apply();
     }
-    private static GradientDrawable shape(Context c, boolean focus) {
+    private static GradientDrawable shape(Context c, boolean focus) { return shape(c,focus,focus); }
+    private static GradientDrawable shape(Context c, boolean emphasis, boolean ring) {
+        boolean focus=emphasis;
         GradientDrawable d = new GradientDrawable();
         d.setColor(focus ? accent(c) : ThemePalette.SURFACES[selected(c)]);
         d.setCornerRadius(12 * c.getResources().getDisplayMetrics().density);
-        d.setStroke((int) Math.ceil(c.getResources().getDisplayMetrics().density),
-                focus ? accent(c) : 0x55FFFFFF);
+        d.setStroke((int) Math.ceil((ring?3:1)*c.getResources().getDisplayMetrics().density),
+                ring ? 0xFFF7FBFF : focus ? accent(c) : 0x55FFFFFF);
         return d;
     }
-    private static GradientDrawable homePill(Context c, boolean focus) {
+    private static GradientDrawable homePill(Context c, boolean focus) { return homePill(c,focus,focus); }
+    static int restingPillColor(Context c) { return 0xA0000000 | (ThemePalette.SURFACES[selected(c)] & 0x00FFFFFF); }
+    private static GradientDrawable homePill(Context c, boolean focus, boolean ring) {
+        int base=restingPillColor(c);
         GradientDrawable d = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                focus ? new int[]{accent(c), accent(c)} : new int[]{0x2EFFFFFF, 0x14FFFFFF});
+                focus ? new int[]{accent(c), accent(c)} : new int[]{0xB0000000 | (base & 0x00FFFFFF), base});
         d.setCornerRadius(21 * c.getResources().getDisplayMetrics().density);
-        d.setStroke((int) Math.ceil(c.getResources().getDisplayMetrics().density),
-                focus ? accent(c) : 0x38FFFFFF);
+        d.setStroke((int) Math.ceil((ring?3:1)*c.getResources().getDisplayMetrics().density),
+                ring ? 0xFFF7FBFF : focus ? accent(c) : 0x38FFFFFF);
         return d;
     }
     private static boolean topControl(View v) {
@@ -71,8 +76,8 @@ final class UiTheme {
                 StateListDrawable bg = new StateListDrawable();
                 bg.addState(new int[]{android.R.attr.state_focused}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
                 bg.addState(new int[]{android.R.attr.state_pressed}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
-                bg.addState(new int[]{android.R.attr.state_activated}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
-                bg.addState(new int[]{android.R.attr.state_selected}, (topControl(v) ? homePill(v.getContext(), true) : shape(v.getContext(), true)));
+                bg.addState(new int[]{android.R.attr.state_activated}, (topControl(v) ? homePill(v.getContext(), true, false) : shape(v.getContext(), true, false)));
+                bg.addState(new int[]{android.R.attr.state_selected}, (topControl(v) ? homePill(v.getContext(), true, false) : shape(v.getContext(), true, false)));
                 bg.addState(new int[]{}, (topControl(v) ? homePill(v.getContext(), false) : shape(v.getContext(), false)));
                 t.setBackground(bg);
                 t.setTextColor(new ColorStateList(new int[][]{{android.R.attr.state_focused}, {android.R.attr.state_activated}, {android.R.attr.state_selected}, {}},

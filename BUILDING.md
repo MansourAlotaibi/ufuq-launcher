@@ -15,9 +15,7 @@ Dependencies are version-pinned, but byte-identical builds across machines have 
 
 ## Separate public signing identity
 
-The owner must create a NEW public Ufuq keystore in private encrypted storage,
-with a unique alias and strong passwords. Never reuse a MansourTV key.
-For example, run keytool interactively (no passwords on the command line):
+This project already has its independent public Ufuq identity; reuse it for updates and never run key generation to replace it. Never use a MansourTV key. Only an independent fork starting a new identity should generate its own key. Example for such a fork, run interactively (no passwords on the command line):
 
 ```sh
 keytool -genkeypair -keystore <private-public-ufuq-key.jks> -alias ufuq-public -keyalg RSA -keysize 3072 -validity 10000

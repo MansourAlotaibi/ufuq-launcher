@@ -1,5 +1,8 @@
 # Current candidate: RC2 hold-OK / reflection correction
 
+Current assessment: [final product/release audit](FINAL-PRODUCT-AUDIT.md). Earlier revision-specific results below are historical evidence.
+
+
 Latest follow-up: [five Arabic fonts, menu ownership and aligned horizon](ARABIC-FONTS-HORIZON.md). Earlier results below describe preceding revisions.
 
 

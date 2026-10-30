@@ -1,5 +1,8 @@
 # Arabic fonts, tile-menu ownership and shared horizon
 
+Current assessment: [final product/release audit](FINAL-PRODUCT-AUDIT.md). Earlier revision-specific results below are historical evidence.
+
+
 Follow-up to reviewed `ab78f171f8511c3e439263debdb399242860d071` on `codex/rc2-original-ux`. MansourTV 2.8.5 remains the protected functional/visual baseline. This follow-up does not redesign Home, alter public package/signing identity, change data providers/calculations or modify installed protected launchers/HOME.
 
 ## Fonts and migration

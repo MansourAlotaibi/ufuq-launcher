@@ -21,6 +21,7 @@ import java.util.List;
 
 /** Remote-friendly settings owned by the launcher; system settings stay one row away. */
 public final class LauncherSettingsActivity extends ThemedActivity {
+    static final String LAST_FIXED_WALLPAPER = Config.LAST_FIXED_WALLPAPER_KEY;
     static final String EXTRA_REORDER = "io.github.mansouralotaibi.ufuq.extra.REORDER_FROM_SETTINGS";
     private SharedPreferences choices;
     private final TextView[] columnChoices = new TextView[4];
@@ -252,7 +253,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
             if (!hasOnTvChoices()) return;
             choices.edit().remove("columns").remove(Config.ROWS_BELOW_DOCK_KEY).remove("animations")
                     .remove("advanced_effects").remove(Config.WALLPAPER_CHOICE_KEY)
-                    .remove(Config.WALLPAPER_RANDOM_KEY)
+                    .remove(Config.WALLPAPER_RANDOM_KEY).remove(LAST_FIXED_WALLPAPER)
                     .remove(Config.DOCK_OPACITY_KEY).remove(Config.SHELF_SCALE_KEY)
                     .remove(SceneReadability.KEY_MODE).remove(Config.WALLPAPER_DIM_KEY)
                     .remove(Config.ROTATION_MINUTES_KEY).commit();
@@ -378,7 +379,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
                 })
                 .setNeutralButton(R.string.wallpaper_theme_default, (dialog, which) -> {
                     choices.edit().remove(Config.WALLPAPER_CHOICE_KEY)
-                            .remove(Config.WALLPAPER_RANDOM_KEY).apply();
+                            .remove(Config.WALLPAPER_RANDOM_KEY).remove(LAST_FIXED_WALLPAPER).apply();
                     changed();
                     refresh();
                 })
@@ -394,10 +395,18 @@ public final class LauncherSettingsActivity extends ThemedActivity {
             File dir = Config.dir(this);
             List<File> images = BundledWallpapers.collection(this, dir);
             SharedPreferences.Editor editor = choices.edit().putBoolean(Config.WALLPAPER_RANDOM_KEY, false);
-            if (!images.isEmpty()) editor.putString(Config.WALLPAPER_CHOICE_KEY, images.get(0).getName());
+            String saved = choices.getString(LAST_FIXED_WALLPAPER, null);
+            boolean single = dir != null && Config.WALLPAPER_NAME.equals(saved) && new File(dir,Config.WALLPAPER_NAME).isFile();
+            if ("none".equals(saved) || single || indexOf(images,saved)>=0) editor.putString(Config.WALLPAPER_CHOICE_KEY,saved);
+            else if (!images.isEmpty()) editor.putString(Config.WALLPAPER_CHOICE_KEY,images.get(0).getName());
             editor.apply();
-        } else choices.edit().putBoolean(Config.WALLPAPER_RANDOM_KEY, true)
-                .remove(Config.WALLPAPER_CHOICE_KEY).apply();
+        } else {
+            SharedPreferences.Editor editor=choices.edit().putBoolean(Config.WALLPAPER_RANDOM_KEY,true)
+                    .remove(Config.WALLPAPER_CHOICE_KEY);
+            if (current!=null) editor.putString(LAST_FIXED_WALLPAPER,current);
+            else editor.remove(LAST_FIXED_WALLPAPER);
+            editor.apply();
+        }
         changed(); refreshWallpaper();
     }
 
@@ -458,6 +467,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         advancedChoice.setText(getString(R.string.advanced_effects_state,
                 getString(advancedEffects ? R.string.on : R.string.off)));
         advancedChoice.setEnabled(animations);
+        advancedChoice.setFocusable(animations);
         advancedChoice.setAlpha(animations ? 1f : 0.5f);
         refreshWallpaper();
         readabilityChoice.setText(getString(R.string.readability_state,
@@ -473,6 +483,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         wallpaperModeChoice.setText(getString(R.string.wallpaper_mode, getString(randomWallpaper
                 ? R.string.wallpaper_mode_random : R.string.wallpaper_mode_fixed)));
         wallpaperChoice.setEnabled(!randomWallpaper);
+        wallpaperChoice.setFocusable(!randomWallpaper);
         wallpaperChoice.setAlpha(randomWallpaper ? 0.55f : 1f);
         wallpaperChoice.setText(getString(R.string.wallpaper_state,
                 "none".equals(wallpaperCurrent) ? getString(R.string.wallpaper_none)

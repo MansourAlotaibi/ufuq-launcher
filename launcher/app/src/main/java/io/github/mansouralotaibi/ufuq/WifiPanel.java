@@ -50,6 +50,7 @@ final class WifiPanel {
     private ListView list;
     private boolean receiverRegistered;
     private boolean passwordMode;
+    private boolean listInitialFocusPending;
 
     WifiPanel(Activity activity) {
         this.activity = activity;
@@ -152,6 +153,7 @@ final class WifiPanel {
         panel.addView(status, statusLp);
 
         list = new ListView(activity);
+        listInitialFocusPending = true;
         list.setId(View.generateViewId());
         list.setDividerHeight(dp(6));
         list.setDivider(round(Color.TRANSPARENT, 0));
@@ -183,6 +185,11 @@ final class WifiPanel {
         receiverRegistered = true;
     }
 
+    void close() {
+        if (dialog != null) { dialog.dismiss(); dialog = null; }
+        unregister();
+    }
+
     private void unregister() {
         if (!receiverRegistered) return;
         try { activity.unregisterReceiver(receiver); } catch (IllegalArgumentException ignored) { }
@@ -198,6 +205,10 @@ final class WifiPanel {
 
     @android.annotation.SuppressLint("MissingPermission")
     private void loadResults(String note) {
+        if (dialog == null || !dialog.isShowing() || passwordMode) return;
+        int previousPosition=list.getSelectedItemPosition();
+        String selectedSsid=previousPosition>0 && previousPosition<=networks.size()
+                ? networks.get(previousPosition-1).SSID : null;
         List<ScanResult> scanned;
         try { scanned = wifi.getScanResults(); } catch (SecurityException e) { scanned = Collections.emptyList(); }
         networks.clear();
@@ -211,14 +222,21 @@ final class WifiPanel {
         });
         adapter.notifyDataSetChanged();
         updateStatus(note);
-        if (!list.hasFocus()) list.post(() -> {
-            list.requestFocus();
-            // Start on the connected network when present; Up always reaches Refresh in one press.
-            String current = cleanSsid(wifi.getConnectionInfo() == null ? null : wifi.getConnectionInfo().getSSID());
-            int selected = 0;
-            for (int i = 0; i < networks.size(); i++) if (networks.get(i).SSID.equals(current)) selected = i + 1;
-            list.setSelection(selected);
-        });
+        int selection=0;
+        String wanted=listInitialFocusPending
+                ? cleanSsid(wifi.getConnectionInfo()==null?null:wifi.getConnectionInfo().getSSID()) : selectedSsid;
+        if (wanted!=null) for(int i=0;i<networks.size();i++) if(networks.get(i).SSID.equals(wanted)) selection=i+1;
+        if (listInitialFocusPending) {
+            listInitialFocusPending=false;
+            ListView target=list; final int initial=selection;
+            target.post(() -> {
+                if (dialog==null || !dialog.isShowing() || list!=target || passwordMode) return;
+                target.requestFocus(); target.setSelection(initial);
+            });
+        } else {
+            // A scan may reorder signal strengths. Keep the same network and never steal header focus.
+            list.setSelection(selection);
+        }
     }
 
     private void updateStatus(String note) {
@@ -235,7 +253,7 @@ final class WifiPanel {
 
     static boolean supportedSecurity(String capabilities) {
         String c = capabilities == null ? "" : capabilities;
-        return !(c.contains("EAP") || c.contains("SAE") || c.contains("OWE") || c.contains("SUITE_B"));
+        return !(c.contains("WEP") || c.contains("EAP") || c.contains("SAE") || c.contains("OWE") || c.contains("SUITE_B"));
     }
 
     private void choose(ScanResult result) {
@@ -417,7 +435,7 @@ final class WifiPanel {
                 refresh.setCompoundDrawablesWithIntrinsicBounds(0, 0, android.R.drawable.ic_popup_sync, 0);
                 refresh.setCompoundDrawablePadding(dp(12));
                 row.addView(refresh, new LinearLayout.LayoutParams(-1, dp(36)));
-                row.setBackground(roundStroke(0x183B2D28, 16, 0x22F2B25B));
+                row.setBackground(roundStroke(0x183B2D28, 16, (0x22000000 | (UiTheme.accent(activity) & 0x00FFFFFF))));
                 row.setFocusable(false);
                 row.setClickable(false);
                 return row;
@@ -448,7 +466,7 @@ final class WifiPanel {
             row.setFocusable(false);
             row.setClickable(false);
             row.setBackground(roundStroke(connected ? 0x283B2D28 : 0x0FFFFFFF, 16,
-                    connected ? 0x80F2B25B : 0x14FFFFFF));
+                    connected ? (0x80000000 | (UiTheme.accent(activity) & 0x00FFFFFF)) : 0x14FFFFFF));
             return row;
         }
     }

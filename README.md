@@ -64,11 +64,11 @@ See [compatibility](COMPATIBILITY.md) for untested behavior and [privacy](PRIVAC
 
 ## Clean public history and validation
 
-The proposed public branch is `codex/public-release`, an independent parentless snapshot.
+The public ancestry begins at the audited parentless commit `0d5faa9`; the initial private push and CI repair are complete. Current release preparation continues on isolated local development/audit branches.
 Original local history is preserved separately and excluded from the push plan. Never push --all or --tags.
 See [push plan](docs/PUBLIC-PUSH-PLAN.md), [signing identity](docs/PUBLIC-SIGNING-IDENTITY.json),
 [lint review](docs/LINT-REVIEW.md) and [validation](docs/VALIDATION.md). Android framework simulation
-exercises API 19/28/34. It is not emulator, visual or physical-remote certification.
+exercises API 19/28/34. Framework simulation is separate from the documented Nobel API19 captures and owner-reported physical-remote checks; other hardware remains unverified.
 
 The current local RC2 [functional and stability comparison](docs/FUNCTIONAL-PARITY.md) records original-source differences, corrections, actual TV evidence and remaining unverified behavior. It is not a claim of full hardware certification.
 

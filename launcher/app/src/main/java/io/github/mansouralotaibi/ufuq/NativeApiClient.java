@@ -9,6 +9,8 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.io.InputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,13 +57,9 @@ class NativeApiClient {
                 connection.setRequestProperty("User-Agent", "Ufuq/1.0.0-rc2 Android-TV");
                 httpCode = connection.getResponseCode();
                 if (httpCode == 200) {
-                    BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[4096];
-                    int read;
-                    while ((read = in.read(buffer)) != -1 && out.size() < 262144) out.write(buffer, 0, read);
-                    in.close();
-                    body = new String(out.toByteArray(), StandardCharsets.UTF_8);
+                    try (InputStream in = new BufferedInputStream(connection.getInputStream())) {
+                        body = readBounded(in);
+                    }
                 }
             } catch (Exception error) {
                 // The caller deliberately keeps the last successful cache.
@@ -77,6 +75,18 @@ class NativeApiClient {
             // discard verified data; the controller decides whether it is still safe to repaint its views.
             main.post(() -> callback.complete(result));
         });
+    }
+
+    static String readBounded(InputStream in) throws IOException {
+        final int limit = 262144;
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[4096]; int read;
+            while ((read=in.read(buffer))!=-1) {
+                if (read>limit-out.size()) throw new IOException("Response exceeds configured limit");
+                out.write(buffer,0,read);
+            }
+            return new String(out.toByteArray(),StandardCharsets.UTF_8);
+        }
     }
 
     void close() { active = false; worker.shutdownNow(); }

@@ -57,8 +57,7 @@ final class DayRailView extends SmartModuleView {
         // The marker radius is 12dp. Keeping the rail 14dp below the view edge prevents the Canvas
         // from clipping its upper arc while retaining a quiet single-line composition.
         float y = HorizonStyle.axis(getContext()), left = dp(6), right = getWidth() - dp(6);
-        int now = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) * 60
-                + Calendar.getInstance().get(Calendar.MINUTE);
+        int now = PrayerCityTime.minute(java.time.Instant.now());
         int start = minutes[0], end = minutes[minutes.length - 1];
         // Before Fajr and after Isha are deliberately clamped to the rail edges. The next prayer
         // still wraps to Fajr, without pretending that overnight hours belong to today's rail.

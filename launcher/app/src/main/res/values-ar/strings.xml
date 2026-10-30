@@ -110,8 +110,8 @@
     <string name="wallpaper_applied">تم تغيير الخلفية</string>
     <string name="wallpaper_theme_default">خلفية السمة</string>
     <string name="readability_state">وضوح المشهد: %1$s</string>
-    <string name="readability_scene">مضبوط لكل مشهد</string>
-    <string name="readability_global">تعتيم السمة العام</string>
+    <string name="readability_scene">إعدادات كل صورة عند توفرها</string>
+    <string name="readability_global">استخدام التعتيم المختار دائماً</string>
     <string name="smart_home_settings">معلومات الواجهة</string>
     <string name="smart_settings_title">معلومات الواجهة</string>
     <string name="smart_settings_summary">اختر المعلومات المدمجة في واجهة أفق. تتحدّث المعلومات المباشرة فقط أثناء ظهور الرئيسية.</string>
@@ -152,14 +152,14 @@
     <string name="wallpaper_mode_hint">العشوائي يغيّر المشاهد بهدوء، والثابت يحتفظ بالخلفية التي تختارها.</string>
     <string name="animations_hint">تحكم في الحركات البصرية والانتقالات داخل الواجهة.</string>
     <string name="advanced_effects_hint">تضيف لمسات محسّنة مثل التوهج والعمق مع مراعاة أداء الجهاز.</string>
-    <string name="readability_hint">يحسن توازن الخلفية مع النصوص والعناصر لقراءة أوضح.</string>
+    <string name="readability_hint">قد توفر المجموعة إعداد تعتيم لكل صورة؛ عند عدم توفره يُستخدم التعتيم المختار. ارفع التعتيم إذا صعّبت صورة ساطعة قراءة النص.</string>
     <string name="reorder_description">يتيح لك تغيير ترتيب التطبيقات المفضلة في الواجهة الرئيسية.</string>
     <string name="minimal_hint">يبقي الساعة والمشهد والتطبيقات ويخفي معلومات الواجهة.</string>
     <string name="home_info_hint">اختر المعلومات الموثقة التي تظهر في واجهة أفق.</string>
     <string name="prayer_hint">يعرض الصلوات الخمس على خط زمني متناسب مع أوقاتها الحقيقية.</string>
     <string name="content_hint">اختر القرآن أو الحديث أو كليهما، أو أخفِ الورد اليومي.</string>
     <string name="team_hint">اختر فريقاً لعرض مباراته القادمة عند توفر بيانات موثقة.</string>
-    <string name="city_hint">تُستخدم لحساب مواقيت الصلاة والعد التنازلي محلياً.</string>
+    <string name="city_hint">تستخدم المواقيت والمؤشر توقيت المدينة السعودية المختارة (UTC+03:00)، بشكل مستقل عن ساعة الجهاز.</string>
     <string name="card_no_fixture">لا توجد مباراة قادمة متاحة</string>
     <string name="card_fixture_free_empty">لا توجد مباراة قادمة على أرض الفريق ضمن تغطية الخطة المجانية</string>
     <string name="card_fixture_past_only">لم ينشر المزود مباراة قادمة أحدث بعد</string>
@@ -179,8 +179,8 @@
     <string name="advanced_effects">تأثيرات متقدمة</string>
     <string name="advanced_effects_state">تأثيرات متقدمة: %1$s</string>
     <string name="advanced_effects_warning">ترفع البطاقات وتكبّر الأيقونات وتنعّم انتقالات الألوان. قد تزيد استهلاك الذاكرة حسب التلفاز.</string>
-    <string name="follow_theme">اتّباع السمة (إعادة ضبط الخيارات)</string>
-    <string name="follow_theme_hint">استخدم تخطيط السمة الحالية وحركتها أو القيم المضمّنة. تطبيق سمة أو إعادة ضبطها يمحو خيارات التلفاز أيضًا.</string>
+    <string name="follow_theme">إعادة ضبط المظهر والحركة</string>
+    <string name="follow_theme_hint">يعيد التخطيط والحركة والخلفية والتعتيم وحجم البطاقات إلى القيم الافتراضية للمجموعة. يحتفظ بالسمة واللغة والخطوط والمفضلة ومعلومات الرئيسية.</string>
     <string name="tv_settings">إعدادات نظام التلفاز</string>
     <string name="on">تشغيل</string>
     <string name="off">إيقاف</string>
@@ -234,4 +234,6 @@
     <string name="wallpaper_name_3">أفق فيروزي</string>
     <string name="wallpaper_name_4">بحيرة مورين</string>
     <string name="font_style_state">نوع الخط: %1$s</string>
+    <string name="library_hold_add">موافق: فتح · مطولاً: إضافة للرئيسية</string>
+    <string name="library_hold_remove">موافق: فتح · مطولاً: إزالة من الرئيسية</string>
 </resources>

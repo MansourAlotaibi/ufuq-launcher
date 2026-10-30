@@ -1,24 +1,17 @@
-# Initial private GitHub push plan — not executed
+# Next reviewed source push — approval required
 
-Local source ref: refs/heads/codex/public-release. Resolve its exact reviewed SHA using
-`git rev-parse refs/heads/codex/public-release`; it is reported at handoff. This ref has one
-parentless commit and no ancestry shared with the protected import graph.
+The initial private push is complete. The remote is not empty: `origin/main` was last verified at `4faeede5e1c9d7189a3928a2215afab75cd23767`. The clean public root is the parentless `0d5faa9df40f968d7270c048fcee66f9a603922c`; subsequent reviewed RC2/audit commits descend from it, not from the protected import graph.
 
-Proposed destination: refs/heads/main in the existing private GitHub repository. At inspection the
-remote is empty. Before approval/execution, recheck remote refs and private visibility. Do not
-force-push if remote history has appeared; inspect it and present a revised plan.
+The current candidate is prepared on isolated local `codex/final-product-audit`. Its exact final SHA, audit evidence and proposed ancestry are recorded in [the final audit](FINAL-PRODUCT-AUDIT.md) and the owner handoff. The reviewed `codex/rc2-original-ux` reference remains at `96932baba086b222a830a0a6c65b81afa1e6ffc0` until separately reviewed integration.
 
-Only after explicit initial-push approval, the intended refspec is:
+Before an owner-approved push:
 
-```sh
-git push origin refs/heads/codex/public-release:refs/heads/main
-```
+1. Recheck repository identity/private visibility and resolve remote main without mutating it.
+2. Compare exact reviewed SHA/parents and list every proposed commit from remote main through the candidate. Confirm a normal fast-forward and the single audited public root.
+3. Re-run scoped security/history/asset/font/content/APK checks; confirm no private evidence, signing material or original import ancestry is reachable.
+4. Obtain explicit approval for that exact source SHA and destination. No approval is inferred from local development/testing.
+5. Only then use a normal non-force exact refspec, such as `git push origin <approved-full-SHA>:refs/heads/main`, and monitor CI. If remote main changed or diverged, stop and present a revised plan; do not force or rewrite.
 
-Do not push --all, --mirror, --tags, protected local main, the import tag, or preparation/work branches.
-No release tag, APK, key or private directory is proposed for this source push. Original local refs
-remain unchanged: main at 057253e; source-import-2.8.5 at that import; accepted preparation at 32a44a93.
-The public root keeps upstream copyright attribution without transferring unresolved old asset blobs.
+Never push `--all`, `--mirror`, `--tags`, protected local main, the import tag or unrelated development refs. No release tag, signed APK, private screenshot or secret is proposed by this source-only plan. Private visibility must remain unchanged.
 
-This is approval for an eventual private source push only. Public repository visibility and a GitHub
-Release require separate authorization. Any future binary release must include the verified dependency
-source archive and applicable notices. Local encrypted-key recovery custody remains an owner action.
+Public visibility, GitHub Release/binary upload and source pushing are separately controlled actions requiring their own authorization. Before eventual binary distribution, confirm secure offline signing-key recovery custody, a working private security-reporting route, verified accompanying dependency source/notices/checksums, and provider terms for the actual channel. GitHub distribution is not automatically equated with an app store.

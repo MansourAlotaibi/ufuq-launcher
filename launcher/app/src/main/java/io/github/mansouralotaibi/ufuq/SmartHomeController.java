@@ -222,14 +222,14 @@ final class SmartHomeController {
     private void renderOfflinePrayer() {
         SmartModuleView card = cards.get(SmartPreferences.PRAYER); if (card == null) return;
         City city = City.selected(p.getString(SmartPreferences.CITY, "riyadh"));
-        PrayerCalculator.Times t=PrayerCalculator.calculate(LocalDate.now(),city.lat,city.lon,3);
+        PrayerCalculator.Times t=PrayerCalculator.calculate(PrayerCityTime.date(java.time.Instant.now()),city.lat,city.lon,3);
         if (card instanceof DayRailView) {
             ((DayRailView) card).setPrayerTimes(t);
             return;
         }
         int[] values={t.fajr,t.dhuhr,t.asr,t.maghrib,t.isha}; String[] en={"Fajr","Dhuhr","Asr","Maghrib","Isha"};
         String[] ar={"الفجر","الظهر","العصر","المغرب","العشاء"};
-        Calendar now=Calendar.getInstance(); int minute=now.get(Calendar.HOUR_OF_DAY)*60+now.get(Calendar.MINUTE);
+        int minute=PrayerCityTime.minute(java.time.Instant.now());
         int pick=0,value=1440+t.fajr; for(int i=0;i<values.length;i++)if(values[i]>minute){pick=i;value=values[i];break;}
         int left=value-minute; String prayerTime = LauncherTimeFormat.minute(activity, values[pick], arabic());
         String timing=arabic()

@@ -13,6 +13,8 @@ PATTERNS = {
  'absolute user path': rb'(?:/' + rb'Users/[^/\s]+/|/' + rb'home/[^/\s]+/|C:' + rb'\\Users\\[^\\\s]+\\)',
 }
 SENSITIVE = re.compile(r'(?i)(\.(apk|aab|jks|keystore|p12|pfx|pem|key|hprof|dump|zip|tar|gz)$|(^|/)(\.env(?:\..*)?|adbkey.*|id_rsa.*|id_ed25519.*|local.properties|key.properties)$)')
+PRIVATE_PATH = re.compile(r'(?i)(^|/)(private|release-local|captures|device-dumps|screenshots-private)(/|$)')
+def prohibited(name): return bool(SENSITIVE.search(name) or PRIVATE_PATH.search(name))
 parser=argparse.ArgumentParser();parser.add_argument('--apk',type=Path);parser.add_argument('--ref',help='Audit only this reachable history; defaults to all local refs')
 args=parser.parse_args()
 errors=[]
@@ -23,7 +25,7 @@ seen=set(); commits=git('rev-list',args.ref if args.ref else '--all').decode().s
 for rev in commits:
  for line in git('ls-tree','-r',rev).decode().splitlines():
   meta,name=line.split('\t',1); sha=meta.split()[2]
-  if SENSITIVE.search(name):errors.append(f'history {rev[:7]}: prohibited filename {name}')
+  if prohibited(name):errors.append(f'history {rev[:7]}: prohibited filename {name}')
   if sha not in seen:
    seen.add(sha);scan(f'history {rev[:7]} {name}',git('cat-file','blob',sha))
 # Include new unstaged source while preparing the candidate.
@@ -32,7 +34,7 @@ for name in sorted(paths):
  if not name:continue
  p=ROOT/name
  if not p.is_file():continue
- if SENSITIVE.search(name):errors.append(f'worktree: prohibited filename {name}')
+ if prohibited(name):errors.append(f'worktree: prohibited filename {name}')
  scan(name,p.read_bytes())
 for name in ['launcher/build-and-install.sh','launcher/build-and-install.ps1']:
  if re.search(r'pm (?:disable|clear|install)|set-home-activity|settings put|tv\.py|b64push', (ROOT/name).read_text()):
@@ -49,14 +51,16 @@ for perm in ET.fromstring(manifest).findall('uses-permission'):
  if name in ['READ_EXTERNAL_STORAGE','WRITE_EXTERNAL_STORAGE'] and perm.get(ns+'maxSdkVersion') != '19':
   errors.append('manifest: legacy storage must stop at API 19')
 # Check relative Markdown document links, ignoring URLs and heading-only links.
-for p in ROOT.glob('*.md'):
+for name in sorted(paths):
+ p=ROOT/name
+ if not name.endswith('.md') or not p.is_file():continue
  for target in re.findall(r'\]\(([^)]+)\)',p.read_text()):
   target=target.split('#',1)[0]
   if target and '://' not in target and not (p.parent/target).exists():errors.append(f'{p.name}: broken link {target}')
 if args.apk:
  with zipfile.ZipFile(args.apk) as z:
   for name in z.namelist():
-   if SENSITIVE.search(name):errors.append('APK: sensitive filename '+name)
+   if prohibited(name):errors.append('APK: sensitive filename '+name)
    scan('APK '+name,z.read(name))
 print(f'Checked {len(commits)} reachable commits, {len(seen)} unique history blobs, {len(paths)-1} worktree paths.')
 print('Checks: token/key/path patterns, prohibited filenames, installer policy, identity, permission grants, document links.')

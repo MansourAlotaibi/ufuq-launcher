@@ -352,7 +352,7 @@ final class AppLibraryDialog {
     private String hint(boolean home) {
         if (selectionMode) return activity.getString(android.R.string.ok) + ": "
                 + activity.getString(home ? R.string.library_remove_shortcut : R.string.library_add_home);
-        return activity.getString(home ? R.string.library_hint_open : R.string.library_hint_add);
+        return activity.getString(home ? R.string.library_hold_remove : R.string.library_hold_add);
     }
 
     private void showCatalog() {
@@ -699,7 +699,7 @@ final class AppLibraryDialog {
             boolean recent = !selectionMode && LibraryApps.recent(installTimes.getOrDefault(pkg, 0L), catalogTime);
             status.setText(home ? R.string.library_on_home : recent ? R.string.library_recent : R.string.library_add_home);
             status.setVisibility(View.VISIBLE);
-            holder.itemView.setBackground(surface(home ? 0x24F2B25B : 0x12FFFFFF, 18));
+            holder.itemView.setBackground(surface(home ? (0x24000000 | (UiTheme.accent(activity) & 0x00FFFFFF)) : 0x12FFFFFF, 18));
             View check = holder.itemView.findViewById(R.id.dot);
             check.getLayoutParams().width = dp(home ? 18 : 8);
             check.getLayoutParams().height = dp(home ? 18 : 8);

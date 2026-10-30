@@ -1,5 +1,8 @@
 # Final security and license audit scope — 2026-10-29
 
+Current assessment: [final product/release audit](FINAL-PRODUCT-AUDIT.md). Earlier revision-specific results below are historical evidence.
+
+
 Commands: tools/security_audit.py (all local refs and separately the public ref, plus signed APK),
 tools/public_audit.py (public ref, signed APK and accompanying dependency source), and
 tools/verify_reflection_content.py (offline corpus evidence). These checks pass at handoff.

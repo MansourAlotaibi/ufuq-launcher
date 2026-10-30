@@ -35,12 +35,14 @@ final class ReflectionView extends LinearLayout {
         setPadding(dp(24), dp(18), dp(24), dp(16));
 
         kicker = label(14, 0x99FBF4E8, R.string.font_medium);
+        kicker.setShadowLayer(dp(2),0,dp(1),0xE6000000);
         kicker.setGravity(arabic ? Gravity.RIGHT : Gravity.LEFT);
         kicker.setTextDirection(arabic ? TEXT_DIRECTION_RTL : TEXT_DIRECTION_LTR);
         addView(kicker, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         quote = label(22, 0xFFFDF8EF, R.string.font_light);
         quote.setTag(UiFont.KEEP_APPROVED);
+        quote.setShadowLayer(dp(2),0,dp(1),0xE6000000);
         quote.setGravity(Gravity.RIGHT);
         quote.setTextDirection(TEXT_DIRECTION_RTL);
         quote.setLineSpacing(dp(4), 1.08f);
@@ -54,6 +56,7 @@ final class ReflectionView extends LinearLayout {
         addView(quote, quoteParams);
 
         source = label(14, 0xC7FBF4E8, R.string.font_regular);
+        source.setShadowLayer(dp(2),0,dp(1),0xE6000000);
         source.setGravity(Gravity.RIGHT);
         source.setTextDirection(TEXT_DIRECTION_RTL);
         addView(source, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));

@@ -22,7 +22,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Security and policy checks
         run: |
-          python3 tools/security_audit.py
+          python3 tools/test_release_policy.py
+          python3 tools/security_audit.py --ref HEAD
+          python3 tools/public_audit.py --ref HEAD
           python3 tools/verify_reflection_content.py
           python3 tools/verify_ui_fonts.py
       - name: Unit tests, release lint, unsigned build
@@ -30,6 +32,8 @@ jobs:
         run: ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease
       - name: Prepare accompanying dependency source
         run: python3 tools/prepare_dependency_sources.py
+      - name: Audit packaged assets and accompanying source
+        run: python3 tools/public_audit.py --ref HEAD --apk launcher/app/build/outputs/apk/release/app-release-unsigned.apk --sources release-local/dependency-sources/desugar_jdk_libs-2.1.5-source.zip
       - name: Candidate checksum
         run: sha256sum launcher/app/build/outputs/apk/release/app-release-unsigned.apk > SHA256SUMS-UNSIGNED.txt
       - uses: actions/upload-artifact@v4
