@@ -114,9 +114,12 @@ class SmartModuleView extends TextView {
     }
 
     @Override protected void onDraw(Canvas canvas) {
-        edge.setColor(isFocused() ? UiTheme.accent(getContext()) : 0x3DFBF4E8);
-        edge.setStrokeWidth(isFocused() ? dp(3) : dp(1));
-        canvas.drawLine(0, isFocused() ? dp(2) : dp(1), getWidth(), isFocused() ? dp(2) : dp(1), edge);
+        boolean football = SmartPreferences.FOOTBALL.equals(module);
+        edge.setColor(football ? HorizonStyle.color(getContext(), isFocused())
+                : isFocused() ? UiTheme.accent(getContext()) : 0x3DFBF4E8);
+        edge.setStrokeWidth(HorizonStyle.stroke(getContext(), isFocused()));
+        float axis = football ? HorizonStyle.axis(getContext()) : isFocused() ? dp(2) : dp(1);
+        canvas.drawLine(0, axis, getWidth(), axis, edge);
         if (isFocused()) {
             edge.setColor(0xD8FBF4E8);
             edge.setStrokeWidth(dp(2));

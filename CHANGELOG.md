@@ -54,3 +54,9 @@ material, API 19/28/34 framework tests and fixes for locale-layout/style startup
 - Add independent Arabic/English font choices with static, pinned OFL fonts and protected reading/clock typography.
 - Disable rotation frequency in Fixed mode, retain it in Random, and localize bundled scene names.
 - Add measured football paragraph leading without redesigning the information horizon.
+
+### RC2 Arabic font and horizon follow-up
+
+- Replace selectable Amiri with five official static Arabic families plus the approved Default; migrate legacy Amiri to Default without changing English or other preferences.
+- Reject duplicate tile-menu openings from overlapping long-press paths; retain the focus/dismissal handoff and original move/save semantics. Physical menu-closure acceptance is tracked separately.
+- Share a fixed 14dp prayer/football horizon axis and matching palette-aware neutral stroke, retaining the progress marker, spacing and data behavior.

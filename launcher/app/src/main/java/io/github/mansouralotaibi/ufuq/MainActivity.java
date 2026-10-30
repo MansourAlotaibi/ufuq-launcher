@@ -1109,7 +1109,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         advancedEffects = cfg.animations && cfg.advancedEffects;
         boolean tilesChanged = changedSetting("animations") || changedSetting("advanced_effects")
                 || changedSetting(Config.SHELF_SCALE_KEY)
-                || changedSetting("font_ar") || changedSetting("font_en") || appliedPalette != UiTheme.selected(this);
+                || changedSetting(UiFont.ARABIC_KEY) || changedSetting("font_en") || appliedPalette != UiTheme.selected(this);
         if (tilesChanged) {
             shelfScalePercent = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
                     .getInt(Config.SHELF_SCALE_KEY, AppAdapter.DEFAULT_SHELF_SCALE);
@@ -3449,6 +3449,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) popup.setElevation(0f);
         popup.setOnDismissListener(() -> {
             if (openPopup == popup) openPopup = null;
+            android.util.Log.i("Ufuq.Menu", "popup dismissed");
             root.post(this::runPendingMenuAction);
         });
         openPopup = popup;
@@ -3560,7 +3561,12 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
      */
     @Override
     public void onTileLongPress(int position, View card) {
-        if (reordering) return;
+        // Both Activity repeat detection and View long-click may report the same hold.
+        // A second PopupWindow leaves the first one visible after selecting Move.
+        if (reordering || pendingMenuAction != null || (openPopup != null && openPopup.isShowing())) {
+            android.util.Log.i("Ufuq.Menu", "duplicate tile menu suppressed");
+            return;
+        }
         String key = adapter.keyAt(position);
         String pkg = adapter.packageAt(position);
         // Empty dock slots and the Default-home tile carry the launcher's own package: no menu for them.
@@ -3568,11 +3574,13 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         View panel = getLayoutInflater().inflate(R.layout.popup_inputs, root, false);
         LinearLayout rows = panel.findViewById(R.id.rows);
         PopupWindow popup = glassPopup(panel, (int) (200 * density));
+        android.util.Log.i("Ufuq.Menu", "tile menu opened");
         if (position < adapter.movableCount()) addSettingsMenuRow(rows, popup, R.string.tile_move, () -> {
             if (!beginReorder()) return;
             int at = adapter.positionOf(key);   // beginReorder can rebuild the tiles
             if (at < 0) return;
             pickUp(at);
+            android.util.Log.i("Ufuq.Menu", "move active after popup dismissal");
             refocusAfterLayout(at);
             Toast.makeText(this, R.string.reorder_hint, Toast.LENGTH_LONG).show();
         });
@@ -3637,13 +3645,14 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         row.setOnKeyListener((v, code, event) -> {
             if (code != KeyEvent.KEYCODE_DPAD_CENTER && code != KeyEvent.KEYCODE_ENTER
                     && code != KeyEvent.KEYCODE_NUMPAD_ENTER) return false;
+            android.util.Log.i("Ufuq.Menu", "menu OK action=" + event.getAction()
+                    + " repeat=" + event.getRepeatCount() + " canceled=" + event.isCanceled());
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                 // A deliberate OK always has its own DOWN. The release that opened this popup has no matching
                 // DOWN in the row, so pressed remains false and is safely ignored without a time gate.
                 // Identify the gesture, not a sticky OEM long-press flag/repeat count on the next press.
-                boolean fresh = openingGesture != Long.MIN_VALUE
-                        ? event.getDownTime() != openingGesture
-                        : event.getRepeatCount() == 0 && !event.isLongPress();
+                boolean fresh = (openingGesture != Long.MIN_VALUE && event.getDownTime() != openingGesture)
+                        || (event.getRepeatCount() == 0 && !event.isLongPress());
                 if (fresh) pressed[0] = true;
                 return true;
             }

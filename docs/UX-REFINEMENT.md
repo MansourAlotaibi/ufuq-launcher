@@ -1,5 +1,8 @@
 # RC2 functional and UX refinement
 
+Latest follow-up: [five Arabic fonts, menu ownership and aligned horizon](ARABIC-FONTS-HORIZON.md). Earlier results below describe preceding revisions.
+
+
 Baseline: `099d3c98d133095f70d52e7e62459d006dcec862`, branch `codex/rc2-original-ux`. The owner reported a physical-remote Move activation failure; that report is accepted as a defect. The personal MansourTV 2.8.5 source/installation is protected. Runtime checks target only the independently signed public package.
 
 ## Before and after

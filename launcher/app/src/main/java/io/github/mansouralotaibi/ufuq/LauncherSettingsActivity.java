@@ -76,7 +76,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         TextView font = findViewById(R.id.fontChoice);
         font.setText(R.string.font_style);
         font.setOnClickListener(v -> {
-            String[] fontNames = {getString(R.string.font_default), UiFont.arabic(this) ? "Amiri · أميري" : "Lato"};
+            String[] fontNames = UiFont.names(this);
             new ThemedDialogBuilder(this).setTitle(R.string.font_style)
                     .setSingleChoiceItems(fontNames, UiFont.selection(this), (d, which) -> {
                         UiFont.select(this, which); d.dismiss(); changed();
@@ -430,7 +430,7 @@ public final class LauncherSettingsActivity extends ThemedActivity {
         ((TextView)findViewById(R.id.paletteChoice)).setText(getString(R.string.ufuq_theme,
                 getResources().getStringArray(R.array.ufuq_themes)[UiTheme.selected(this)]));
         ((TextView)findViewById(R.id.fontChoice)).setText(getString(R.string.font_style_state,
-                UiFont.selection(this)==0 ? getString(R.string.font_default) : UiFont.arabic(this) ? "Amiri · أميري" : "Lato"));
+                UiFont.names(this)[UiFont.selection(this)]));
         String language = LocalePreferences.current(this);
         int languageName = LocalePreferences.ARABIC.equals(language) ? R.string.language_arabic
                 : LocalePreferences.ENGLISH.equals(language) ? R.string.language_english

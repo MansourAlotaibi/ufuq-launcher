@@ -38,15 +38,35 @@ final class UiFont {
     }
     private UiFont() {}
     static boolean arabic(Context c) { return "ar".equals(c.getResources().getConfiguration().locale.getLanguage()); }
+    static final String ARABIC_KEY = "font_ar_family";
+    private static final String[] ARABIC_IDS = {"default", "cairo", "tajawal", "ibm-plex-sans-arabic", "readex-pro", "almarai"};
+    private static final String[] ARABIC_FILES = {null, "Cairo-Regular.ttf", "Tajawal-Regular.ttf", "IBMPlexSansArabic-Regular.ttf", "ReadexPro-Regular.ttf", "Almarai-Regular.ttf"};
+    static String[] names(Context c) {
+        return arabic(c) ? new String[]{c.getString(R.string.font_default), "Cairo · القاهرة", "Tajawal · تجوال",
+                "IBM Plex Sans Arabic", "Readex Pro · ريدكس برو", "Almarai · المراعي"}
+                : new String[]{c.getString(R.string.font_default), "Lato"};
+    }
     static int selection(Context c) {
-        return c.getSharedPreferences(Config.SETTINGS_NAME, 0).getInt(arabic(c) ? "font_ar" : "font_en", 0) == 1 ? 1 : 0;
+        android.content.SharedPreferences p = c.getSharedPreferences(Config.SETTINGS_NAME, 0);
+        if (!arabic(c)) return p.getInt("font_en", 0) == 1 ? 1 : 0;
+        if (!p.contains(ARABIC_KEY)) {
+            // Legacy font_ar=1 meant Amiri, never Cairo. Migrate only font keys, once.
+            p.edit().putString(ARABIC_KEY, "default").remove("font_ar").apply();
+        }
+        String id = p.getString(ARABIC_KEY, "default");
+        for (int i=0;i<ARABIC_IDS.length;i++) if (ARABIC_IDS[i].equals(id)) return i;
+        return 0;
     }
     static void select(Context c, int value) {
-        c.getSharedPreferences(Config.SETTINGS_NAME, 0).edit()
-                .putInt(arabic(c) ? "font_ar" : "font_en", value == 1 ? 1 : 0).apply();
+        android.content.SharedPreferences.Editor e = c.getSharedPreferences(Config.SETTINGS_NAME, 0).edit();
+        if (arabic(c)) e.putString(ARABIC_KEY, ARABIC_IDS[value>=0 && value<ARABIC_IDS.length ? value : 0]).remove("font_ar");
+        else e.putInt("font_en", value==1 ? 1 : 0);
+        e.apply();
     }
     static synchronized Typeface selected(Context c) {
-        String name = arabic(c) ? "Amiri-Regular.ttf" : "Lato-Regular.ttf";
+        int chosen = selection(c);
+        if (chosen == 0) return get(c, R.string.font_regular);
+        String name = arabic(c) ? ARABIC_FILES[chosen] : "Lato-Regular.ttf";
         Typeface font = loaded.get(name);
         if (font == null) {
             font = Typeface.createFromAsset(c.getAssets(), "fonts/" + name);

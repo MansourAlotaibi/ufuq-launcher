@@ -1,5 +1,8 @@
 # Publication preparation — full-feature 1.0.0 RC2
 
+Latest: [Arabic fonts and horizon follow-up](docs/ARABIC-FONTS-HORIZON.md).
+
+
 - Accepted full feature baseline retained; football and Quran/Hadith remain enabled implementations with accurate provider/content attribution.
 - Cinematic clock/dates, personalized greeting, reflection, unboxed prayer/football horizon and bottom favorites dock restored from the owner-approved installed 2.8.5 reference.
 - Three independent palettes; Large default favorite sizing; persistent fixed/random wallpapers, dimming and rotation interval.

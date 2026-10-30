@@ -35,6 +35,7 @@ final class DayRailView extends SmartModuleView {
         time.setColor(0xBDFBF4E8);
         time.setTextSize(dp(15));
         time.setTypeface(UiFont.get(context, R.string.font_light));
+        if (UiFont.selection(context) != 0) { name.setTypeface(UiFont.selected(context)); time.setTypeface(UiFont.selected(context)); }
         setContentDescription(context.getString(R.string.card_prayer_title));
     }
 
@@ -55,7 +56,7 @@ final class DayRailView extends SmartModuleView {
         if (minutes.length != 5) return;
         // The marker radius is 12dp. Keeping the rail 14dp below the view edge prevents the Canvas
         // from clipping its upper arc while retaining a quiet single-line composition.
-        float y = dp(14), left = dp(6), right = getWidth() - dp(6);
+        float y = HorizonStyle.axis(getContext()), left = dp(6), right = getWidth() - dp(6);
         int now = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) * 60
                 + Calendar.getInstance().get(Calendar.MINUTE);
         int start = minutes[0], end = minutes[minutes.length - 1];
@@ -63,8 +64,8 @@ final class DayRailView extends SmartModuleView {
         // still wraps to Fajr, without pretending that overnight hours belong to today's rail.
         float progress = PrayerRailMath.fraction(now, start, end);
         float sun = left + (right - left) * (arabic ? 1f - progress : progress);
-        hair.setStrokeWidth(isFocused() ? dp(3) : dp(1));
-        hair.setColor(isFocused() ? 0x80FBF4E8 : 0x3DFBF4E8);
+        hair.setStrokeWidth(HorizonStyle.stroke(getContext(), isFocused()));
+        hair.setColor(HorizonStyle.color(getContext(), isFocused()));
         canvas.drawLine(left, y, right, y, hair);
         accent.setStrokeWidth(isFocused() ? dp(3) : dp(2));
         if (arabic) canvas.drawLine(right, y, sun, y, accent);

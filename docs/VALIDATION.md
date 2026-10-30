@@ -1,5 +1,8 @@
 # Current candidate: RC2 hold-OK / reflection correction
 
+Latest follow-up: [five Arabic fonts, menu ownership and aligned horizon](ARABIC-FONTS-HORIZON.md). Earlier results below describe preceding revisions.
+
+
 Latest: [final RC2 functional/UX refinement](UX-REFINEMENT.md). Required local checks pass 323 tests; release lint 0 errors / 147 warnings; release build passes. Native API 19 evidence and physical-remote limits are distinguished in that report. The preceding [hold-OK/glass correction](REORDER-GLASS-VALIDATION.md) remains historical evidence.
 
 # Preceding candidate: RC2 functional-parity correction

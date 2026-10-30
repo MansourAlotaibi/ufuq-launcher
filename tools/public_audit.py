@@ -16,7 +16,9 @@ manifest=json.loads((r/'third_party/public-assets.json').read_text());allow={e['
 for name in paths:
  if Path(name).suffix.lower() in ['.ttf','.png','.jpg','.jpeg','.webp']:
   assert name in allow,'Uninventoried image/font: '+name
-  assert hashlib.sha256((r/name).read_bytes()).hexdigest()==allow[name]['sha256']
+  if (r/name).exists():
+   assert hashlib.sha256((r/name).read_bytes()).hexdigest()==allow[name]['sha256']
+  else: assert allow[name].get('historicalOnly'), 'Missing current asset: '+name
 # Check every reachable revision, including assets later deleted or replaced.
 for revision in git('rev-list',a.ref).splitlines():
  for name in git('ls-tree','-r','--name-only',revision).splitlines():
@@ -40,6 +42,10 @@ if a.apk:
   for e in json.loads((r/'third_party/ui-font-provenance.json').read_text())['files']:
    asset=e['file'].split('/assets/',1)[1]
    assert hashlib.sha256(z.read('assets/'+asset)).hexdigest()==e['sha256'],'Font/license package mismatch'
+  assert z.read('assets/third_party_notices.txt')==(r/'launcher/app/src/main/assets/third_party_notices.txt').read_bytes(),'Packaged notices mismatch'
+  for entry in manifest:
+   if entry.get('historicalOnly') and '/assets/' in entry['path']:
+    assert 'assets/'+entry['path'].split('/assets/',1)[1] not in z.namelist(),'Retired historical asset packaged'
   assert z.read('assets/daily_reflection.json')==(r/'launcher/app/src/main/assets/daily_reflection.json').read_bytes()
   assert not any('version-control-info' in n for n in z.namelist()),'Private history metadata must not be packaged'
 if a.sources:

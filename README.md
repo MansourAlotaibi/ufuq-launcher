@@ -72,4 +72,4 @@ exercises API 19/28/34. It is not emulator, visual or physical-remote certificat
 
 The current local RC2 [functional and stability comparison](docs/FUNCTIONAL-PARITY.md) records original-source differences, corrections, actual TV evidence and remaining unverified behavior. It is not a claim of full hardware certification.
 
-Font Style offers the approved default or Amiri (Arabic UI), and the approved default or Lato (English UI), saved independently. Clock and religious-text typography remain purpose-specific. Optional fonts are unmodified static SIL OFL 1.1 files; see [font provenance](third_party/ui-font-provenance.json) and [third-party notices](THIRD-PARTY-NOTICES.md).
+Font Style retains the approved default and adds Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro and Almarai for Arabic UI; English retains Default/Lato. Selections are saved independently. A legacy Amiri selection safely migrates to Default. Clock and religious-text typography remain purpose-specific. Optional fonts are unmodified static SIL OFL 1.1 files; see [font provenance](third_party/ui-font-provenance.json) and [third-party notices](THIRD-PARTY-NOTICES.md).

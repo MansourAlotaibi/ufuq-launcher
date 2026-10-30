@@ -71,6 +71,9 @@ public class UxRefinementTest {
    listener.onKey(row,key,new android.view.KeyEvent(1000,1100,0,key,1,0,0,0,android.view.KeyEvent.FLAG_LONG_PRESS));
    listener.onKey(row,key,new android.view.KeyEvent(1000,1150,1,key,0));org.robolectric.shadows.ShadowLooper.idleMainLooper();assertEquals(1,calls.get());
    listener.onKey(row,key,new android.view.KeyEvent(1000,1200,1,key,0));org.robolectric.shadows.ShadowLooper.idleMainLooper();assertEquals(1,calls.get());
+   // Some remotes reuse downTime; a fresh ordinary DOWN must still select once.
+   listener.onKey(row,key,new android.view.KeyEvent(100,1300,0,key,0));
+   listener.onKey(row,key,new android.view.KeyEvent(100,1350,1,key,0));org.robolectric.shadows.ShadowLooper.idleMainLooper();assertEquals(2,calls.get());
   }
  }
  @Test public void dynamicFontUpdatesKeepOneMetricSpanAndDoNotDisturbEditing() {
@@ -83,4 +86,36 @@ public class UxRefinementTest {
   }
   android.widget.EditText edit=new android.widget.EditText(c);edit.setText("Editable");edit.setSelection(4);Typeface original=edit.getTypeface();UiFont.apply(edit);assertSame(original,edit.getTypeface());assertEquals(4,edit.getSelectionEnd());
  }
+ @Test public void legacyAmiriMigratesOnlyArabicFontAndAllFiveFamiliesRemainIndependent() {
+  Context base=RuntimeEnvironment.getApplication();Configuration conf=new Configuration(base.getResources().getConfiguration());conf.setLocale(new java.util.Locale("ar"));Context ar=base.createConfigurationContext(conf);
+  android.content.SharedPreferences p=base.getSharedPreferences(Config.SETTINGS_NAME,0);
+  p.edit().clear().putInt("font_ar",1).putInt("font_en",1).putInt(Config.ROTATION_MINUTES_KEY,30).putString(Config.WALLPAPER_CHOICE_KEY,"desert-sunset.jpg").commit();
+  assertEquals(0,UiFont.selection(ar));assertFalse(p.contains("font_ar"));assertEquals("default",p.getString(UiFont.ARABIC_KEY,null));assertEquals(1,p.getInt("font_en",0));assertEquals(30,p.getInt(Config.ROTATION_MINUTES_KEY,0));assertEquals("desert-sunset.jpg",p.getString(Config.WALLPAPER_CHOICE_KEY,null));
+  assertEquals(6,UiFont.names(ar).length);assertEquals(2,UiFont.names(base).length);
+  for(int i=1;i<=5;i++){UiFont.select(ar,i);assertEquals(i,UiFont.selection(ar));assertSame(UiFont.selected(ar),UiFont.selected(ar));assertEquals(1,UiFont.selection(base));assertFalse(UiFont.names(ar)[i].contains("Amiri"));}
+  UiFont.select(ar,0);assertEquals(0,UiFont.selection(ar));assertEquals(1,UiFont.selection(base));
+ }
+ @Test public void duplicateLongPressCannotStackTileMenus() {
+  try(ActivityController<MainActivity> c=Robolectric.buildActivity(MainActivity.class).setup().visible().windowFocusChanged(true)) {
+   MainActivity a=c.get();AppAdapter fake=new AppAdapter(a,a,6,Config.load(a)) {
+    @Override String keyAt(int i){return "example.safe/app";}
+    @Override String packageAt(int i){return "example.safe";}
+    @Override int movableCount(){return 2;}
+   };
+   org.robolectric.util.ReflectionHelpers.setField(a,"adapter",fake);
+   View tile=new View(a);a.addContentView(tile,new android.view.ViewGroup.LayoutParams(300,180));tile.layout(0,700,300,880);
+   a.onTileLongPress(0,tile);android.widget.PopupWindow first=org.robolectric.util.ReflectionHelpers.getField(a,"openPopup");assertNotNull(first);assertTrue(first.isShowing());
+   a.onTileLongPress(0,tile);assertSame(first,org.robolectric.util.ReflectionHelpers.getField(a,"openPopup"));first.dismiss();assertFalse(first.isShowing());assertNull(org.robolectric.util.ReflectionHelpers.getField(a,"openPopup"));
+  }
+ }
+ @Test public void horizonChildrenKeepSharedAxisInAllPalettesAndDirections() {
+  Context ctx=RuntimeEnvironment.getApplication();
+  for(int palette=0;palette<3;palette++)for(boolean rtl:new boolean[]{false,true}){
+   UiTheme.select(ctx,palette);SmartCompositionLayout group=new SmartCompositionLayout(ctx,null);group.setLayoutDirection(rtl?View.LAYOUT_DIRECTION_RTL:View.LAYOUT_DIRECTION_LTR);
+   group.addModule(SmartPreferences.PRAYER,new DayRailView(ctx,rtl));SmartModuleView football=new SmartModuleView(ctx,rtl);football.bindModule(SmartPreferences.FOOTBALL);group.addModule(SmartPreferences.FOOTBALL,football);
+   group.measure(View.MeasureSpec.makeMeasureSpec(1200,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(140,View.MeasureSpec.EXACTLY));group.layout(0,0,1200,140);
+   assertEquals(group.getChildAt(0).getTop(),group.getChildAt(1).getTop());assertEquals(Math.round(14*ctx.getResources().getDisplayMetrics().density),HorizonStyle.axis(ctx));assertTrue(HorizonStyle.stroke(ctx,false)>0);assertEquals(0x3D,HorizonStyle.color(ctx,false)>>>24);
+  }
+ }
+
 }
