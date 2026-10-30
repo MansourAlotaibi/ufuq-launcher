@@ -1,75 +1,108 @@
 # Ufuq Launcher
 
-[العربية](README_AR.md)
+[العربية](README_AR.md) · [English gallery](docs/gallery/GALLERY_EN.md) · [معرض الصور العربي](docs/gallery/GALLERY_AR.md)
 
-A native Java Android TV launcher for API 19 and newer, prepared from the protected
-MansourTV Ufuq 2.8.5 source import. This is the full-feature development project,
-not a deliberately reduced public edition. Version **1.0.0-rc2** is a local candidate;
-an independently signed local candidate is prepared, but no release has been published.
+A cinematic, remote-friendly Android TV launcher built with native Java and Android Views. Ufuq brings a prominent clock, daily reflections, prayer times, football fixtures and your favorite apps into one coherent Home screen.
 
-Features: cinematic Home, Classic/Midnight/Coast palettes, fixed/random local wallpapers,
-prayer times, Hijri calendar, daily Quran/Hadith reflections with full-text details,
-favourites, app library, personalized greetings, Wi-Fi, TV inputs, clock/screensaver,
-optional remote helpers and user-driven launcher switching.
+**1.0.0-rc2 · release candidate · public publication pending.** The independently signed candidate has been tested on the owner's Nobel Android 4.4.4 television. No official public APK release has been published yet.
 
-Appearance is selected in launcher Settings and saved separately from wallpaper choices.
-No telemetry, WebView, Compose or background API polling is added. Package
-`io.github.mansouralotaibi.ufuq` is independent of the personal MansourTV installation.
+![Classic Home, English LTR, full 1920×1080 frame with privacy redactions](docs/gallery/images/en/home-classic.png)
 
-[Feature-by-feature comparison](docs/FEATURE-PARITY.md) · [Build](BUILDING.md)
-· [Install safely](INSTALLATION.md) · [Compatibility](COMPATIBILITY.md)
-· [Privacy](PRIVACY.md) · [Release readiness](docs/RELEASE-READINESS.md)
-· [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
+*Real TV capture, full 16:9 frame. The actual greeting, dates, horizon, controls and complete dock retain their positions. Only the personal name, SSID text and two private app entries are masked. No demo name, icon or UI was invented. [Image provenance and credits](docs/gallery/CREDITS.md).*
 
-## Content sources and distribution conditions
+## Three themes, one Ufuq experience
 
-Application code derives from CleanYourTV under MIT, with upstream notices retained.
-Outfit is SIL OFL 1.1. Content and external services have their own terms, not the application's MIT grant.
-[Third-party notices](THIRD-PARTY-NOTICES.md) and [LICENSE](LICENSE) control the distinctions below.
+| Classic | Midnight | Coast |
+|---|---|---|
+| ![Classic — gold](docs/gallery/images/en/home-classic.png) | ![Midnight — silver](docs/gallery/images/en/home-midnight.png) | ![Coast — turquoise](docs/gallery/images/en/home-coast.png) |
+| Cinematic gold | Dark silver | Blue/turquoise accents |
 
-- **Quran:** four complete Arabic verses from official Tanzil Uthmani 1.1. Copyright
-  Tanzil Project, CC BY 3.0 and source-specific verbatim-copy conditions. Text is not
-  edited; complete source notices and https://tanzil.net links accompany it. No translation is bundled.
-- **Hadith:** three Arabic Sahih al-Bukhari matn excerpts from revision-pinned Arabic
-  Wikisource chapters, CC BY-SA 4.0. Contributor attribution, source/history links,
-  selection changes and share-alike terms are retained. No modern translation or commentary is copied.
-- **Football:** working text-only TheSportsDB integration, optional and off until enabled
-  and a team selected. Source: https://www.thesportsdb.com/; terms:
-  https://www.thesportsdb.com/docs_terms_of_use.php. The documented public test identifier
-  `123` is not a private credential. The provider permits official-endpoint data reuse
-  subject to conditions and requires a paid subscription for app-store publication.
-  GitHub source hosting and GitHub Releases are not named as app stores in those terms;
-  that clause is not treated as a blanket ban on this GitHub project, nor as permission
-  for every commercial/production distribution. Recheck terms for the intended channel.
-  Do not resell the API or embed premium/private keys. No team logos or provider images are downloaded.
-  Selected-team fixtures appear from the private local cache immediately. Freshness is one hour; retries have a one-minute floor per team, foreground only.
-  The provider currently documents 30 requests/minute for the free tier; availability and data quality vary.
-- **Wallpapers:** the full local wallpaper engine is retained. Two verified public-domain landscape photographs and three original MIT procedural landscapes are bundled; see [wallpaper credits](THIRD-PARTY-NOTICES.md#photographic-cinematic-wallpapers-visual-parity-update). No wallpaper collection was
-  present in the protected source import; these are new public-project assets.
-  Import only images whose rights permit your intended use/distribution. Private wallpaper
-  folders and device screenshots are not accessed or bundled. In-app images remain independent of palettes.
+Themes share geometry, navigation and functionality. Wallpaper selection, rotation and dimming remain independent of the palette. Five audited scenes are bundled: two public-domain landscape photographs and three original MIT landscapes.
 
-The source snapshots, selected text, revision IDs, hashes and license files make the
-replacement corpus auditable offline. Run `python3 tools/verify_reflection_content.py`.
-A README disclaimer is not permission: unverified artwork must not be bundled or promoted
-until its specific license or written permission has been established.
+## Features
 
-## Platform differences
+| Everyday use | What Ufuq offers |
+|---|---|
+| Home | Large clock; actual morning/evening greeting with an optional locally saved name; independent Gregorian/Hijri visibility and Hijri adjustment |
+| Favorites | Recognizable app icons, Small/Medium/Large tiles, whole-card pages, long-OK menu, move/place/save and persistent ordering |
+| Apps | Native application library; add/remove Home shortcuts without uninstalling apps |
+| Daily Reflection | Offline Quran/Hadith selection, dynamic preview, full-entry reading, source links and attribution |
+| Prayer horizon | Five-prayer timeline, next-prayer information and marker; offline calculations for five Saudi cities using UTC+03:00 |
+| Football | Favorite-team selection, text fixtures, device-local match times, immediate team-scoped cache and asynchronous refresh |
+| Personalization | Classic/Midnight/Coast, independent language-specific fonts, fixed/random wallpapers, dimming and rotation frequency |
+| Device controls | Guarded native Wi-Fi/system fallback, capability-based Inputs and user-initiated opening of another launcher |
 
-On API 19–28, the native Wi-Fi panel scans/connects with declared legacy permissions;
-API 23–28 requests location permission when the user opens it. Denial falls back to system
-settings. Android 10+ restricts ordinary applications' Wi-Fi configuration, so connection
-management uses system settings there. No installer changes HOME or grants privileges.
-See [compatibility](COMPATIBILITY.md) for untested behavior and [privacy](PRIVACY.md) for data handling.
+The full [English gallery](docs/gallery/GALLERY_EN.md) covers all 14 feature groups, with honest labels where a current screen was captured only in Arabic. Those images are not relabeled as English UI. The [feature comparison](docs/FEATURE-PARITY.md) and [final audit](docs/FINAL-PRODUCT-AUDIT.md) distinguish source checks, framework tests, injected keys and owner-reported physical-remote results.
 
-## Clean public history and validation
+Optional clock/screensaver and explicitly user-enabled remote helpers remain available where supported; accessibility is never enabled automatically. Third-party app labels may follow the installed app/system language, and canonical religious text remains Arabic inside English UI.
 
-The public ancestry begins at the audited parentless commit `0d5faa9`; the initial private push and CI repair are complete. Current release preparation continues on isolated local development/audit branches.
-Original local history is preserved separately and excluded from the push plan. Never push --all or --tags.
-See [push plan](docs/PUBLIC-PUSH-PLAN.md), [signing identity](docs/PUBLIC-SIGNING-IDENTITY.json),
-[lint review](docs/LINT-REVIEW.md) and [validation](docs/VALIDATION.md). Android framework simulation
-exercises API 19/28/34. Framework simulation is separate from the documented Nobel API19 captures and owner-reported physical-remote checks; other hardware remains unverified.
+## Make it yours
 
-The current local RC2 [functional and stability comparison](docs/FUNCTIONAL-PARITY.md) records original-source differences, corrections, actual TV evidence and remaining unverified behavior. It is not a claim of full hardware certification.
+- **Arabic RTL / English LTR:** language, direction and saved font choice follow the UI language.
+- **Arabic fonts:** Default, Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro and Almarai. **English fonts:** Default or Lato. Preferences are independent; clock/religious typography remains purpose-specific.
+- **Wallpapers:** choose a fixed scene or timed random rotation, keep the previous fixed selection, and adjust dimming. Rotation frequency is disabled in Fixed mode without losing the saved interval.
+- **Favorites and information:** choose tile size, reorder across whole-card pages, customize the greeting, and independently show calendars, prayers, reflections and football. Ordinary cinematic settings update in place; language changes use a controlled recreation.
 
-Font Style retains the approved default and adds Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro and Almarai for Arabic UI; English retains Default/Lato. Selections are saved independently. A legacy Amiri selection safely migrates to Default. Clock and religious-text typography remain purpose-specific. Optional fonts are unmodified static SIL OFL 1.1 files; see [font provenance](third_party/ui-font-provenance.json) and [third-party notices](THIRD-PARTY-NOTICES.md).
+| English font choices | Favorite movement |
+|---|---|
+| ![Actual English font-selection dialog](docs/gallery/images/en/fonts-en.png) | ![Actual English move mode, private fields masked](docs/gallery/images/en/favorites-move.png) |
+
+## Android compatibility
+
+Designed for **Android 4.4 / API 19 and newer**, with native Views, D-pad navigation and restrained memory use. Installation success is not compatibility certification.
+
+| Environment | Evidence and limitation |
+|---|---|
+| Nobel/CVTE Android 4.4.4, API 19,1920×1080 | Actual TV captures and owner-reported Arabic/English physical-remote flow; tested device only |
+| API 19/28/34 | Framework regression tests, not emulator or hardware certification |
+| Other Android TV / Google TV hardware, API 35+ | Not physically verified |
+| Wi-Fi | Native legacy panel on19–28 with applicable user permission; system settings on29+; unsupported security routes to system configuration |
+| Inputs / HOME | Require supported platform handlers/firmware; API 19 lacks standard TIF. No automatic default-HOME change |
+
+See [COMPATIBILITY](COMPATIBILITY.md) for TLS/trust-store, permissions, display/overscan, feature detection and untested scenarios. Prayer cities are currently Saudi cities; broader locations are not implied.
+
+## Install safely
+
+There is no official public APK download yet. For an owner-approved signed candidate or future release:
+
+1. Verify its SHA-256, independent certificate and package `io.github.mansouralotaibi.ufuq`.
+2. Open it with Android's normal package installer and review the device's installation consent.
+3. Launch Ufuq from the app list. Keep the current HOME unless you explicitly choose another later.
+
+Do not disable, clear or uninstall another launcher, grant privileged permissions, or run inherited installation scripts. CI APKs are **unsigned validation artifacts**, not official signed releases. See [INSTALLATION](INSTALLATION.md) and [candidate identity/checksum](docs/SHA256SUMS-SIGNED.txt).
+
+## Build from source
+
+Use JDK 17, Android platform/build-tools 34 and the supplied Gradle 8.9 wrapper. Repository access is required while it remains private.
+
+```sh
+git clone https://github.com/MansourAlotaibi/ufuq-launcher.git
+cd ufuq-launcher/launcher
+./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease
+```
+
+The default build is unsigned. Follow [BUILDING](BUILDING.md) for reproducible tool configuration, public-only signing and accompanying dependency source. Never reuse a personal MansourTV signing key or commit credentials. [Backup/recovery instructions](docs/SIGNING-RECOVERY.md) are for the owner; recovery is not assumed complete merely because the procedure exists.
+
+The accepted application source at `7091b90` passed [GitHub CI](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41077946236):355 tests, 0 failures and release lint 0 errors / 149 warnings, plus release build and security/license-policy checks. This gallery is a local documentation update, not a new hardware test or a new CI run.
+
+## Privacy and security
+
+No telemetry, analytics, WebView or Compose UI is added. Greetings, favorites, fonts and wallpaper choices are local; football uses optional foreground-driven networking and a private local cache. Legacy Wi-Fi passes user-entered credentials to Android; modern connection management uses system settings. Ufuq's independent identity cannot update the protected personal package.
+
+[PRIVACY](PRIVACY.md) explains permissions, storage, cache and networking. [SECURITY](SECURITY.md) explains private vulnerability reporting and its publication gate. Never post secrets, SSIDs or raw device dumps in public issues. The gallery contains only curated privacy-redacted derivatives; raw device captures remain excluded.
+
+## Open-source code and content rights
+
+Code is MIT, derived from CleanYourTV with upstream notices preserved. Content, fonts, provider data and visible third-party app marks retain their separate rights; they are not blanket MIT assets.
+
+- **Quran:** four complete Arabic verses from official Tanzil Uthmani 1.1, CC BY 3.0 with source-specific verbatim/notice conditions. No translation or altered wording is bundled.
+- **Hadith:** three revision-pinned Arabic Wikisource Sahih al-Bukhari matn excerpts, CC BY-SA 4.0, with source/history attribution. This is a curated reflection corpus, not complete Quran/Hadith books.
+- **Football:** TheSportsDB text-only integration with provider attribution. The documented public test identifier is not a private credential. Terms distinguish app-store publication, which requires a paid subscription; GitHub hosting/Releases are not automatically equated with an app store or treated as unrestricted production permission. Respect provider/third-party rights and recheck the intended channel. No logos/provider artwork are downloaded.
+- **Fonts and wallpaper:** official static SIL OFL 1.1 fonts; provenance-verified public-domain photographs and original MIT landscapes. Use only additional images whose rights permit the intended use.
+- **Screenshots:** actual full 1920×1080 frames with documented privacy masks; no composited demo apps or fictional greeting. App icons identify actual installed public applications, not endorsement or reusable icon assets. Complete screenshot/component credits are in [CREDITS](docs/gallery/CREDITS.md).
+
+See [LICENSE](LICENSE), [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES.md), [asset inventory](third_party/public-assets.json) and [image provenance](docs/gallery/PROVENANCE.json). A disclaimer is not permission to distribute restricted material.
+
+## Contribute
+
+Read [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md). Include Android version, device model, language/theme and safe reproduction steps; redact personal data. Preserve API 19, native Views, D-pad behavior, RTL/LTR, independent package/signing and safe HOME behavior. Useful contributions include compatibility evidence, focused fixes, localization and properly licensed content.

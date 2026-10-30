@@ -1,0 +1,1768 @@
+{
+  "schema": 1,
+  "status": "Local owner-review promotional derivatives; not uploaded or new runtime evidence",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "images": [
+    {
+      "id": "home-classic",
+      "file": "images/ar/home-classic.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Classic Home",
+        "ar": "الرئيسية — الكلاسيكي"
+      },
+      "caption": {
+        "en": "Actual full Home. Clock, dates, reflection, prayer/football horizon, navigation and the complete dock remain in place. Private name/SSID and two private app entries masked; common app icons retained.",
+        "ar": "الرئيسية كاملة كما التُقطت: الساعة والتواريخ والورد والصلاة والمباريات وأزرار التنقل وشريط المفضلة. حُجب الاسم الخاص واسم الشبكة وتطبيقان خاصان، مع إبقاء أيقونات التطبيقات العامة."
+      },
+      "sha256": "234ca7445a083c965ad4283cc32ffacd6da384863b0cab25d2f9ae90b3ca4580",
+      "bytes": 1698267,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-classic-ar",
+      "sourceSha256": "216d004895baf4351ef2d15903b76286e6c8c960cafc51b50784c8695832c42b",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            768,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "home-midnight",
+      "file": "images/ar/home-midnight.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Midnight Home",
+        "ar": "الرئيسية — منتصف الليل"
+      },
+      "caption": {
+        "en": "Actual full Home. Clock, dates, reflection, prayer/football horizon, navigation and the complete dock remain in place. Private name/SSID and two private app entries masked; common app icons retained.",
+        "ar": "الرئيسية كاملة كما التُقطت: الساعة والتواريخ والورد والصلاة والمباريات وأزرار التنقل وشريط المفضلة. حُجب الاسم الخاص واسم الشبكة وتطبيقان خاصان، مع إبقاء أيقونات التطبيقات العامة."
+      },
+      "sha256": "b01ed9b9cee99b024d0a0f3e894a1550ad149edd7337e049dbb9cc5c9b3886eb",
+      "bytes": 1698482,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-midnight-ar",
+      "sourceSha256": "7dc423dfd0d5f569ed9d16d8297d6cd2057cde17c048461602ab6cac2f2452f1",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            768,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "home-coast",
+      "file": "images/ar/home-coast.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Coast Home",
+        "ar": "الرئيسية — الساحل"
+      },
+      "caption": {
+        "en": "Actual full Home. Clock, dates, reflection, prayer/football horizon, navigation and the complete dock remain in place. Private name/SSID and two private app entries masked; common app icons retained.",
+        "ar": "الرئيسية كاملة كما التُقطت: الساعة والتواريخ والورد والصلاة والمباريات وأزرار التنقل وشريط المفضلة. حُجب الاسم الخاص واسم الشبكة وتطبيقان خاصان، مع إبقاء أيقونات التطبيقات العامة."
+      },
+      "sha256": "363b04a58a10eac888951b3d6eba7343120444769c4643e93053f9272c4074f3",
+      "bytes": 1698342,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-coast-ar",
+      "sourceSha256": "a51ebce83d2b1784798f0fd687d26eedf58a57bd6de3daf808903f0c957dfc86",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            768,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "home-classic",
+      "file": "images/en/home-classic.png",
+      "screenshotLanguage": "en",
+      "title": {
+        "en": "Classic Home",
+        "ar": "الرئيسية — الكلاسيكي"
+      },
+      "caption": {
+        "en": "Actual full Home. Clock, dates, reflection, prayer/football horizon, navigation and the complete dock remain in place. Private name/SSID and two private app entries masked; common app icons retained.",
+        "ar": "الرئيسية كاملة كما التُقطت: الساعة والتواريخ والورد والصلاة والمباريات وأزرار التنقل وشريط المفضلة. حُجب الاسم الخاص واسم الشبكة وتطبيقان خاصان، مع إبقاء أيقونات التطبيقات العامة."
+      },
+      "sha256": "3cf446edc9c850a623a4f33d66cdeac88a92cc8b0a0838158041b80b6734a741",
+      "bytes": 1704090,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-classic-en",
+      "sourceSha256": "db07c2a5e5921a94712eb7862813c6ccedcf20740d498b8543c578ed0f839db9",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            289,
+            45,
+            384,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            1529,
+            58,
+            1674,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1307,
+            768,
+            1411,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1240,
+            883,
+            1478,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1573,
+            768,
+            1677,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1506,
+            883,
+            1744,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "home-midnight",
+      "file": "images/en/home-midnight.png",
+      "screenshotLanguage": "en",
+      "title": {
+        "en": "Midnight Home",
+        "ar": "الرئيسية — منتصف الليل"
+      },
+      "caption": {
+        "en": "Actual full Home. Clock, dates, reflection, prayer/football horizon, navigation and the complete dock remain in place. Private name/SSID and two private app entries masked; common app icons retained.",
+        "ar": "الرئيسية كاملة كما التُقطت: الساعة والتواريخ والورد والصلاة والمباريات وأزرار التنقل وشريط المفضلة. حُجب الاسم الخاص واسم الشبكة وتطبيقان خاصان، مع إبقاء أيقونات التطبيقات العامة."
+      },
+      "sha256": "520fbdfdfdc614fb17816c040f367c3b679cb74e0e24d4f59ec29e78e9d69d3a",
+      "bytes": 1705193,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-midnight-en",
+      "sourceSha256": "c8a6900c36cd53af7abaaf0ac8ad7d181728567bb6288d4cc84370d80f8ec0fc",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            289,
+            45,
+            384,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            1529,
+            58,
+            1674,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1307,
+            768,
+            1411,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1240,
+            883,
+            1478,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1573,
+            768,
+            1677,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1506,
+            883,
+            1744,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "home-coast",
+      "file": "images/en/home-coast.png",
+      "screenshotLanguage": "en",
+      "title": {
+        "en": "Coast Home",
+        "ar": "الرئيسية — الساحل"
+      },
+      "caption": {
+        "en": "Actual full Home. Clock, dates, reflection, prayer/football horizon, navigation and the complete dock remain in place. Private name/SSID and two private app entries masked; common app icons retained.",
+        "ar": "الرئيسية كاملة كما التُقطت: الساعة والتواريخ والورد والصلاة والمباريات وأزرار التنقل وشريط المفضلة. حُجب الاسم الخاص واسم الشبكة وتطبيقان خاصان، مع إبقاء أيقونات التطبيقات العامة."
+      },
+      "sha256": "c7c44f2c6bae910a434611565a140968011e684ac26893a763d374a4f5ded2fe",
+      "bytes": 1704723,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-coast-en",
+      "sourceSha256": "df2ba938ca6cdcb00e9746de3156be002655985a053f42d73c1aace7211eec17",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            289,
+            45,
+            384,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            1529,
+            58,
+            1674,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1307,
+            768,
+            1411,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1240,
+            883,
+            1478,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1573,
+            768,
+            1677,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1506,
+            883,
+            1744,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "home-desert",
+      "file": "images/ar/home-desert.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Cinematic sunset and dimming",
+        "ar": "الغروب السينمائي والتعتيم"
+      },
+      "caption": {
+        "en": "Actual sunset scene with dimming. Wallpaper and theme are independent; privacy masks do not change the layout.",
+        "ar": "مشهد الغروب الحقيقي مع التعتيم. الخلفية مستقلة عن السمة، ولا تغيّر أقنعة الخصوصية توزيع الواجهة."
+      },
+      "sha256": "b8c793ba1098f21babe5e33ef518f83069bcd358c0ec906dffa0cdf697e8f259",
+      "bytes": 547095,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-dark-classic-ar",
+      "sourceSha256": "da1df4e88ce19064e86d48da5b9864236fa6aaf48cb0da1425f229d9d447d839",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            768,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "favorites-move",
+      "file": "images/ar/favorites-move.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Move favorites across pages",
+        "ar": "نقل المفضلة بين الصفحات"
+      },
+      "caption": {
+        "en": "Actual moving state on page2. On-screen arrows/OK/Back guidance is real. Public Downloads is selected; private background data masked.",
+        "ar": "حالة النقل الفعلية في الصفحة الثانية، مع تعليمات الأسهم وموافق ورجوع. التطبيق المحدد هو التنزيلات، وقد حُجبت البيانات الخاصة في الخلفية."
+      },
+      "sha256": "545c033db96c51fdf369510a5abc54fcc04f30b97be423587b044a92295f3529",
+      "bytes": 1717070,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "move-menu-closed-ar",
+      "sourceSha256": "e87cd5ab6e52ac34948e55d7dc3091649d7f5fdd04bbd4784680e88b344e710b",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "favorites-move",
+      "file": "images/en/favorites-move.png",
+      "screenshotLanguage": "en",
+      "title": {
+        "en": "Move favorites across pages",
+        "ar": "نقل المفضلة بين الصفحات"
+      },
+      "caption": {
+        "en": "Actual move mode after one menu selection and an immediate arrow. Screenshot is not proof of a new physical press; earlier tests distinguish injected and owner physical input.",
+        "ar": "وضع النقل بعد اختيار واحد من القائمة ثم سهم مباشرة. الصورة لا تثبت ضغطة فعلية جديدة؛ يفصل سجل الاختبار بين الإدخال المحقون واختبار المالك بالريموت."
+      },
+      "sha256": "fd97277b734809d06a9ff1520cac08115849b12953aacc78be62998b2cf8ee62",
+      "bytes": 1731426,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "move-menu-closed-first-arrow-en",
+      "sourceSha256": "d75e7d97a4dde1d20fdae9cf85ec063b4f5d12b8b96d022c75933a30e8e946a9",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            289,
+            45,
+            384,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            1529,
+            58,
+            1674,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1573,
+            768,
+            1677,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            1506,
+            883,
+            1744,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "apps-library",
+      "file": "images/ar/apps-library.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "App library",
+        "ar": "مكتبة التطبيقات"
+      },
+      "caption": {
+        "en": "Actual catalog with recognizable public apps. Five private/tool entries are masked; masked cells are not empty application slots.",
+        "ar": "كتالوج التطبيقات الحقيقي مع أيقونات التطبيقات العامة المعروفة. حُجبت خمسة إدخالات خاصة أو لأدوات حساسة؛ وليست المساحات المحجوبة خانات فارغة."
+      },
+      "sha256": "f4701ba7ea90d4da276487db365e6b7dad853da38d1fb53de262f89a25bfb083",
+      "bytes": 228061,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-apps-guarded",
+      "sourceSha256": "d53ba9cd0dbd3854e5ebbc95afea6b20b46d4a6e8c3d12ad4c5c3965da5a556b",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "private-or-sensitive-catalog-entry",
+          "rectanglePixels": [
+            98,
+            218,
+            368,
+            459
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-or-sensitive-catalog-entry",
+          "rectanglePixels": [
+            674,
+            218,
+            944,
+            459
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-or-sensitive-catalog-entry",
+          "rectanglePixels": [
+            962,
+            486,
+            1232,
+            727
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-or-sensitive-catalog-entry",
+          "rectanglePixels": [
+            98,
+            754,
+            368,
+            994
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-or-sensitive-catalog-entry",
+          "rectanglePixels": [
+            674,
+            754,
+            944,
+            994
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "quran-reading",
+      "file": "images/ar/quran-reading.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Read the complete Quran entry",
+        "ar": "قراءة الآية كاملة"
+      },
+      "caption": {
+        "en": "Actual full-reading dialog, source and license links. Quran wording/diacritics untouched. Private background data masked.",
+        "ar": "نافذة القراءة الكاملة الفعلية مع المصدر وروابط الترخيص. لم يتغير النص القرآني أو تشكيله، وحُجبت البيانات الخاصة في الخلفية."
+      },
+      "sha256": "5a463c31917495f62e61f96f2dbe436e3ec14847ee918242ba64e69ed6bf94e7",
+      "bytes": 901759,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-quran-reading",
+      "sourceSha256": "205b1cf3a61594de634b84f94ddcfca3319df8784afa6a32706ee0ae8f3e607c",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            768,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "hadith-reading",
+      "file": "images/ar/hadith-reading.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Read the complete Hadith selection",
+        "ar": "قراءة مقتطف الحديث كاملاً"
+      },
+      "caption": {
+        "en": "Actual attributed Hadith reading. The selected excerpt, source and share-alike license remain visible; no modern translation is invented.",
+        "ar": "قراءة فعلية لمقتطف الحديث مع المصدر وترخيص المشاركة بالمثل. بقي النص والتوثيق ظاهرين، ولم تُنشأ ترجمة حديثة."
+      },
+      "sha256": "25d608b0fd80684faeafde9f1d05804208f0cd6d147bce10b998da44432574fe",
+      "bytes": 890153,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-hadith-reading",
+      "sourceSha256": "820b03e870f692d00414160d5d8e36e864ed24658869110a7e6a4bfa67011beb",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            89
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            785,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "football-teams",
+      "file": "images/ar/football-teams.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Choose a favorite team",
+        "ar": "اختيار الفريق المفضل"
+      },
+      "caption": {
+        "en": "Actual Saudi/international team-group dialog. Personal greeting value in the background masked. Fixture data is a capture-time snapshot, not a current live-score claim.",
+        "ar": "قائمة فعلية للأندية السعودية والعالمية، مع حجب الاسم الشخصي في الخلفية. بيانات المباراة لقطة وقت الالتقاط، وليست ادعاءً بنتيجة مباشرة حالية."
+      },
+      "sha256": "05764a74109271e714d3a786030f827294b965e69ee576a13a3138fbf012e2a5",
+      "bytes": 114829,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-team-groups",
+      "sourceSha256": "9331147b7d1e500d9368bb3666f2d31eca4da6842142035a2342fbffd47f07e5",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "saved-personal-name-in-background",
+          "rectanglePixels": [
+            1490,
+            169,
+            1810,
+            215
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "fonts-ar",
+      "file": "images/ar/fonts-ar.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Arabic font choices",
+        "ar": "خيارات الخط العربي"
+      },
+      "caption": {
+        "en": "Default plus Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro and Almarai. Actual Arabic-only choices.",
+        "ar": "الافتراضي مع Cairo وTajawal وIBM Plex Sans Arabic وReadex Pro وAlmarai. هذه الخيارات الفعلية الخاصة باللغة العربية."
+      },
+      "sha256": "0cab0d0bd6f5eb5231ebf86ec00e960f1b102287286c05b667509ab2ba451034",
+      "bytes": 96488,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-final-font-list",
+      "sourceSha256": "daf8598f975c5bab0e6a2c31e89bb2c0c00c0dc294c7964c130749e8384edf06",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "fonts-en",
+      "file": "images/en/fonts-en.png",
+      "screenshotLanguage": "en",
+      "title": {
+        "en": "English font choices",
+        "ar": "خيارات الخط الإنجليزي"
+      },
+      "caption": {
+        "en": "Actual English Default/Lato choices. Arabic and English preferences are saved independently.",
+        "ar": "خيارات الإنجليزية الفعلية: الافتراضي وLato، مع حفظ مستقل لاختيارات الخط في اللغتين."
+      },
+      "sha256": "4d4b9e0a02d5a59533bedee7a09818c81108efb47459f942cd3ebb6fbe89dddb",
+      "bytes": 70455,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "candidate-entry-font-en",
+      "sourceSha256": "ac81a6ef39d4adda248aec962320daf8f5b5bb5c98c4817cb3f210fe25c6b1f4",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "wallpaper-fixed",
+      "file": "images/ar/wallpaper-fixed.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Fixed wallpaper and dock size",
+        "ar": "الخلفية الثابتة وحجم المفضلة"
+      },
+      "caption": {
+        "en": "Actual Fixed mode, chosen scene, Large dock selection and dimming row. The interval row is below the viewport; do not treat this frame as proof of its disabled state.",
+        "ar": "الوضع الثابت والمشهد المختار والحجم الكبير للمفضلة وسطر التعتيم كما ظهرت فعلياً. سطر الفترة أسفل مجال العرض؛ فلا تثبت هذه اللقطة وحدها حالته المعطلة."
+      },
+      "sha256": "fe92c457b9b8a894b1fa46f0fd150d994d30bd7906e189f9c22d91ed40e06e09",
+      "bytes": 84233,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-restore-wallpaper-visible",
+      "sourceSha256": "ab4b88c10cb16ca03595066dee31682366401f6731c498d97da28732405da388",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "wallpaper-random",
+      "file": "images/ar/wallpaper-random.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Random wallpaper and rotation interval",
+        "ar": "الخلفية العشوائية وفترة التبديل"
+      },
+      "caption": {
+        "en": "Actual Random mode: fixed scene selection is visibly disabled. The saved frequency is15minutes; this screenshot alone does not demonstrate timed rotation.",
+        "ar": "الوضع العشوائي الفعلي مع تعطيل اختيار الصورة الثابتة بصرياً. الفترة المحفوظة ١٥ دقيقة، ولا تثبت هذه الصورة وحدها حدوث التبديل بمرور الوقت."
+      },
+      "sha256": "10d942866c92b36558f828e544a3985b4d6da0c7462a275f7cd2da4d93936dba",
+      "bytes": 87053,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-restored-random-settings",
+      "sourceSha256": "49e91365df6bab64296091f81aa7c8917adcae8673da33fe6f306bd8a83b218d",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "wifi",
+      "file": "images/ar/wifi.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Native Wi-Fi panel",
+        "ar": "لوحة Wi-Fi الأصلية"
+      },
+      "caption": {
+        "en": "Actual API19 Wi-Fi panel. All visible SSIDs and connected-network status masked; signal/security UI retained. No connection was changed. API29+ uses system settings.",
+        "ar": "لوحة الشبكة الفعلية على API19. حُجبت جميع أسماء الشبكات الظاهرة وسطر الشبكة المتصلة، مع إبقاء مؤشرات الإشارة والأمان. لم يتغير الاتصال؛ وتستخدم API29 فأحدث إعدادات النظام."
+      },
+      "sha256": "36000f5a65b28f9c8213186b217ecc80d54b7f243f4f1261cc17e10c4e23560e",
+      "bytes": 865214,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "final-wifi",
+      "sourceSha256": "b2719d5558ccb8de7ecd2f5162f097ae088811948269e90f7449f8ac0506bf43",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "personal-greeting-name",
+          "rectanglePixels": [
+            1588,
+            45,
+            1698,
+            82
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "wifi-ssid-text",
+          "rectanglePixels": [
+            251,
+            58,
+            399,
+            101
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            509,
+            768,
+            613,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            442,
+            883,
+            680,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            243,
+            768,
+            347,
+            872
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-app-icon-or-label",
+          "rectanglePixels": [
+            176,
+            883,
+            414,
+            924
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "connected-network-status",
+          "rectanglePixels": [
+            1104,
+            250,
+            1881,
+            287
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            319,
+            1776,
+            359
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            408,
+            1776,
+            448
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            497,
+            1776,
+            537
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            586,
+            1776,
+            626
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            675,
+            1776,
+            715
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            764,
+            1776,
+            804
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            853,
+            1776,
+            893
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "visible-network-ssid",
+          "rectanglePixels": [
+            1134,
+            942,
+            1776,
+            967
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "launcher-picker",
+      "file": "images/ar/launcher-picker.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Open another launcher safely",
+        "ar": "فتح مشغّل آخر بأمان"
+      },
+      "caption": {
+        "en": "Actual picker, cancelled without opening a protected launcher. All launcher names masked. The frame is not evidence of a completed switch or a HOME change.",
+        "ar": "قائمة فعلية أُغلقت دون فتح أي مشغّل محمي. حُجبت أسماء المشغّلات كلها. الصورة ليست دليلاً على تنفيذ تبديل أو تغيير المشغّل الافتراضي."
+      },
+      "sha256": "85cd6d910a6cba6c83949b92e7d78801d5a85a7f8033050255fb52016fd8e7a3",
+      "bytes": 83363,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-launcher-picker-cancel-only",
+      "sourceSha256": "b340f959c01f2124656bbafad1c063f9942d08579cbffd4181d50fd1aba16283",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [
+        {
+          "category": "private-launcher-name",
+          "rectanglePixels": [
+            910,
+            449,
+            1552,
+            507
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-launcher-name",
+          "rectanglePixels": [
+            910,
+            523,
+            1552,
+            581
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "category": "private-launcher-name",
+          "rectanglePixels": [
+            910,
+            597,
+            1552,
+            655
+          ],
+          "rgb": [
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "settings",
+      "file": "images/ar/settings.png",
+      "screenshotLanguage": "ar",
+      "title": {
+        "en": "Settings and personalization",
+        "ar": "الإعدادات والتخصيص"
+      },
+      "caption": {
+        "en": "Actual native Arabic settings. No new UI or onboarding was created for promotion.",
+        "ar": "الإعدادات العربية الأصلية كما التُقطت، دون إنشاء واجهة أو خطوات بدء جديدة للترويج."
+      },
+      "sha256": "b6a115af1a3f7b4c58434ae9395ae2626f99f9c0f4925c8facdda9bcae2ce1f7",
+      "bytes": 76182,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "audit-final-settings",
+      "sourceSha256": "bf1ad6c4845047c0a256bef41c85b09d8b4a4f437e6a4bb98238c95486ccda1c",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    },
+    {
+      "id": "settings",
+      "file": "images/en/settings.png",
+      "screenshotLanguage": "en",
+      "title": {
+        "en": "Settings and personalization",
+        "ar": "الإعدادات والتخصيص"
+      },
+      "caption": {
+        "en": "Actual native English settings. Fonts, language, clock and theme controls retain their real proportions.",
+        "ar": "الإعدادات الإنجليزية الأصلية، مع إبقاء النسب الحقيقية لعناصر الخط واللغة والساعة والسمة."
+      },
+      "sha256": "050a3a6af7e6efb51f5565aa902da61b29a0279cbaaa639a523c869bcbcce954",
+      "bytes": 69163,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sourceCapture": "move-settled-settings-en",
+      "sourceSha256": "56b2c514f32eb24472a8a0e53b625738d18f1eef728b57e64a76a1e22d1293bc",
+      "captureDate": "2026-10-30",
+      "apkSha256": "17fe36e3e416f1f33627a7d0715846adbe5158d1c5ce426451b1c3b0e893f766",
+      "applicationSourceBaseline": "7091b90f9bd669823918e947f6e4af6c0e9028f3",
+      "edit": "Full frame. Opaque privacy redactions only; no crop, resizing, replaced names/icons, compositing or synthesized UI.",
+      "redactions": [],
+      "verification": "Original hash unchanged; exact RGB pixel equality outside masks; opaque RGB masks; public-only metadata; owner visual review required."
+    }
+  ]
+}

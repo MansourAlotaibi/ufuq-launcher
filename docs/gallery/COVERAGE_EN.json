@@ -1,0 +1,128 @@
+[
+  {
+    "feature": "themes",
+    "galleryLanguage": "en",
+    "images": [
+      "images/en/home-classic.png",
+      "images/en/home-midnight.png",
+      "images/en/home-coast.png"
+    ],
+    "description": "Three palettes, the same full Home geometry.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "cinematic",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/home-desert.png"
+    ],
+    "description": "The sunset image is an actual Arabic capture; no English sunset frame is claimed.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "favorites",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/wallpaper-fixed.png"
+    ],
+    "description": "Small/Medium/Large and whole-card pages are real settings. The Home frames above retain the entire dock; private entries alone are masked.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "library",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/apps-library.png",
+      "images/en/favorites-move.png"
+    ],
+    "description": "The current catalog capture is Arabic. Move mode has both Arabic and English captures. No protected app was opened for this gallery.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "reflection",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/quran-reading.png",
+      "images/ar/hadith-reading.png"
+    ],
+    "description": "Full-reading captures are Arabic. Canonical Quran/Hadith text intentionally remains Arabic in either UI language; no translation or English-labeled dialog is invented.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "prayers",
+    "galleryLanguage": "en",
+    "images": [],
+    "description": "Visible in every Home image: proportionally positioned stations, next prayer and marker. Calculations use the selected Saudi city UTC+03:00; no device timezone is changed.",
+    "availability": "Shown in Home; no extra frame invented"
+  },
+  {
+    "feature": "dates",
+    "galleryLanguage": "en",
+    "images": [],
+    "description": "Both dates are visible in the Home images. Visibility is independent, with manual Hijri-day adjustment.",
+    "availability": "Shown in Home; no extra frame invented"
+  },
+  {
+    "feature": "football",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/football-teams.png"
+    ],
+    "description": "Home shows actual captured fixtures. The team-group dialog is Arabic; its personal background name is masked. Provider snapshots are not current-score guarantees.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "greeting",
+    "galleryLanguage": "en",
+    "images": [],
+    "description": "The real salutation remains in Home. Only the private saved name is masked; no demonstration name has been composited. Name customization remains functional.",
+    "availability": "Shown in Home; no extra frame invented"
+  },
+  {
+    "feature": "fonts",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/fonts-ar.png",
+      "images/en/fonts-en.png"
+    ],
+    "description": "Actual Arabic and English font dialogs. Preferences are independent, with an approved Default in each language. Religious/clock typography has purpose-specific handling.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "wallpaper",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/wallpaper-fixed.png",
+      "images/ar/wallpaper-random.png"
+    ],
+    "description": "Current settings captures are Arabic. Rotation interval is inapplicable in Fixed mode and preserved for Random; the screenshots alone do not prove elapsed-time rotation.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "wifi",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/wifi.png"
+    ],
+    "description": "Only the current Arabic native-panel capture is used. Network labels are redacted. No connection/password operation was performed. Android29+ uses system settings.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "launchers",
+    "galleryLanguage": "en",
+    "images": [
+      "images/ar/launcher-picker.png"
+    ],
+    "description": "The Arabic picker was opened and cancelled. Private launcher names are masked. This demonstrates the selection UI, not a completed switch. No default HOME or protected launcher was changed.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "settings",
+    "galleryLanguage": "en",
+    "images": [
+      "images/en/settings.png"
+    ],
+    "description": "Actual settings in each UI language. No extra UI, navigation flow or application feature was created to obtain these images.",
+    "availability": "Native UI in this language"
+  }
+]

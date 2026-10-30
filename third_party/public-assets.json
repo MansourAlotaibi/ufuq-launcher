@@ -77,5 +77,131 @@
     "sha256": "5b5cad33c8e5922083728d271cdcda91f96ba291f1307eccc4f4ef732dc19622",
     "license": "SIL OFL 1.1",
     "source": "https://raw.githubusercontent.com/google/fonts/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/almarai/Almarai-Regular.ttf"
+  },
+  {
+    "path": "docs/gallery/images/ar/home-classic.png",
+    "sha256": "234ca7445a083c965ad4283cc32ffacd6da384863b0cab25d2f9ae90b3ca4580",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/home-midnight.png",
+    "sha256": "b01ed9b9cee99b024d0a0f3e894a1550ad149edd7337e049dbb9cc5c9b3886eb",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/home-coast.png",
+    "sha256": "363b04a58a10eac888951b3d6eba7343120444769c4643e93053f9272c4074f3",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/en/home-classic.png",
+    "sha256": "3cf446edc9c850a623a4f33d66cdeac88a92cc8b0a0838158041b80b6734a741",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/en/home-midnight.png",
+    "sha256": "520fbdfdfdc614fb17816c040f367c3b679cb74e0e24d4f59ec29e78e9d69d3a",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/en/home-coast.png",
+    "sha256": "c7c44f2c6bae910a434611565a140968011e684ac26893a763d374a4f5ded2fe",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/home-desert.png",
+    "sha256": "b8c793ba1098f21babe5e33ef518f83069bcd358c0ec906dffa0cdf697e8f259",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/favorites-move.png",
+    "sha256": "545c033db96c51fdf369510a5abc54fcc04f30b97be423587b044a92295f3529",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/en/favorites-move.png",
+    "sha256": "fd97277b734809d06a9ff1520cac08115849b12953aacc78be62998b2cf8ee62",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/apps-library.png",
+    "sha256": "f4701ba7ea90d4da276487db365e6b7dad853da38d1fb53de262f89a25bfb083",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/quran-reading.png",
+    "sha256": "5a463c31917495f62e61f96f2dbe436e3ec14847ee918242ba64e69ed6bf94e7",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/hadith-reading.png",
+    "sha256": "25d608b0fd80684faeafde9f1d05804208f0cd6d147bce10b998da44432574fe",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/football-teams.png",
+    "sha256": "05764a74109271e714d3a786030f827294b965e69ee576a13a3138fbf012e2a5",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/fonts-ar.png",
+    "sha256": "0cab0d0bd6f5eb5231ebf86ec00e960f1b102287286c05b667509ab2ba451034",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/en/fonts-en.png",
+    "sha256": "4d4b9e0a02d5a59533bedee7a09818c81108efb47459f942cd3ebb6fbe89dddb",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/wallpaper-fixed.png",
+    "sha256": "fe92c457b9b8a894b1fa46f0fd150d994d30bd7906e189f9c22d91ed40e06e09",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/wallpaper-random.png",
+    "sha256": "10d942866c92b36558f828e544a3985b4d6da0c7462a275f7cd2da4d93936dba",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/wifi.png",
+    "sha256": "36000f5a65b28f9c8213186b217ecc80d54b7f243f4f1261cc17e10c4e23560e",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/launcher-picker.png",
+    "sha256": "85cd6d910a6cba6c83949b92e7d78801d5a85a7f8033050255fb52016fd8e7a3",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/ar/settings.png",
+    "sha256": "b6a115af1a3f7b4c58434ae9395ae2626f99f9c0f4925c8facdda9bcae2ce1f7",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
+  },
+  {
+    "path": "docs/gallery/images/en/settings.png",
+    "sha256": "050a3a6af7e6efb51f5565aa902da61b29a0279cbaaa639a523c869bcbcce954",
+    "license": "Composite screenshot: MIT UI; separately licensed text/content and third-party app marks. See credits; no blanket asset-license grant.",
+    "evidence": "docs/gallery/PROVENANCE.json; docs/gallery/CREDITS.md"
   }
 ]

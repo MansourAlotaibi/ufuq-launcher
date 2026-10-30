@@ -1,0 +1,128 @@
+[
+  {
+    "feature": "themes",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/home-classic.png",
+      "images/ar/home-midnight.png",
+      "images/ar/home-coast.png"
+    ],
+    "description": "ثلاث لوحات ألوان مع توزيع واحد للرئيسية الكاملة.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "cinematic",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/home-desert.png"
+    ],
+    "description": "صورة الغروب لقطة عربية فعلية؛ ولا يُدّعى توفر لقطة غروب إنجليزية.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "favorites",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/wallpaper-fixed.png"
+    ],
+    "description": "أحجام صغير ومتوسط وكبير وصفحات البطاقات الكاملة إعدادات فعلية. تُبقي صور الرئيسية الشريط كاملاً، مع حجب الإدخالات الخاصة فقط.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "library",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/apps-library.png",
+      "images/ar/favorites-move.png"
+    ],
+    "description": "لقطة الكتالوج الحالية بالعربية. ويتوفر وضع النقل بالعربية والإنجليزية. لم يُفتح تطبيق محمي لإعداد هذا المعرض.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "reflection",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/quran-reading.png",
+      "images/ar/hadith-reading.png"
+    ],
+    "description": "لقطات القراءة الكاملة بالعربية. يبقى النص القرآني والحديثي بالعربية في لغتي الواجهة، دون إنشاء ترجمة أو نافذة إنجليزية وهمية.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "prayers",
+    "galleryLanguage": "ar",
+    "images": [],
+    "description": "يظهر في صور الرئيسية: مواضع متناسبة للصلوات والصلاة التالية والمؤشر. تتبع الحسابات المدينة السعودية المختارة وفقUTC+03:00 دون تغيير توقيت الجهاز.",
+    "availability": "Shown in Home; no extra frame invented"
+  },
+  {
+    "feature": "dates",
+    "galleryLanguage": "ar",
+    "images": [],
+    "description": "يظهر التاريخان في صور الرئيسية؛ ويمكن التحكم في إظهار كل منهما بصورة مستقلة وتعديل اليوم الهجري.",
+    "availability": "Shown in Home; no extra frame invented"
+  },
+  {
+    "feature": "football",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/football-teams.png"
+    ],
+    "description": "تعرض الرئيسية مباريات كما ظهرت عند الالتقاط. نافذة اختيار المجموعة عربية، وقد حُجب الاسم الشخصي في الخلفية. ليست اللقطات ضماناً لنتائج حالية.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "greeting",
+    "galleryLanguage": "ar",
+    "images": [],
+    "description": "تبقى كلمات التحية الحقيقية في الرئيسية، ويُحجب الاسم المحفوظ الخاص فقط. لم يُركّب اسم تجريبي، وتظل ميزة تخصيص الاسم موجودة.",
+    "availability": "Shown in Home; no extra frame invented"
+  },
+  {
+    "feature": "fonts",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/fonts-ar.png",
+      "images/en/fonts-en.png"
+    ],
+    "description": "نافذتا الخط العربـي والإنجليزي الفعليتان. تُحفظ الخيارات بصورة مستقلة مع افتراضي معتمد لكل لغة، ومعالجة مخصصة لطباعة الساعة والنصوص الدينية.",
+    "availability": "Shared/other-language capture explicitly labeled"
+  },
+  {
+    "feature": "wallpaper",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/wallpaper-fixed.png",
+      "images/ar/wallpaper-random.png"
+    ],
+    "description": "لقطات الإعدادات الحالية عربية. لا تنطبق فترة التبديل على الوضع الثابت وتُحفظ للعشوائي، ولا تثبت الصور وحدها حدوث التبديل بمرور الوقت.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "wifi",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/wifi.png"
+    ],
+    "description": "تُستخدم لقطة اللوحة الأصلية العربية الحالية فقط، مع حجب أسماء الشبكات. لم يُنفذ اتصال أو إدخال كلمة مرور. تستخدمAPI29 فأحدث إعدادات النظام.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "launchers",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/launcher-picker.png"
+    ],
+    "description": "فُتحت القائمة العربية ثم أُغلقت، مع حجب أسماء المشغّلات الخاصة. هذه صورة لواجهة الاختيار وليست إثباتاً لتنفيذ تبديل. لم يتغير المشغّل الافتراضي أو أي مشغّل محمي.",
+    "availability": "Native UI in this language"
+  },
+  {
+    "feature": "settings",
+    "galleryLanguage": "ar",
+    "images": [
+      "images/ar/settings.png"
+    ],
+    "description": "إعدادات فعلية في كل لغة، دون إنشاء واجهة أو مسار تنقل أو ميزة تطبيق جديدة للحصول على الصور.",
+    "availability": "Native UI in this language"
+  }
+]
