@@ -1,5 +1,12 @@
 # Changelog
 
+## Accepted RC2 audit baseline — 2026-10-30
+
+Approved source 7091b90 is on private GitHub main with passing CI:355 tests, lint 0 errors / 149 warnings and successful release build/security/packaged-license checks. The final signed APK and owner physical-remote verification are recorded in [the release draft](docs/RELEASE-NOTES-1.0.0-RC2.md). Prior sections below are historical iteration records, not the current readiness verdict. Public publication remains separately gated.
+
+Final audit improves fixed-wallpaper memory, focus/selection contrast, bright-scene controls, city-time consistency, bounded HTTP reads and Wi-Fi focus/lifecycle ownership, without removing core features or redesigning Home.
+
+
 ## RC2 functional-parity correction
 
 Restores the measured 2.8.5 reflection preview on KitKat, separates readable full text from the complete accessible copyright notice, fixes selected-team football details/timestamps/full names and cache clock rollback, and restores native focus after pointer-selected navigation. System-language selection restores the process locale; invisible routing helpers use their original plain Activity. See [functional parity matrix](docs/FUNCTIONAL-PARITY.md).

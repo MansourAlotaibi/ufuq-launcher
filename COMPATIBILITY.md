@@ -9,7 +9,7 @@
 | API 21–34 other devices | Runtime guards, package discovery and desugaring | Hardware untested |
 | API 35+ | No runtime evidence | Untested |
 | Arabic RTL / English LTR, Classic / Midnight / Coast | Actual TV captures and framework tests | Tested screens only |
-| D-pad | Injected events and owner-reported complete Arabic/English physical-remote flow on reviewed 96932ba | Physical baseline verified by owner; changes in the audit candidate require the separately recorded follow-up scope |
+| D-pad | Injected events and owner-reported complete Arabic/English physical-remote flow on final signed 17fe audit candidate | Owner confirms full flow and all ordering pass; individual optional substeps were not separately itemized. See final audit for the earlier non-reproduced scripted observation. |
 | Process restart | Only the independent public package may be stopped for recovery testing | Does not establish TV reboot or low-memory soak behavior |
 
 The public application ID is `io.github.mansouralotaibi.ufuq`. It cannot update the protected personal package. Installation does not set HOME, disable another launcher or grant accessibility/system permissions. The owner expressly authorized a single read-only reference capture of the installed personal Home; its settings and installation were not changed.
