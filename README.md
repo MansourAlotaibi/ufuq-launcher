@@ -4,7 +4,7 @@
 
 A cinematic, remote-friendly Android TV launcher built with native Java and Android Views. Ufuq brings a prominent clock, daily reflections, prayer times, football fixtures and your favorite apps into one coherent Home screen.
 
-**1.0.0-rc2 · release candidate · public publication pending.** The independently signed candidate has been tested on the owner's Nobel Android 4.4.4 television. No official public APK release has been published yet.
+**[1.0.0-rc2 · public pre-release](https://github.com/MansourAlotaibi/ufuq-launcher/releases/tag/v1.0.0-rc2).** The independently signed release has been tested on the owner's Nobel Android 4.4.4 television. Other Android TV and Google TV hardware remains unverified.
 
 ![Classic Home, English LTR, full 1920×1080 frame with privacy redactions](docs/gallery/images/en/home-classic.png)
 
@@ -63,7 +63,7 @@ See [COMPATIBILITY](COMPATIBILITY.md) for TLS/trust-store, permissions, display/
 
 ## Install safely
 
-There is no official public APK download yet. For an owner-approved signed candidate or future release:
+Download the [official signed RC2 APK](https://github.com/MansourAlotaibi/ufuq-launcher/releases/download/v1.0.0-rc2/ufuq-launcher-1.0.0-rc2.apk) and [published checksums](https://github.com/MansourAlotaibi/ufuq-launcher/releases/download/v1.0.0-rc2/SHA256SUMS.txt) from the [pre-release](https://github.com/MansourAlotaibi/ufuq-launcher/releases/tag/v1.0.0-rc2):
 
 1. Verify its SHA-256, independent certificate and package `io.github.mansouralotaibi.ufuq`.
 2. Open it with Android's normal package installer and review the device's installation consent.
@@ -73,23 +73,25 @@ Do not disable, clear or uninstall another launcher, grant privileged permission
 
 ## Build from source
 
-Use JDK 17, Android platform/build-tools 34 and the supplied Gradle 8.9 wrapper. Repository access is required while it remains private.
+Use JDK 17, Android platform/build-tools 34 and the supplied Gradle 8.9 wrapper. The repository is public. Check out the release tag to build the published RC2 source; future development changes are reviewed through pull requests.
 
 ```sh
 git clone https://github.com/MansourAlotaibi/ufuq-launcher.git
-cd ufuq-launcher/launcher
+cd ufuq-launcher
+git checkout v1.0.0-rc2
+cd launcher
 ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease
 ```
 
-The default build is unsigned. Follow [BUILDING](BUILDING.md) for reproducible tool configuration, public-only signing and accompanying dependency source. Never reuse a personal MansourTV signing key or commit credentials. [Backup/recovery status](docs/SIGNING-RECOVERY.md): the owner completed the encrypted local backup and separate-copy signing recovery test, including API 19 v1/v2 verification. Independent off-device disaster-recovery custody remains outstanding.
+The default build is unsigned. Follow [BUILDING](BUILDING.md) for reproducible tool configuration, public-only signing and accompanying dependency source. Never reuse a personal MansourTV signing key or commit credentials. [Backup/recovery status](docs/SIGNING-RECOVERY.md): the owner completed the encrypted local backup and separate-copy signing recovery test, including API 19 v1/v2 verification. Independent off-device disaster-recovery custody remains outstanding and was explicitly deferred by the owner until after launch.
 
-The accepted application source at `7091b90` passed [GitHub CI](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41077946236):355 tests, 0 failures and release lint 0 errors / 149 warnings, plus release build and security/license-policy checks. This gallery is a local documentation update, not a new hardware test or a new CI run.
+The published tag `v1.0.0-rc2` resolves to `d6eac0ac30f9d9ad96ea52f83f59dfacedec8957` and passed [release-tag CI](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41113149093): 355 tests, 0 failures and release lint 0 errors / 149 warnings, plus release build and security/license-policy checks. Maintenance documentation and CI changes do not replace the published APK or imply new hardware testing.
 
 ## Privacy and security
 
 No telemetry, analytics, WebView or Compose UI is added. Greetings, favorites, fonts and wallpaper choices are local; football uses optional foreground-driven networking and a private local cache. Legacy Wi-Fi passes user-entered credentials to Android; modern connection management uses system settings. Ufuq's independent identity cannot update the protected personal package.
 
-[PRIVACY](PRIVACY.md) explains permissions, storage, cache and networking. [SECURITY](SECURITY.md) explains private vulnerability reporting and its publication gate. Never post secrets, SSIDs or raw device dumps in public issues. The gallery contains only curated privacy-redacted derivatives; raw device captures remain excluded.
+[PRIVACY](PRIVACY.md) explains permissions, storage, cache and networking. [SECURITY](SECURITY.md) explains the enabled [private vulnerability-reporting route](https://github.com/MansourAlotaibi/ufuq-launcher/security/advisories/new). Never post secrets, SSIDs or raw device dumps in public issues. The gallery contains only curated privacy-redacted derivatives; raw device captures remain excluded.
 
 ## Open-source code and content rights
 
