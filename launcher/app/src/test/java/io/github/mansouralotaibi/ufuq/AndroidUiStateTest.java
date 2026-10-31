@@ -38,10 +38,10 @@ public class AndroidUiStateTest {
  }
  @Test public void bundledArtWorksWithoutExternalImagesAndFixedRandomChoicesPersist() {
   Context c=RuntimeEnvironment.getApplication();
-  List<File> art=BundledWallpapers.collection(c,null); assertEquals(5,art.size());
+  List<File> art=BundledWallpapers.collection(c,null); assertEquals(9,art.size());
   for(File file:art)assertTrue(file.length()>0);
   c.getSharedPreferences(Config.SETTINGS_NAME,0).edit().clear().putBoolean(Config.WALLPAPER_RANDOM_KEY,true).commit();
-  Config random=Config.load(c); assertTrue(random.wallpaperEnabled);assertEquals(5,random.wallpapers.size());
+  Config random=Config.load(c); assertTrue(random.wallpaperEnabled);assertEquals(9,random.wallpapers.size());
   c.getSharedPreferences(Config.SETTINGS_NAME,0).edit().putBoolean(Config.WALLPAPER_RANDOM_KEY,false)
    .putString(Config.WALLPAPER_CHOICE_KEY,"turquoise-horizon.png").commit();
   Config fixed=Config.load(c);assertEquals(1,fixed.wallpapers.size());assertEquals("turquoise-horizon.png",fixed.wallpaper.getName());

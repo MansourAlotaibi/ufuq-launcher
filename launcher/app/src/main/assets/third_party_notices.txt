@@ -144,3 +144,24 @@ and exact SHA-256 hashes are in `third_party/wallpaper-provenance.json`.
 
 
 Optional UI fonts (unmodified static files, SIL OFL 1.1): Cairo, copyright 2009 The Cairo Project Authors; Tajawal, copyright 2018 Boutros International; IBM Plex Sans Arabic, copyright 2017 IBM Corp., Reserved Font Name Plex; Readex Pro, copyright 2018 The Readex Pro Project Authors, Reserved Font Name RevReading Lexend; Almarai, copyright 2019 The Almarai Project Authors; Lato, copyright 2010–2014 tyPoland Łukasz Dziedzic, Reserved Font Name Lato. Complete individual copyright/license notices are bundled under assets/licenses/*-OFL.txt. Revision-pinned official sources, unchanged file hashes and per-file revisions are in third_party/ui-font-provenance.json. Cairo uses the last official static release before variable-font conversion for API19; Readex Pro is the author's official static TTF. No font file has been converted, subsetted or renamed internally. These licenses remain separate from application licensing. Clock/religious reading typography stays purpose-specific. Amiri is absent from current builds; its previously verified historical asset remains inventoried for clean-history auditing.
+
+### Additional 4K photographs (development after RC2)
+
+These four photographs are not AI-generated artwork. Each bundled derivative is a centered 16:9 crop downsampled to 3840×2160 JPEG. No generative fill or image-content replacement was used. The author, original source, original/downloaded hash, packaged hash and changes are recorded in third_party/wallpaper-provenance.json. Existing RC2 images are unchanged.
+
+- **Utah Dunes at Sunset** — Bob Wick / Bureau of Land Management - Utah. License: Public domain (U.S. federal government official work). Source: https://commons.wikimedia.org/wiki/File:Utah_Dunes_Landscape_-_West_Desert_District.jpg
+
+- **Peyto Lake** — Douglaspperkins. License: CC-BY-SA-4.0. Source: https://commons.wikimedia.org/wiki/File:Peyto_Lake_2025.jpg
+
+- **Lofoten Evening** — Simo Räsänen (Ximonic). License: GFDL-1.2-or-later. Source: https://commons.wikimedia.org/wiki/File:Gims%C3%B8ystraumen%2C_2009_09.jpg
+
+- **Lake Bled Blue Hour** — Jakub T. Jankiewicz. License: CC-BY-SA-4.0. Source: https://commons.wikimedia.org/wiki/File:Bled_Church_island_in_Blue_hour.jpg
+
+
+Peyto Lake and Lake Bled Blue Hour, including the cropped derivatives, remain CC BY-SA 4.0: preserve attribution, link the license, identify changes, and distribute adaptations of these images under that license. See assets/licenses/CC-BY-SA-4.0.txt. They are separate works in the application collection, not MIT artwork.
+
+
+**Lofoten Evening — Ufuq 4K edition.** Original title: Gimsøystraumen, 2009 09; copyright Simo Räsänen (Ximonic), 2010. Cropping/resizing adaptation copyright Ufuq Launcher contributors, 2026. Publisher of the adaptation: Ufuq Launcher contributors. Permission is granted to copy, distribute and/or modify this image under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is bundled in assets/licenses/GFDL-1.3.txt, with the image-specific notice in assets/licenses/lofoten-evening-NOTICE.txt. The editable JPEG derivative is in assets/wallpapers/lofoten-evening.jpg and the unchanged original source is in third_party/wallpaper-sources/lofoten-evening-original.jpg in the source repository.
+
+
+**History:** 2010 — original Gimsøystraumen, 2009 09 by Simo Räsänen; original source https://commons.wikimedia.org/wiki/File:Gims%C3%B8ystraumen,_2009_09.jpg . 2026 — Lofoten Evening — Ufuq 4K edition, by Ufuq Launcher contributors; only center-cropping and downsampling. Image source and revision history: https://github.com/MansourAlotaibi/ufuq-launcher . No endorsement by photographers or agencies is implied. These asset licenses do not change the application source license. The source and derivative JPEG files are transparent image copies under the GFDL definition.

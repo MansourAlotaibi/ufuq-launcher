@@ -291,4 +291,8 @@
     <string name="wifi_detail_security">Advertised security</string>
     <string name="wifi_detail_ip">IP address (IPv4)</string>
     <string name="wifi_detail_unavailable">Unavailable</string>
+    <string name="wallpaper_name_5">Utah Dunes at Sunset</string>
+    <string name="wallpaper_name_6">Peyto Lake</string>
+    <string name="wallpaper_name_7">Lofoten Evening</string>
+    <string name="wallpaper_name_8">Lake Bled Blue Hour</string>
 </resources>

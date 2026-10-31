@@ -496,6 +496,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
         greeting = findViewById(R.id.greeting);
         clockBlock = findViewById(R.id.leftBlock);
         if (sceneHero) {
+            HomeGeometry.balance(root, density);
             // The legacy invisible clock must not enlarge the cinematic navigation header
             // when an alternate font has taller metrics. Preserve its approved 48dp lane.
             View header = findViewById(R.id.homeHeader);
@@ -615,10 +616,15 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
                     @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 int width = parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight();
                 int slots = ShelfGeometry.slots(width, density, shelfScalePercent);
-                if (parent.getChildAdapterPosition(view) == state.getItemCount() - 1) {
-                    int tail = ShelfGeometry.tail(state.getItemCount(), slots)
-                            * ShelfGeometry.cell(width, density, shelfScalePercent);
-                    if (rtlAppGrid) out.left = tail; else out.right = tail;
+                int count = state.getItemCount(), position = parent.getChildAdapterPosition(view);
+                if (count > 0 && position != RecyclerView.NO_POSITION) {
+                    int cell = ShelfGeometry.cell(width, density, shelfScalePercent);
+                    // Both edges share the final page's unused cells; its total width stays
+                    // unchanged, preserving whole-card paging and cross-page reorder offsets.
+                    int leading = ShelfGeometry.edgeSpace(count, position, slots, cell, true);
+                    int trailing = ShelfGeometry.edgeSpace(count, position, slots, cell, false);
+                    if (rtlAppGrid) { out.right = leading; out.left = trailing; }
+                    else { out.left = leading; out.right = trailing; }
                 }
             }
         });
@@ -672,7 +678,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             // even when the theme requests an extra visible row below the dock.
             int shelfClearance = cfg.appLibrary ? hero.getMeasuredHeight() + (int) (40 * density) : 0;
             int want = sceneHero
-                    ? Math.max(0, h - itemH - (int) (93 * density))
+                    ? Math.max(0, h - itemH - (int) ((93 - HomeGeometry.VERTICAL_SHIFT_DP) * density))
                     : Math.max(shelfClearance, h - dockRow - gridRows - (int) (AppAdapter.BOTTOM_ROOM_DP * density));
             // Where the rows cannot fit even at the smallest tile (3 rows with the title on), the title keeps its
             // room above the dock and the last rows run off the bottom instead of the title drawing over the clock.
@@ -1918,7 +1924,7 @@ public class MainActivity extends ThemedActivity implements AppAdapter.TileListe
             fillHero(position, label);
             heroMeta.setVisibility(View.GONE);
             heroDots.setVisibility(View.GONE);
-            hero.setY(292 * density);
+            hero.setY((292 + HomeGeometry.VERTICAL_SHIFT_DP) * density);
             hero.setTranslationX(0f);
             hero.setAlpha(1f);
             heroShown = true;

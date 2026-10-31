@@ -40,4 +40,20 @@ public class ShelfGeometryTest {
     if(to!=from) assertEquals(down ? from/slots+1 : from/slots-1,to/slots);
    }
  }
+ @Test public void shortPagesAreCenteredWithoutChangingPageWidthOrOrder() {
+  for(int slots=1;slots<=8;slots++) for(int count=1;count<=30;count++) {
+   int cell=267,unused=ShelfGeometry.tail(count,slots)*cell;
+   int lastStart=ShelfGeometry.pageStart(count-1,slots),lead=0,trail=0;
+   for(int position=0;position<count;position++) {
+    int l=ShelfGeometry.edgeSpace(count,position,slots,cell,true);
+    int t=ShelfGeometry.edgeSpace(count,position,slots,cell,false);
+    if(position<lastStart){assertEquals(0,l);assertEquals(0,t);}
+    lead+=l;trail+=t;
+   }
+   assertEquals(unused,lead+trail);assertTrue(Math.abs(lead-trail)<=1);
+   assertEquals(slots*cell,(count-lastStart)*cell+lead+trail);
+  }
+  assertEquals(266,ShelfGeometry.edgeSpace(4,0,6,266,true));
+  assertEquals(266,ShelfGeometry.edgeSpace(4,3,6,266,false));
+ }
 }

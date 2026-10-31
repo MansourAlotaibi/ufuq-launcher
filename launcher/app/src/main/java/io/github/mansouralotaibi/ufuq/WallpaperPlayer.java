@@ -228,7 +228,7 @@ final class WallpaperPlayer {
         // The reference composition treats the location as a restrained caption directly below the dominant
         // clock. Keeping it at the physical right also prevents an isolated word floating in the centre of the
         // Scene, which competed with both the verse and the wallpaper's natural focal point.
-        params.topMargin = Math.round((sceneHero ? 332 : 110) * dp);
+        params.topMargin = Math.round((sceneHero ? 332 + HomeGeometry.VERTICAL_SHIFT_DP : 110) * dp);
         params.rightMargin = Math.round((sceneHero ? 166 : 62) * dp);
         root.addView(text, params);
         return text;

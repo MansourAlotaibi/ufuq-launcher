@@ -17,7 +17,9 @@ A cinematic, remote-friendly Android TV launcher built with native Java and Andr
 | ![Classic — gold](docs/gallery/images/en/home-classic.png) | ![Midnight — silver](docs/gallery/images/en/home-midnight.png) | ![Coast — turquoise](docs/gallery/images/en/home-coast.png) |
 | Cinematic gold | Dark silver | Blue/turquoise accents |
 
-Themes share geometry, navigation and functionality. Wallpaper selection, rotation and dimming remain independent of the palette. Five audited scenes are bundled: two public-domain landscape photographs and three original MIT landscapes.
+Themes share geometry, navigation and functionality. Wallpaper selection, rotation and dimming remain independent of the palette. Published RC2 bundles five audited scenes. Current development source adds four real 4K photographs—Utah Dunes at Sunset, Peyto Lake, Lofoten Evening and Lake Bled Blue Hour—for nine choices total. Their separate public-domain, CC BY-SA and GFDL terms are documented in [third-party notices](THIRD-PARTY-NOTICES.md).
+
+Current development (`1.0.0-rc3-dev`) also lowers the cinematic foreground slightly and centers incomplete favorites pages without changing card sizes or saved order. The owner accepted these shared presentation changes on the private edition of the tested Nobel API19 TV; the public package requires its own runtime validation. The gallery documents RC2, and the downloadable RC2 APK and tag are unchanged. No newer signed release is published by this source update.
 
 ## Features
 
