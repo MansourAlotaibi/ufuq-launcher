@@ -27,4 +27,9 @@ updates:
           - version-update:semver-major
       - dependency-name: com.android.application
         update-types:
+          - version-update:semver-minor
+          - version-update:semver-major
+      - dependency-name: gradle-wrapper
+        update-types:
+          - version-update:semver-minor
           - version-update:semver-major
