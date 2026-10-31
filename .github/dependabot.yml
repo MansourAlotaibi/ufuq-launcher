@@ -14,3 +14,17 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 3
+    # Version updates only: preserve API19 tests/runtime and migrate build tools as a unit.
+    # Security updates are not filtered by these update-types rules; review compatibility manually.
+    ignore:
+      - dependency-name: org.robolectric:robolectric
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-major
+      - dependency-name: androidx.dynamicanimation:dynamicanimation
+        update-types:
+          - version-update:semver-minor
+          - version-update:semver-major
+      - dependency-name: com.android.application
+        update-types:
+          - version-update:semver-major
