@@ -283,4 +283,12 @@
     <string name="font_style_state">Font Style: %1$s</string>
     <string name="library_hold_add">OK: Open · Hold: Add to Home</string>
     <string name="library_hold_remove">OK: Open · Hold: Remove from Home</string>
+    <string name="wifi_connection_details">Connection details</string>
+    <string name="wifi_details_back">Back to networks</string>
+    <string name="wifi_detail_status">Connection status</string>
+    <string name="wifi_detail_name">Network name</string>
+    <string name="wifi_detail_signal">Signal strength</string>
+    <string name="wifi_detail_security">Advertised security</string>
+    <string name="wifi_detail_ip">IP address (IPv4)</string>
+    <string name="wifi_detail_unavailable">Unavailable</string>
 </resources>
