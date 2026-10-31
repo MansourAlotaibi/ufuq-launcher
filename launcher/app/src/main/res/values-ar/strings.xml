@@ -244,4 +244,8 @@
     <string name="wifi_detail_security">نوع الحماية المعلن للشبكة</string>
     <string name="wifi_detail_ip">عنوان IP ‏(IPv4)</string>
     <string name="wifi_detail_unavailable">غير متاح</string>
+    <string name="wallpaper_name_5">كثبان يوتا عند الغروب</string>
+    <string name="wallpaper_name_6">بحيرة بيتو</string>
+    <string name="wallpaper_name_7">مساء لوفوتن</string>
+    <string name="wallpaper_name_8">بحيرة بليد الزرقاء</string>
 </resources>

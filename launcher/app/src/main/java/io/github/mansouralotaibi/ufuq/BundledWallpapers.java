@@ -9,7 +9,7 @@ import java.util.List;
 
 /** Bounded, one-time local extraction: bundled art works even without external storage. */
 final class BundledWallpapers {
-    private static final String[] NAMES = {"desert-sunset.jpg", "moraine-lake.jpg", "golden-dunes.png", "silver-peaks.png", "turquoise-horizon.png"};
+    private static final String[] NAMES = {"desert-sunset.jpg", "moraine-lake.jpg", "golden-dunes.png", "silver-peaks.png", "turquoise-horizon.png", "utah-dunes.jpg", "peyto-lake.jpg", "lofoten-evening.jpg", "bled-blue-hour.jpg"};
     static synchronized List<File> collection(Context context, File themeDir) {
         File dir = new File(context.getFilesDir(), "bundled-wallpapers-v1");
         List<File> result = new ArrayList<>();

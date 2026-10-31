@@ -31,13 +31,17 @@ for revision in git('rev-list',a.ref).splitlines():
    assert hashlib.sha256(data).hexdigest()==allow[name]['sha256'],'Unverified historical asset: '+name
 f=json.loads((r/'third_party/font-provenance.json').read_text())
 assert hashlib.sha256((r/'launcher/app/src/main/res/font/outfit.ttf').read_bytes()).hexdigest()==f['sha256']
+for entry in json.loads((r/'third_party/wallpaper-provenance.json').read_text()):
+ if entry.get('originalSourceCopy'):
+  original=r/entry['originalSourceCopy']
+  assert hashlib.sha256(original.read_bytes()).hexdigest()==entry['originalSha256'],'Wallpaper original source checksum mismatch'
 w=json.loads((r/'third_party/gradle-wrapper-provenance.json').read_text())
 assert hashlib.sha256((r/'launcher/gradle/wrapper/gradle-wrapper.jar').read_bytes()).hexdigest()==w['sha256']
 if a.apk:
  with zipfile.ZipFile(a.apk) as z:
   for e in json.loads((r/'third_party/wallpaper-provenance.json').read_text()):
    assert hashlib.sha256(z.read('assets/wallpapers/'+e['file'])).hexdigest()==e['sha256']
-  for name in ['OFL-Outfit.txt','Apache-2.0.txt','desugar-LICENSE.txt','CC-BY-3.0.txt','CC-BY-SA-4.0.txt']:
+  for name in ['OFL-Outfit.txt','Apache-2.0.txt','desugar-LICENSE.txt','CC-BY-3.0.txt','CC-BY-SA-4.0.txt','GFDL-1.3.txt','lofoten-evening-NOTICE.txt']:
    assert z.read('assets/licenses/'+name)==(r/'launcher/app/src/main/assets/licenses'/name).read_bytes()
   for e in json.loads((r/'third_party/ui-font-provenance.json').read_text())['files']:
    asset=e['file'].split('/assets/',1)[1]

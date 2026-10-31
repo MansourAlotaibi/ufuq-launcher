@@ -16,6 +16,13 @@ final class ShelfGeometry {
     }
     static int pageStart(int position, int slots) { return Math.max(0, position) / slots * slots; }
     static int tail(int count, int slots) { return (slots - count % slots) % slots; }
+    /** Extra unused space on each logical edge of the last page; mirrors naturally in RTL. */
+    static int edgeSpace(int count, int position, int slots, int cell, boolean leading) {
+        if (count <= 0 || position < 0 || position >= count) return 0;
+        int unused = tail(count, slots) * cell;
+        if (leading) return position == pageStart(count - 1, slots) ? unused / 2 : 0;
+        return position == count - 1 ? unused - unused / 2 : 0;
+    }
     static int verticalMove(int from, int count, int slots, boolean down) {
         if (count < 1 || slots < 1 || from < 0 || from >= count) return from;
         int to = from + (down ? slots : -slots);
