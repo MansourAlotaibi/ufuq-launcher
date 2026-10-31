@@ -4,7 +4,7 @@
 
 - Show connection status, signal, advertised security and assigned IPv4 in the legacy Wi-Fi panel, with Arabic/English and palette-aware focus.
 - Open details with OK on the connected network; BACK returns to networks without reconnecting or disconnecting.
-- Keep modern Android system settings fallback and show unavailable data honestly. Physical validation remains pending; see [the feature checklist](docs/WIFI-CONNECTION-DETAILS.md).
+- Keep modern Android system settings fallback and show unavailable data honestly. The owner verified both details entry points and BACK with a physical remote in the same-code Personal candidate on the API19 Nobel TV; see [the scoped validation record](docs/WIFI-CONNECTION-DETAILS.md).
 
 ## Accepted RC2 audit baseline — 2026-10-30
 
