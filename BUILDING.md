@@ -1,4 +1,4 @@
-# Building 1.0.0-rc2
+# Building 1.0.0-rc3
 
 Use JDK 17, Android SDK platform 34 and build-tools 34.0.0. Set JAVA_HOME and
 ANDROID_HOME locally; never commit local.properties. Gradle 8.9 is checksum-pinned.

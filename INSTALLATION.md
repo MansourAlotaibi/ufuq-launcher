@@ -18,6 +18,12 @@ Do not grant WRITE_SECURE_SETTINGS.
 
 The legacy-named build-and-install scripts now ONLY build and validate. They do not install.
 
+## RC3 update
+
+Use the signed `ufuq-launcher-1.0.0-rc3.apk` (code10002) from the official `v1.0.0-rc3` pre-release, with its SHA256SUMS.txt. It uses the same public certificate as RC2, so an ordinary in-place update preserves existing Ufuq data. Reject any package/certificate mismatch; do not uninstall or clear data to bypass it. The expected certificate is in [PUBLIC-SIGNING-IDENTITY](docs/PUBLIC-SIGNING-IDENTITY.json). Installation does not change HOME. RC3's specific hardware/test limitations are in [compatibility](COMPATIBILITY.md) and [release notes](docs/RELEASE-NOTES-1.0.0-RC3.md).
+
+RC2/code10001 is lower than RC3/code10002; a normal downgrade is generally rejected. Preserve data and request a verified forward-version fix if needed rather than forcing downgrade or deleting the app. The published RC2 APK and checksum below remain unchanged for historical verification.
+
 ## RC2 verification and recovery
 
 The accepted candidate is version1.0.0-rc2/code 10001, independently signed for `io.github.mansouralotaibi.ufuq`. Its SHA-256 is:
