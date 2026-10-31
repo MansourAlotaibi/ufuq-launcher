@@ -71,7 +71,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     // Last Robolectric series that exercises both API 19 and API 34; test only.
     testImplementation 'org.robolectric:robolectric:4.12.2'
-    testImplementation 'org.json:json:20240303'
+    testImplementation 'org.json:json:20260814'
 }
 
 // Refuse legacy command-line identity overrides rather than silently accepting them.
