@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.core.text.BidiFormatter;
@@ -50,6 +51,8 @@ final class WifiPanel {
     private ListView list;
     private boolean receiverRegistered;
     private boolean passwordMode;
+    private boolean detailsMode;
+    private TextView details;
     private boolean listInitialFocusPending;
 
     WifiPanel(Activity activity) {
@@ -86,6 +89,9 @@ final class WifiPanel {
             activity.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             return;
         }
+        if (dialog != null && dialog.isShowing()) return;
+        detailsMode = false;
+        passwordMode = false;
         if (wifi == null) {
             Toast.makeText(activity, R.string.not_available, Toast.LENGTH_SHORT).show();
             return;
@@ -96,6 +102,10 @@ final class WifiPanel {
         UiTheme.apply(dialog.getWindow().getDecorView());
         dialog.setOnDismissListener(d -> unregister());
         dialog.setOnKeyListener((d, key, event) -> {
+            if (detailsMode && key == KeyEvent.KEYCODE_BACK) {
+                if (event.getAction() == KeyEvent.ACTION_UP) showNetworks();
+                return true;
+            }
             if (passwordMode && key == android.view.KeyEvent.KEYCODE_BACK
                     && event.getAction() == android.view.KeyEvent.ACTION_UP) {
                 passwordMode = false;
@@ -144,6 +154,10 @@ final class WifiPanel {
         settings.setText(R.string.ufuq_wifi_system_settings);
         settings.setOnClickListener(view -> systemSettings(activity));
         panel.addView(settings, new LinearLayout.LayoutParams(-1, -2));
+        Button connectionDetails = new Button(activity);
+        connectionDetails.setText(R.string.wifi_connection_details);
+        connectionDetails.setOnClickListener(view -> showDetails());
+        panel.addView(connectionDetails, new LinearLayout.LayoutParams(-1, -2));
 
         status = text("", 15, 0xCCFFFFFF);
         LinearLayout.LayoutParams statusLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -198,14 +212,15 @@ final class WifiPanel {
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
-            if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(intent.getAction())) loadResults(null);
+            if (detailsMode) updateDetails();
+            else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(intent.getAction())) loadResults(null);
             else updateStatus(null);
         }
     };
 
     @android.annotation.SuppressLint("MissingPermission")
     private void loadResults(String note) {
-        if (dialog == null || !dialog.isShowing() || passwordMode) return;
+        if (dialog == null || !dialog.isShowing() || passwordMode || detailsMode) return;
         int previousPosition=list.getSelectedItemPosition();
         String selectedSsid=previousPosition>0 && previousPosition<=networks.size()
                 ? networks.get(previousPosition-1).SSID : null;
@@ -223,14 +238,15 @@ final class WifiPanel {
         adapter.notifyDataSetChanged();
         updateStatus(note);
         int selection=0;
+        WifiInfo connection = connectionInfo();
         String wanted=listInitialFocusPending
-                ? cleanSsid(wifi.getConnectionInfo()==null?null:wifi.getConnectionInfo().getSSID()) : selectedSsid;
+                ? cleanSsid(connection == null ? null : connection.getSSID()) : selectedSsid;
         if (wanted!=null) for(int i=0;i<networks.size();i++) if(networks.get(i).SSID.equals(wanted)) selection=i+1;
         if (listInitialFocusPending) {
             listInitialFocusPending=false;
             ListView target=list; final int initial=selection;
             target.post(() -> {
-                if (dialog==null || !dialog.isShowing() || list!=target || passwordMode) return;
+                if (dialog==null || !dialog.isShowing() || list!=target || passwordMode || detailsMode) return;
                 target.requestFocus(); target.setSelection(initial);
             });
         } else {
@@ -241,7 +257,7 @@ final class WifiPanel {
 
     private void updateStatus(String note) {
         if (status == null) return;
-        WifiInfo info = wifi.getConnectionInfo();
+        WifiInfo info = connectionInfo();
         String ssid = cleanSsid(info == null ? null : info.getSSID());
         String line = TextUtils.isEmpty(ssid) || "<unknown ssid>".equalsIgnoreCase(ssid)
                 ? activity.getString(R.string.wifi_disconnected)
@@ -257,14 +273,14 @@ final class WifiPanel {
     }
 
     private void choose(ScanResult result) {
+        WifiInfo current = connectionInfo();
+        if (sameNetwork(result.SSID, current == null ? null : current.getSSID())) {
+            showDetails();
+            return;
+        }
         if (!supportedSecurity(result.capabilities)) {
             Toast.makeText(activity, R.string.ufuq_wifi_security_system, Toast.LENGTH_LONG).show();
             systemSettings(activity);
-            return;
-        }
-        WifiInfo current = wifi.getConnectionInfo();
-        if (sameNetwork(result.SSID, current == null ? null : current.getSSID())) {
-            updateStatus(activity.getString(R.string.wifi_already_connected));
             return;
         }
         WifiConfiguration saved = saved(result.SSID);
@@ -279,6 +295,92 @@ final class WifiPanel {
             return;
         }
         askPassword(result);
+    }
+
+    /** No persistence or logging: connection information exists only in this visible panel. */
+    private WifiInfo connectionInfo() {
+        try { return wifi == null ? null : wifi.getConnectionInfo(); }
+        catch (SecurityException unavailable) { return null; }
+    }
+
+    private void showNetworks() {
+        detailsMode = false;
+        details = null;
+        dialog.setContentView(content());
+        UiTheme.apply(dialog.getWindow().getDecorView());
+        loadResults(null);
+    }
+
+    private void showDetails() {
+        detailsMode = true;
+        LinearLayout panel = new LinearLayout(activity);
+        panel.setOrientation(LinearLayout.VERTICAL);
+        panel.setLayoutDirection(activity.getResources().getConfiguration().locale.getLanguage().equals("ar")
+                ? View.LAYOUT_DIRECTION_RTL : View.LAYOUT_DIRECTION_LTR);
+        panel.setPadding(dp(28), dp(24), dp(28), dp(22));
+        panel.setBackground(roundStroke(ThemePalette.SURFACES[UiTheme.selected(activity)], 26,
+                (UiTheme.accent(activity) & 0x00FFFFFF) | 0x55000000));
+        panel.addView(text(activity.getString(R.string.wifi_connection_details), 25, Color.WHITE));
+        ScrollView scroll = new ScrollView(activity);
+        details = text("", 18, Color.WHITE);
+        details.setPadding(0, dp(18), 0, dp(18));
+        details.setLineSpacing(dp(4), 1f);
+        scroll.addView(details);
+        panel.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
+        Button back = new Button(activity);
+        back.setText(R.string.wifi_details_back);
+        back.setOnClickListener(view -> showNetworks());
+        panel.addView(back, new LinearLayout.LayoutParams(-1, -2));
+        dialog.setContentView(panel);
+        UiTheme.apply(dialog.getWindow().getDecorView());
+        updateDetails();
+        back.requestFocus();
+    }
+
+    private void updateDetails() {
+        if (!detailsMode || details == null) return;
+        WifiInfo info = connectionInfo();
+        String ssid = cleanSsid(info == null ? null : info.getSSID());
+        boolean connected = info != null && info.getNetworkId() >= 0
+                && info.getSupplicantState() == android.net.wifi.SupplicantState.COMPLETED;
+        String unknown = activity.getString(R.string.wifi_detail_unavailable);
+        String name = TextUtils.isEmpty(ssid) || "<unknown ssid>".equalsIgnoreCase(ssid) ? unknown : ssid;
+        String advertised = null;
+        if (connected) {
+            List<ScanResult> results;
+            try { results = wifi.getScanResults(); }
+            catch (SecurityException unavailable) { results = null; }
+            // Match the actual access point, not just its name: different APs may share an SSID.
+            if (results != null && info.getBSSID() != null) for (ScanResult result : results) {
+                if (result != null && info.getBSSID().equals(result.BSSID)) {
+                    advertised = security(result);
+                    break;
+                }
+            }
+        }
+        String ip = connected ? ipv4(info.getIpAddress()) : "";
+        StringBuilder copy = new StringBuilder();
+        detail(copy, R.string.wifi_detail_status, activity.getString(connected
+                ? R.string.wifi_connected : R.string.wifi_disconnected));
+        detail(copy, R.string.wifi_detail_name, connected ? name : unknown);
+        detail(copy, R.string.wifi_detail_signal, connected && info.getRssi() > -127
+                ? signal(info.getRssi()) : unknown);
+        detail(copy, R.string.wifi_detail_security, advertised == null ? unknown : advertised);
+        detail(copy, R.string.wifi_detail_ip, TextUtils.isEmpty(ip) ? unknown : ip);
+        details.setText(copy.toString());
+    }
+
+    private void detail(StringBuilder copy, int label, String value) {
+        if (copy.length() > 0) copy.append("\n\n");
+        copy.append(activity.getString(label)).append("\n")
+                .append(BidiFormatter.getInstance().unicodeWrap(value));
+    }
+
+    // WifiInfo uses Android's little-endian IPv4 representation. Zero means not assigned.
+    static String ipv4(int address) {
+        if (address == 0) return "";
+        return (address & 255) + "." + ((address >>> 8) & 255) + "."
+                + ((address >>> 16) & 255) + "." + ((address >>> 24) & 255);
     }
 
     private void askPassword(ScanResult result) {
@@ -402,12 +504,20 @@ final class WifiPanel {
     static boolean sameNetwork(String selected, String currentSsid) {
         return selected != null && !selected.isEmpty() && selected.equals(cleanSsid(currentSsid));
     }
-    private String security(ScanResult result) {
-        String c = result.capabilities == null ? "" : result.capabilities;
+    static String securityName(String capabilities) {
+        String c = capabilities == null ? "" : capabilities.toUpperCase(java.util.Locale.ROOT);
+        if (c.contains("SAE")) return c.contains("PSK") ? "WPA2/WPA3 Personal" : "WPA3 Personal";
+        if (c.contains("OWE")) return "Enhanced Open (OWE)";
+        if (c.contains("SUITE_B")) return "WPA3 Enterprise";
+        if (c.contains("EAP")) return "WPA/WPA2 Enterprise";
         if (c.contains("WEP")) return "WEP";
-        if (c.contains("PSK")) return "WPA/WPA2";
-        if (c.contains("EAP")) return "Enterprise";
-        return activity.getString(R.string.wifi_open);
+        if (c.contains("PSK")) return "WPA/WPA2 Personal";
+        return c.equals("[ESS]") || c.equals("[ESS][WPS]") || c.equals("[WPS][ESS]") ? "" : null;
+    }
+    private String security(ScanResult result) {
+        String name = securityName(result.capabilities);
+        if (name == null) return activity.getString(R.string.wifi_detail_unavailable);
+        return name.isEmpty() ? activity.getString(R.string.wifi_open) : name;
     }
     private String signal(int rssi) {
         int level = WifiManager.calculateSignalLevel(rssi, 4);
@@ -441,7 +551,8 @@ final class WifiPanel {
                 return row;
             }
             ScanResult result = networks.get(position - 1);
-            String current = cleanSsid(wifi.getConnectionInfo() == null ? null : wifi.getConnectionInfo().getSSID());
+            WifiInfo connection = connectionInfo();
+            String current = cleanSsid(connection == null ? null : connection.getSSID());
             boolean connected = result.SSID.equals(current);
             WifiSignalView bars = new WifiSignalView(activity);
             bars.bind(WifiManager.calculateSignalLevel(result.level, 4), connected);
@@ -452,7 +563,8 @@ final class WifiPanel {
             LinearLayout copy = new LinearLayout(activity);
             copy.setOrientation(LinearLayout.VERTICAL);
             TextView name = text(BidiFormatter.getInstance().unicodeWrap(result.SSID), 17, Color.WHITE);
-            name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+            name.setTextDirection(android.os.Build.VERSION.SDK_INT >= 23
+                    ? View.TEXT_DIRECTION_FIRST_STRONG_LTR : View.TEXT_DIRECTION_FIRST_STRONG);
             copy.addView(name);
             String detail = security(result) + "  •  " + signal(result.level)
                     + (connected ? "  •  " + activity.getString(R.string.wifi_connected)

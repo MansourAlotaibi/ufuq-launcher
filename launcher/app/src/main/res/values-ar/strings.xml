@@ -236,4 +236,12 @@
     <string name="font_style_state">نوع الخط: %1$s</string>
     <string name="library_hold_add">موافق: فتح · مطولاً: إضافة للرئيسية</string>
     <string name="library_hold_remove">موافق: فتح · مطولاً: إزالة من الرئيسية</string>
+    <string name="wifi_connection_details">تفاصيل الاتصال</string>
+    <string name="wifi_details_back">العودة إلى الشبكات</string>
+    <string name="wifi_detail_status">حالة الاتصال</string>
+    <string name="wifi_detail_name">اسم الشبكة</string>
+    <string name="wifi_detail_signal">قوة الإشارة</string>
+    <string name="wifi_detail_security">نوع الحماية المعلن للشبكة</string>
+    <string name="wifi_detail_ip">عنوان IP ‏(IPv4)</string>
+    <string name="wifi_detail_unavailable">غير متاح</string>
 </resources>

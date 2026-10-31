@@ -56,7 +56,7 @@ Designed for **Android 4.4 / API 19 and newer**, with native Views, D-pad naviga
 | Nobel/CVTE Android 4.4.4, API 19,1920×1080 | Actual TV captures and owner-reported Arabic/English physical-remote flow; tested device only |
 | API 19/28/34 | Framework regression tests, not emulator or hardware certification |
 | Other Android TV / Google TV hardware, API 35+ | Not physically verified |
-| Wi-Fi | Native legacy panel on19–28 with applicable user permission; system settings on29+; unsupported security routes to system configuration |
+| Wi-Fi | Native panel on19–28 with applicable permission, including connection status, signal, advertised security and assigned IPv4 details; system settings on29+; unsupported security routes to system configuration |
 | Inputs / HOME | Require supported platform handlers/firmware; API 19 lacks standard TIF. No automatic default-HOME change |
 
 See [COMPATIBILITY](COMPATIBILITY.md) for TLS/trust-store, permissions, display/overscan, feature detection and untested scenarios. Prayer cities are currently Saudi cities; broader locations are not implied.
