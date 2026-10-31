@@ -1,5 +1,11 @@
 # Compatibility
 
+## RC3 evidence — 1 November 2026
+
+RC3/code10002 retains minimum API19 and target34. Its public package passes381 unit/framework checks, including API19/28/34, Arabic/English, shared-theme geometry and RTL/LTR centering. The signed APK is verified with the existing public certificate, API19 v1/JAR and v2 signatures. These are static/framework checks.
+
+The owner accepted the shared new presentation, photos and Wi-Fi details using the separate private edition on the same Nobel API19 TV. The newly signed public RC3 APK is not physically installed during this release procedure. Do not label its binary universally device-tested. The following RC2 physical evidence is retained as historical evidence. Other hardware, API35+, extended low-memory/reboot and extreme overscan/density remain unverified. See [RC3 notes](docs/RELEASE-NOTES-1.0.0-RC3.md).
+
 ## RC2 evidence — 30 October 2026
 
 | Target | Evidence | Status |

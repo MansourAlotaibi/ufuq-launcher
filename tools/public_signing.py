@@ -4,7 +4,7 @@ Provisioning files stay in ignored private/public-signing with owner-only permis
 Move recovery material to separate encrypted/offline storage before public publication.
 """
 from pathlib import Path
-import argparse,os,secrets,subprocess,hashlib,json,zipfile,re
+import argparse,os,secrets,subprocess,hashlib,json,zipfile,re,tempfile
 r=Path(__file__).resolve().parents[1];p=r/'private/public-signing';key=p/'ufuq-public.p12';password=p/'store-password.txt'
 parser=argparse.ArgumentParser();parser.add_argument('action',choices=['init','sign']);parser.add_argument('--apk',type=Path);args=parser.parse_args()
 def run(cmd,**kw):
@@ -38,26 +38,32 @@ else:
  dest=r/'release-local';dest.mkdir(exist_ok=True)
  badging=run([str(sdk/'build-tools/34.0.0/aapt'),'dump','badging',str(args.apk)],env=env).stdout
  identity=re.search(r"package: name='([^']+)' versionCode='[^']+' versionName='([^']+)'",badging)
- if not identity or identity.group(1)!='io.github.mansouralotaibi.ufuq':
-  raise SystemExit('Refusing to sign an APK outside the independent public identity.')
+ if not identity or identity.group(1)!='io.github.mansouralotaibi.ufuq' or "sdkVersion:'19'" not in badging:
+  raise SystemExit('Refusing unexpected package or minimum SDK.')
  version=identity.group(2)
  if not re.fullmatch(r'[A-Za-z0-9._+-]+',version):raise SystemExit('Unsafe version label')
  output=dest/('ufuq-launcher-'+version+'.apk')
- # AGP's build metadata is not runtime input and is excluded from v1 JAR coverage.
- # Remove it before signing, then restore standard APK alignment for API 19+.
- stripped=dest/'signing-input.apk';aligned=dest/'signing-aligned.apk'
- with zipfile.ZipFile(args.apk) as src, zipfile.ZipFile(stripped,'w') as target:
-  for info in src.infolist():
-   if info.filename != 'META-INF/com/android/build/gradle/app-metadata.properties':
-    target.writestr(info,src.read(info.filename))
- run([str(sdk/'build-tools/34.0.0/zipalign'),'-f','4',str(stripped),str(aligned)],env=env)
- tool=sdk/'build-tools/34.0.0/apksigner'
- run([str(tool),'sign','--ks',str(key),'--ks-key-alias','ufuq-public','--ks-pass','file:'+str(password),'--v1-signing-enabled','true','--v2-signing-enabled','true','--out',str(output),str(aligned)],env=env)
- run([str(sdk/'build-tools/34.0.0/zipalign'),'-c','4',str(output)],env=env)
- result=run([str(tool),'verify','--verbose','--print-certs',str(output)],env=env)
+ verificationFile=dest/('signature-verification-'+version+'.txt')
+ checksumFile=dest/('SHA256SUMS-'+version+'.txt')
+ if any(x.exists() for x in [output,verificationFile,checksumFile]):raise SystemExit('Refusing to overwrite an existing signed candidate or verification record.')
  expected=json.loads((r/'docs/PUBLIC-SIGNING-IDENTITY.json').read_text())['certificateSha256']
- if expected not in result.stdout:raise SystemExit('Unexpected certificate fingerprint')
- (dest/'signature-verification.txt').write_text(result.stdout)
+ # Check the existing certificate before signing; never create/rotate an identity here.
+ cert=subprocess.run([str(jdk/'bin/keytool'),'-exportcert','-alias','ufuq-public','-keystore',str(key),'-storepass:file',str(password)],capture_output=True)
+ if cert.returncode or hashlib.sha256(cert.stdout).hexdigest()!=expected:raise SystemExit('Existing public certificate verification failed; no APK signed.')
+ with tempfile.TemporaryDirectory(prefix='public-sign-',dir=dest) as temporary:
+  stripped=Path(temporary)/'input.apk';aligned=Path(temporary)/'aligned.apk'
+  with zipfile.ZipFile(args.apk) as src,zipfile.ZipFile(stripped,'x') as target:
+   for info in src.infolist():
+    if info.filename!='META-INF/com/android/build/gradle/app-metadata.properties':target.writestr(info,src.read(info.filename))
+  run([str(sdk/'build-tools/34.0.0/zipalign'),'4',str(stripped),str(aligned)],env=env)
+  tool=sdk/'build-tools/34.0.0/apksigner'
+  run([str(tool),'sign','--ks',str(key),'--ks-key-alias','ufuq-public','--ks-pass','file:'+str(password),'--min-sdk-version','19','--v1-signing-enabled','true','--v2-signing-enabled','true','--v4-signing-enabled','false','--out',str(output),str(aligned)],env=env)
+ result=run([str(tool),'verify','--verbose','--print-certs','--min-sdk-version','19',str(output)],env=env)
+ if ('Signer #1 certificate SHA-256 digest: '+expected not in result.stdout
+     or 'Verified using v1 scheme (JAR signing): true' not in result.stdout
+     or 'Verified using v2 scheme (APK Signature Scheme v2): true' not in result.stdout):raise SystemExit('Public APK signing verification failed; do not publish.')
+ run([str(sdk/'build-tools/34.0.0/zipalign'),'-c','4',str(output)],env=env)
+ verificationFile.write_text(result.stdout)
  digest=hashlib.sha256(output.read_bytes()).hexdigest()
- (r/'docs/SHA256SUMS-SIGNED.txt').write_text(digest+'  '+output.name+'\n')
- print('Signed candidate verified with independent public certificate. SHA-256:',digest)
+ checksumFile.write_text(digest+'  '+output.name+'\n')
+ print('Signed candidate verified with existing public certificate. SHA-256:',digest)

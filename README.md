@@ -4,7 +4,7 @@
 
 A cinematic, remote-friendly Android TV launcher built with native Java and Android Views. Ufuq brings a prominent clock, daily reflections, prayer times, football fixtures and your favorite apps into one coherent Home screen.
 
-**[1.0.0-rc2 · public pre-release](https://github.com/MansourAlotaibi/ufuq-launcher/releases/tag/v1.0.0-rc2).** The independently signed release has been tested on the owner's Nobel Android 4.4.4 television. Other Android TV and Google TV hardware remains unverified.
+**[1.0.0-rc3 · public pre-release](https://github.com/MansourAlotaibi/ufuq-launcher/releases/tag/v1.0.0-rc3).** Same public signing identity as RC2. The previous public RC2 binary and shared RC3 changes in the private edition have Nobel Android4.4.4 hardware evidence; this newly signed public RC3 APK has not been physically installed in this release procedure. Other Android TV/Google TV hardware remains unverified.
 
 ![Classic Home, English LTR, full 1920×1080 frame with privacy redactions](docs/gallery/images/en/home-classic.png)
 
@@ -17,9 +17,9 @@ A cinematic, remote-friendly Android TV launcher built with native Java and Andr
 | ![Classic — gold](docs/gallery/images/en/home-classic.png) | ![Midnight — silver](docs/gallery/images/en/home-midnight.png) | ![Coast — turquoise](docs/gallery/images/en/home-coast.png) |
 | Cinematic gold | Dark silver | Blue/turquoise accents |
 
-Themes share geometry, navigation and functionality. Wallpaper selection, rotation and dimming remain independent of the palette. Published RC2 bundles five audited scenes. Current development source adds four real 4K photographs—Utah Dunes at Sunset, Peyto Lake, Lofoten Evening and Lake Bled Blue Hour—for nine choices total. Their separate public-domain, CC BY-SA and GFDL terms are documented in [third-party notices](THIRD-PARTY-NOTICES.md).
+Themes share geometry, navigation and functionality. Wallpaper selection, rotation and dimming remain independent of the palette. Published RC2 bundles five audited scenes. RC3 adds four real 4K photographs—Utah Dunes at Sunset, Peyto Lake, Lofoten Evening and Lake Bled Blue Hour—for nine choices total. Their separate public-domain, CC BY-SA and GFDL terms are documented in [third-party notices](THIRD-PARTY-NOTICES.md).
 
-Current development (`1.0.0-rc3-dev`) also lowers the cinematic foreground slightly and centers incomplete favorites pages without changing card sizes or saved order. The owner accepted these shared presentation changes on the private edition of the tested Nobel API19 TV; the public package requires its own runtime validation. The gallery documents RC2, and the downloadable RC2 APK and tag are unchanged. No newer signed release is published by this source update.
+RC3 (`1.0.0-rc3`) also lowers the cinematic foreground slightly and centers incomplete favorites pages without changing card sizes or saved order. The owner accepted these shared presentation changes on the private edition of the tested Nobel API19 TV; the public package requires its own runtime validation. The gallery documents RC2, and published RC2 remains unchanged. Download RC3 for the new photos, layout and Wi-Fi details; see [RC3 notes](docs/RELEASE-NOTES-1.0.0-RC3.md) for exact test limitations.
 
 ## Features
 
@@ -65,29 +65,29 @@ See [COMPATIBILITY](COMPATIBILITY.md) for TLS/trust-store, permissions, display/
 
 ## Install safely
 
-Download the [official signed RC2 APK](https://github.com/MansourAlotaibi/ufuq-launcher/releases/download/v1.0.0-rc2/ufuq-launcher-1.0.0-rc2.apk) and [published checksums](https://github.com/MansourAlotaibi/ufuq-launcher/releases/download/v1.0.0-rc2/SHA256SUMS.txt) from the [pre-release](https://github.com/MansourAlotaibi/ufuq-launcher/releases/tag/v1.0.0-rc2):
+Download the [official signed RC3 APK](https://github.com/MansourAlotaibi/ufuq-launcher/releases/download/v1.0.0-rc3/ufuq-launcher-1.0.0-rc3.apk) and [published checksums](https://github.com/MansourAlotaibi/ufuq-launcher/releases/download/v1.0.0-rc3/SHA256SUMS.txt) from the [pre-release](https://github.com/MansourAlotaibi/ufuq-launcher/releases/tag/v1.0.0-rc3):
 
 1. Verify its SHA-256, independent certificate and package `io.github.mansouralotaibi.ufuq`.
 2. Open it with Android's normal package installer and review the device's installation consent.
 3. Launch Ufuq from the app list. Keep the current HOME unless you explicitly choose another later.
 
-Do not disable, clear or uninstall another launcher, grant privileged permissions, or run inherited installation scripts. CI APKs are **unsigned validation artifacts**, not official signed releases. See [INSTALLATION](INSTALLATION.md) and [candidate identity/checksum](docs/SHA256SUMS-SIGNED.txt).
+Do not disable, clear or uninstall another launcher, grant privileged permissions, or run inherited installation scripts. CI APKs are **unsigned validation artifacts**, not official signed releases. See [INSTALLATION](INSTALLATION.md) and [candidate identity/checksum](docs/SHA256SUMS-RC3.txt).
 
 ## Build from source
 
-Use JDK 17, Android platform/build-tools 34 and the supplied Gradle 8.9 wrapper. The repository is public. Check out the release tag to build the published RC2 source; future development changes are reviewed through pull requests.
+Use JDK 17, Android platform/build-tools 34 and the supplied Gradle 8.9 wrapper. The repository is public. Check out the release tag to build the published RC3 source; future development changes are reviewed through pull requests.
 
 ```sh
 git clone https://github.com/MansourAlotaibi/ufuq-launcher.git
 cd ufuq-launcher
-git checkout v1.0.0-rc2
+git checkout v1.0.0-rc3
 cd launcher
 ./gradlew --no-daemon testReleaseUnitTest lintRelease assembleRelease
 ```
 
 The default build is unsigned. Follow [BUILDING](BUILDING.md) for reproducible tool configuration, public-only signing and accompanying dependency source. Never reuse a personal MansourTV signing key or commit credentials. [Backup/recovery status](docs/SIGNING-RECOVERY.md): the owner completed the encrypted local backup and separate-copy signing recovery test, including API 19 v1/v2 verification. Independent off-device disaster-recovery custody remains outstanding and was explicitly deferred by the owner until after launch.
 
-The published tag `v1.0.0-rc2` resolves to `d6eac0ac30f9d9ad96ea52f83f59dfacedec8957` and passed [release-tag CI](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41113149093): 355 tests, 0 failures and release lint 0 errors / 149 warnings, plus release build and security/license-policy checks. Maintenance documentation and CI changes do not replace the published APK or imply new hardware testing.
+Historical RC2 evidence: tag `v1.0.0-rc2` resolves to `d6eac0ac30f9d9ad96ea52f83f59dfacedec8957` and passed [release-tag CI](https://github.com/MansourAlotaibi/ufuq-launcher/actions/runs/41113149093): 355 tests, 0 failures and release lint 0 errors / 149 warnings, plus release build and security/license-policy checks. Maintenance documentation and CI changes do not replace the published APK or imply new hardware testing.
 
 ## Privacy and security
 
